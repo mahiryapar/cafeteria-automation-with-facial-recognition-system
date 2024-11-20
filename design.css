@@ -1,0 +1,105 @@
+#icerik{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+}
+
+
+
+#sayfa{
+
+    background-color: #b8b3b3;
+    height: 100%;
+    width:100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+#nav {
+
+    background: linear-gradient(155deg,#636262 -30%,#333 90%);
+    display: flex;
+    justify-content: space-between;
+    align-items:stretch;
+    border:solid;
+    border-top:3px;
+    border-left: 3px;
+    overflow: visible;
+    border-color: #2b2c2a;
+    border-radius: 0px 0px 10px 10px;
+    box-shadow: 0px 10px 10px 0px;
+}
+#liste{
+
+    margin-bottom: 0px;
+    padding-left: 0px;
+    display: flex;
+    list-style: none;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+}
+#liste .liler{
+    z-index: 1;
+    position: relative;
+    background-color: #3e3b3b;        
+    margin: 4px;
+    padding-left: 18px;
+    padding-top: 10px;
+    padding-right: 18px;
+    padding-bottom:10px;
+    border:solid 2px;
+    border-top: 0px;
+    border-left:0px ;
+    border-radius: 0px 10px 0px 10px;
+    box-shadow: 0px 2px 2px 0px;
+    transition: 0.2s ease-in-out;
+
+}
+
+.prfl{
+    z-index: 2;
+    margin: 4px;
+    justify-content: center;
+    width: 15%;
+}
+
+#prfl-foto{
+    position:relative;
+    background-color: #3e3b3b;        
+    height: 100%;
+    margin-top: 30px;
+    padding-left: 18px;
+    padding-top: 10px;
+    padding-right: 18px;
+    padding-bottom:10px;
+    border:solid 2px;
+    border-top: 0px;
+    border-left:0px ;
+    border-radius: 100% 100% 100% 100%;
+    box-shadow: 0px 2px 2px 0px;
+    transition: 0.2s ease-in-out;
+}
+
+#liste li a,span{
+    user-select: none;
+
+    position: relative;
+    font-size: 13px;
+    text-decoration: none;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    color: #b8b3b3;
+    text-shadow: 3px 3px 2px rgba(15, 14, 14, 0.5);
+}
+#liste li:hover{
+    transform: scale(0.95,0.95);
+    background-color: #292525;
+
+    
+}
+#liste li:has(>a:active){
+    transform: scale(0.85,0.85);
+    background-color: #222020;
+}
