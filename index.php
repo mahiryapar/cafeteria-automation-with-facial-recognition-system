@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,6 +19,40 @@
                 <li class="liler"><a class="linkler" href="#">İletişim</a></li>
         </nav>
         <div id="icerik">
+        <?php
+        $serverName = "34.159.4.220"; 
+        $database = "db_yemekhane";
+        $uid = "sqlserver";
+        $pass = "admin";
+        $connection_info = [
+            "Database" =>   $database,
+            "Uid" => $uid,
+            "PWD" => $pass
+        ];
+        $conn = sqlsrv_connect($serverName,$connection_info);
+        
+        if( $conn ) {
+             echo "Connection established.<br />";
+             $sql = "SELECT * FROM Users"; // tabloadi yerine kendi tablonuzun adını yazın
+             $stmt = sqlsrv_query($conn, $sql);
+
+            if ($stmt === false) {
+                 die(print_r(sqlsrv_errors(), true));
+             }
+
+            // Verileri okuma
+            while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+                 echo "ID: " . $row['id'] . " - Ad: " . $row['name'] . " - Soyad: " . $row['surname'].
+                  " - Mail: " . $row['mail'] . " - Tel: " . $row['phonenum']. " - Money: " . $row['moneyy']."<br />"; // Kendi sütun adlarınıza göre değiştirin
+            }
+
+             // Kaynakları serbest bırak
+             sqlsrv_free_stmt($stmt);
+        }else{
+            echo "Connection could not be established.<br />";
+            die( print_r( sqlsrv_errors(), true));
+        }
+        ?>
             <!--
             <div class="icerikdivleri" id="hosgeldiniz">
                 <span class="metin" data-original="Merhabalar!">Merhabalar!</span>
