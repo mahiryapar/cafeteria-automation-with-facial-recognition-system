@@ -1,16 +1,13 @@
 #icerik{
-    position: fixed;
     height: 100%;
     width: 100%;
-    display: flex;
-    align-items: stretch;
 }
 
 #prfl-foto-img {
     width: 7vw;
     height: 7vw;
-    border-radius: 50%; /* Yuvarlak çerçeve */
-    object-fit: cover; /* Görseli çerçeveye sığdır */
+    border-radius: 50%; 
+    object-fit: cover; 
 }
 
 #sayfa{
@@ -66,11 +63,11 @@
 }
 
 #liste #signin{
-    display:none;
+    display:block;
 }
 
 #liste #ogrenci-li{
-    display: block;
+    display: none;
 }
 
 #liste #admin-li{
@@ -107,7 +104,7 @@
     box-shadow: 0px 2px 2px 0px;
 }
 
-#liste li a,span{
+#liste li a{
     user-select: none;
     position: relative;
     font-size: 13px;

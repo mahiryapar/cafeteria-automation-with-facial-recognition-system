@@ -7,11 +7,11 @@ document.addEventListener("DOMContentLoaded", INIT);
 
 
 function INIT(){
-    var signinElement = document.getElementById("signin");
-    var signinDisplay = window.getComputedStyle(signinElement).display;
-    if (signinDisplay == "block") {
-        document.getElementsByClassName("prfl")[0].style.display = "none";
-    }
+    // var signinElement = document.getElementById("signin");
+    // var signinDisplay = window.getComputedStyle(signinElement).display;
+    // if (signinDisplay == "block") {
+    //     document.getElementsByClassName("prfl")[0].style.display = "none";
+    // }    BURAYI AYARLAYIP AÇ
 }
 
 
