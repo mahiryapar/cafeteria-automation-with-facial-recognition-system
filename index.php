@@ -15,13 +15,14 @@
                 <li class="liler" id = "ortak-li"><a class="linkler" href="#">Ana Sayfa</a></li>
                 <li class="liler" id = "ortak-li"><a class="linkler" href="#">Yemek Takvimi</a></li>
                 <li class="liler" id="signin"><a class="linkler" href="#">Giriş Yap</a></li>
-                <li class="prfl" ><div id="prfl-foto"><img src="" alt=""></div></li>
+                <li class="prfl" ><div id="prfl-foto"><img src="fetch_image.php" alt="Profil Fotoğrafı" id="prfl-foto-img"></div></li>
                 <li class="liler" id="signin"><a class="linkler" href="#">Kaydol</a></li>
                 <li class="liler" id="admin-li"><a class="linkler" href="#">Öğrenciler</a></li>
                 <li class="liler" id="ogrenci-li"><a class="linkler" href="#">İletişim</a></li>
+                <li class="liler" id="ogrenci-li"><a class="linkler" href="#">İletişim</a></li>
         </nav>
         <div id="icerik">
-       
+
         </div>
     </div>
     <script src="app.js"></script>

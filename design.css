@@ -6,7 +6,12 @@
     align-items: stretch;
 }
 
-
+#prfl-foto-img {
+    width: 7vw;
+    height: 7vw;
+    border-radius: 50%; /* Yuvarlak çerçeve */
+    object-fit: cover; /* Görseli çerçeveye sığdır */
+}
 
 #sayfa{
 
@@ -92,10 +97,9 @@
     margin-bottom: 5px;
     margin-left: 5px;
     margin-right: 5px;
-    padding-left: 18px;
-    padding-top: 10px;
-    padding-right: 18px;
-    padding-bottom:10px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border:solid 2px;
     border-top: 0px;
     border-left:0px ;
