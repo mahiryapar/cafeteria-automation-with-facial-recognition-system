@@ -25,9 +25,6 @@
             <button type="submit">Onayla</button>
             </form>  
             <div id="sonuc"></div> 
-            <script >
-                console.log("sa ab");
-            </script>
         </div>
     </div>
     <script>

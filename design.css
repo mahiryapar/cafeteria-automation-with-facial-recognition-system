@@ -63,7 +63,7 @@
 }
 
 #liste #signin{
-    display:block;
+    display:none;
 }
 
 #liste #ogrenci-li{
@@ -80,7 +80,7 @@
     margin: 4px;
     justify-content: center;
     align-items: center;
-    display: flex;
+    display: none;
 }
 
 #prfl-foto{

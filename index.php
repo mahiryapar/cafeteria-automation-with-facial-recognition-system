@@ -2,6 +2,15 @@
 session_start();
 if(isset($_SESSION['nickname'])){
     $nickname = $_SESSION['nickname'];
+    $role = $_SESSION['role'];
+}
+else{
+    $_SESSION['role'] = "guest";
+}
+$message = null;
+if(isset($_SESSION['flash_message'])){
+    $message = $_SESSION['flash_message'];
+    unset($_SESSION['flash_message']);
 }
 ?>
 
@@ -23,15 +32,23 @@ if(isset($_SESSION['nickname'])){
                 <li class="liler" id="signin"><a class="linkler" href="giris_kayit.php?giris=1">Giriş Yap</a></li>
                 <li class="prfl" ><div id="prfl-foto"><img src="fetch_image.php" alt="Profil Fotoğrafı" id="prfl-foto-img"></div></li>
                 <li class="liler" id="signin"><a class="linkler" href="giris_kayit.php?giris=0">Kaydol</a></li>
+                <li class="liler" id="admin-li"><a class="linkler" href="#">Yemekhanem</a></li>
+                <li class="liler" id="ogrenci-li"><a class="linkler" href="#">Yemekhanem</a></li>
                 <li class="liler" id="admin-li"><a class="linkler" href="#">Öğrenciler</a></li>
                 <li class="liler" id="ogrenci-li"><a class="linkler" href="#">İletişim</a></li>
+                <li class="liler" id="ogrenci-li"><a class="linkler" href="logout.php">Çıkış</a></li>
+                <li class="liler" id="admin-li"><a class="linkler" href="logout.php">Çıkış</a></li>
         </nav>
         <div id="icerik">
-            <?php
-            echo "hos geldiniz ".$nickname;
-            ?>
         </div>
     </div>
+    <script>
+        window.onload = () => {
+            if(<?php echo json_encode($message);?> != null){
+                alert(<?php echo json_encode($message);?>);
+        }
+        };
+    </script>
     <script src="app.js"></script>
     <link rel="stylesheet" href="design.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
