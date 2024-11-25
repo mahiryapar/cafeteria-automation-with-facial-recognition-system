@@ -74,6 +74,14 @@
     display: none;
 }
 
+#giris{
+    display: none;
+}
+
+#kayit{
+    display: none;
+}
+
 
 .prfl{
     width: 15%;
