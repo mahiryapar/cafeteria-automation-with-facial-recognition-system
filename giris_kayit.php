@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: text/html; charset=utf-8');
 if(isset($_GET['giris'])){
     $giris = $_GET['giris'];
 }
@@ -102,4 +103,5 @@ if(isset($_GET['giris'])){
 </script>
     <script src="app.js"></script>
     <link rel="stylesheet" href="design.css">
+    <link rel="stylesheet" href="giris_kayit_design.css">
 </html>
