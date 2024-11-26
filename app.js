@@ -9,6 +9,11 @@ document.addEventListener("DOMContentLoaded", INIT);
 
 
 function INIT(){
+    document.querySelectorAll('a').forEach(a => {
+        a.addEventListener('dragstart', (e) => {
+            e.preventDefault(); 
+        });
+    });
     fetch('session_data.php')
     .then(response => response.json())
     .then(data => {

@@ -4,6 +4,7 @@
 }
 
 #prfl-foto-img {
+    user-select: none;
     width: 7vw;
     height: 7vw;
     border-radius: 50%; 
@@ -106,6 +107,7 @@
 
 #liste li a{
     user-select: none;
+    -webkit-user-drag: none;
     position: relative;
     font-size: 13px;
     text-decoration: none;

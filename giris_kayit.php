@@ -27,27 +27,27 @@ if(isset($_GET['giris'])){
         <div id="icerik">
         <div id= "giris">
         <form id="myFormlogin" action="giris_bcknd.php" method="post"> 
-            <span style="color:black">Kullanıcı Adı: </span>
-            <input type="text" id= "login_ncknm" name="login_kullanici_adi"><br><br>
-            <span style="color:black">Şifre:</span>
-            <input type="password" id= "login_psw" name="login_sifre"><br><br>
+            <div><span style="color:black">Kullanıcı Adı: </span>       
+            <input type="text" id= "login_ncknm" name="login_kullanici_adi"></div>
+            <div><span style="color:black">Şifre:</span>
+            <input type="password" id= "login_psw" name="login_sifre"></div>
             <button type="submit" id="loginbutton">Onayla</button>
         </form>  
         </div>
         <div id= "kayit">
         <form id="myFormsignup" action="giris_bcknd.php" method="post"> 
-            <span style="color:black">İsim: </span>
-            <input type="text" id= "isim" name="isim"><br><br>
-            <span style="color:black">Soyisim: </span>
-            <input type="text" id= "soyisim" name="soyisim"><br><br>
-            <span style="color:black">Kullanıcı Adı: </span>
-            <input type="text" id= "ncknm" name="kullanici_adi"><br><br>
-            <span style="color:black">Mail: </span>
-            <input type="email" id= "mail" name="mail"><br><br>
-            <span style="color:black">Telefon Numarası: </span>
-            <input type="number" id= "number" name="number"><br><br>
-            <span style="color:black">Şifre:</span>
-            <input type="password" id= "psw" name="sifre"><br><br>
+            <div><span style="color:black">İsim: </span>
+            <input type="text" id= "isim" name="isim"></div>
+            <div><span style="color:black">Soyisim: </span>
+            <input type="text" id= "soyisim" name="soyisim"></div>
+            <div><span style="color:black">Kullanıcı Adı: </span>
+            <input type="text" id= "ncknm" name="kullanici_adi"></div>
+            <div><span style="color:black">Mail: </span>
+            <input type="email" id= "mail" name="mail"></div>
+            <div><span style="color:black">Telefon Numarası: </span>
+            <input type="number" id= "number" name="number"></div>
+            <div><span style="color:black">Şifre:</span>
+            <input type="password" id= "psw" name="sifre"></div>
             <button type="submit" id="signupbutton">Onayla</button>
         </form>   
         </div>
