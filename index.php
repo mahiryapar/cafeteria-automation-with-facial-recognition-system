@@ -1,10 +1,11 @@
 <?php 
 session_start();
-include 'fetch_image.php';
+
 
 if(isset($_SESSION['nickname'])){
     $nickname = $_SESSION['nickname'];
     $role = $_SESSION['role'];
+    include 'fetch_image.php';
 }
 else{
     $_SESSION['role'] = "guest";

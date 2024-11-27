@@ -37,7 +37,15 @@ else{
                 <li class="liler" id="admin-li"><a class="linkler" href="logout.php">Çıkış</a></li>
         </nav>
         <div id="icerik">
-            Hesabım sayfasına hoş geldiniz.
+        <h1>Profil Fotoğrafı Yükle</h1>
+            <form action="upload.php" method="POST" enctype="multipart/form-data">
+                <label for="profile_photo">Profil Fotoğrafı:</label>
+                <input type="file" name="profile_photo" id="profile_photo" required>
+                <button type="submit">Yükle</button>
+            </form>
+            <form action="remove_pp.php" method="POST" enctype="multipart/form-data">
+                <button type="submit">Profil Fotoğrafını Kaldır</button>
+            </form>
         </div>
     </div>
     <script>
