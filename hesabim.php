@@ -3,6 +3,13 @@ session_start();
 if(isset($_SESSION['nickname'])){
     $nickname = $_SESSION['nickname'];
     $role = $_SESSION['role'];
+    include "hesap_bilgileri.php";
+    $isim = $_SESSION['isim'];
+    $soyisim = $_SESSION['soyisim'];
+    $bakiye = $_SESSION['bakiye'];
+    $mail = $_SESSION['mail'];
+    $tel = $_SESSION['tel'];
+    $yemekhane = $_SESSION['yemekhane'];
 }
 else{
     $_SESSION['role'] = "guest";
@@ -22,13 +29,15 @@ else{
     <div id="sayfa">
         <nav id="nav">
             <ul id="liste">
-                <li class="liler" id = "ortak-li"><a class="linkler" href="#">Ana Sayfa</a></li>
+                <li class="liler" id = "ortak-li"><a class="linkler" href="index.php">Ana Sayfa</a></li>
                 <li class="liler" id = "admin-li"><a class="linkler" href="#">Hesabım</a></li>
                 <li class="liler" id = "ogrenci-li"><a class="linkler" href="#">Hesabım</a></li>
                 <li class="liler" id = "ortak-li"><a class="linkler" href="#">Yemek Takvimi</a></li>
+                <li class="liler" id = "ogrenci-li"><a class="linkler" href="#">Öğün Satın Al</a></li>
                 <li class="liler" id="signin"><a class="linkler" href="giris_kayit.php?giris=1">Giriş Yap</a></li>
                 <li class="prfl" ><div id="prfl-foto"><img src="<?php echo $_SESSION['pp']; ?>" alt="Profil Fotoğrafı" id="prfl-foto-img"></div></li>
                 <li class="liler" id="signin"><a class="linkler" href="giris_kayit.php?giris=0">Kaydol</a></li>
+                <li class="liler" id = "ogrenci-li"><a class="linkler" href="#">Bakiye Yükle</a></li>
                 <li class="liler" id="admin-li"><a class="linkler" href="#">Yemekhanem</a></li>
                 <li class="liler" id="ogrenci-li"><a class="linkler" href="#">Yemekhanem</a></li>
                 <li class="liler" id="admin-li"><a class="linkler" href="#">Öğrenciler</a></li>
@@ -37,7 +46,23 @@ else{
                 <li class="liler" id="admin-li"><a class="linkler" href="logout.php">Çıkış</a></li>
         </nav>
         <div id="icerik">
-        <h1>Profil Fotoğrafı Yükle</h1>
+            
+            <div id="hesap_bilgileri">
+                <h3>Hesap Bilgilerim</h3>
+                <span id="nickname">Kullanıcı Adı: <?php echo $nickname?></span><br>
+                <span id="isim">İsim: <?php echo $isim?></span><br>
+                <span id="soyisim">Soyisim: <?php echo $soyisim?></span><br>
+                <span id="bakiye">Bakiye: <?php echo $bakiye?></span><br>
+                <span id="tel">Telefon Numarası: <?php echo $tel?></span><br>
+                <span id="mail">E-Posta: <?php echo $mail?></span><br>
+                <span id="yemekhane">Yemekhane: <?php echo $yemekhane?></span><br>
+                <span id="rol">Rol: <?php echo $role?></span><br>
+                <span></span><br>
+                <span></span><br>
+            </div>
+        
+        
+            <div id="pp_ayar">
             <form action="upload.php" method="POST" enctype="multipart/form-data">
                 <label for="profile_photo">Profil Fotoğrafı:</label>
                 <input type="file" name="profile_photo" id="profile_photo" required>
@@ -46,6 +71,7 @@ else{
             <form action="remove_pp.php" method="POST" enctype="multipart/form-data">
                 <button type="submit">Profil Fotoğrafını Kaldır</button>
             </form>
+            </div>
         </div>
     </div>
     <script>
@@ -57,6 +83,7 @@ else{
     </script>
     <script src="app.js"></script>
     <link rel="stylesheet" href="design.css">
+    <link rel="stylesheet" href="hesabim_design.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
