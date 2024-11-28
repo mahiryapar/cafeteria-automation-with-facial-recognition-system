@@ -13,6 +13,14 @@ if(isset($_GET['giris'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php if($giris ==1){echo "Giriş Yap";}else{echo "Kayıt Ol";} ?></title>
+    <style>
+        #sonuc{
+            display:none;
+            margin-left:20vw;
+            margin-right:20vw;
+            margin-top:3vh;
+        }
+    </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
@@ -24,6 +32,7 @@ if(isset($_GET['giris'])){
                 <li class="liler" id="signin"><a class="linkler" href="giris_kayit.php?giris=0">Kaydol</a></li>
         </nav>
         <div id="icerik">
+        <div id="sonuc"></div> 
         <div id= "giris">
         <form id="myFormlogin" action="../backend/giris_bcknd.php" method="post"> 
             <div><span style="color:black">Kullanıcı Adı: </span>       
@@ -50,7 +59,6 @@ if(isset($_GET['giris'])){
             <button type="submit" id="signupbutton">Onayla</button>
         </form>   
         </div>
-        <div id="sonuc"></div> 
         </div>
     </div>
     <script>

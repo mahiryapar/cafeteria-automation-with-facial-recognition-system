@@ -23,7 +23,14 @@ if(isset($_SESSION['flash_message'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yemekhane</title>
-    
+    <style>
+        #cikis{
+            display:none;
+            margin-left:20vw;
+            margin-right:20vw;
+            margin-top:3vh;
+        }
+    </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
@@ -48,12 +55,18 @@ if(isset($_SESSION['flash_message'])){
                 <li class="liler" id="admin-li"><a class="linkler" href="../backend/logout.php">Çıkış</a></li>
         </nav>
         <div id="icerik">
+            <div id="cikis" class="alert alert-success">
+                <strong>Logout!</strong> Başarıyla Çıkış Yapıldı.
+            </div>
         </div>
     </div>
     <script>
         window.onload = () => {
             if(<?php echo json_encode($message);?> != null){
-                alert(<?php echo json_encode($message);?>);
+                document.getElementById('cikis').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('cikis').style.display = 'none';
+                }, 2000);
         }
         };
     </script>
