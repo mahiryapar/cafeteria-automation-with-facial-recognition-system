@@ -25,7 +25,7 @@ if(isset($_GET['giris'])){
         </nav>
         <div id="icerik">
         <div id= "giris">
-        <form id="myFormlogin" action="giris_bcknd.php" method="post"> 
+        <form id="myFormlogin" action="../backend/giris_bcknd.php" method="post"> 
             <div><span style="color:black">Kullanıcı Adı: </span>       
             <input type="text" id= "login_ncknm" name="login_kullanici_adi"></div>
             <div><span style="color:black">Şifre:</span>
@@ -34,7 +34,7 @@ if(isset($_GET['giris'])){
         </form>  
         </div>
         <div id= "kayit">
-        <form id="myFormsignup" action="giris_bcknd.php" method="post"> 
+        <form id="myFormsignup" action="../backend/giris_bcknd.php" method="post"> 
             <div><span style="color:black">İsim: </span>
             <input type="text" id= "isim" name="isim"></div>
             <div><span style="color:black">Soyisim: </span>
@@ -60,7 +60,7 @@ if(isset($_GET['giris'])){
             document.getElementById("myFormsignup").addEventListener("submit", function(event) {
             event.preventDefault(); 
             const formData = new FormData(this);
-            fetch("giris_bcknd.php?giris=0", {
+            fetch("../backend/giris_bcknd.php?giris=0", {
                 method: "POST",
                 body: formData,
             })
@@ -82,7 +82,7 @@ if(isset($_GET['giris'])){
             document.getElementById("myFormlogin").addEventListener("submit", function(event) {
             event.preventDefault(); 
             const formData = new FormData(this);
-            fetch("giris_bcknd.php?giris=1", {
+            fetch("../backend/giris_bcknd.php?giris=1", {
                 method: "POST",
                 body: formData,
             })
@@ -100,7 +100,7 @@ if(isset($_GET['giris'])){
             });
         }       
 </script>
-    <script src="app.js"></script>
-    <link rel="stylesheet" href="design.css">
-    <link rel="stylesheet" href="giris_kayit_design.css">
+    <script src="../js/app.js"></script>
+    <link rel="stylesheet" href="../css/design.css">
+    <link rel="stylesheet" href="../css/giris_kayit_design.css">
 </html>

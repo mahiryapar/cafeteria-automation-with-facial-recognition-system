@@ -14,7 +14,7 @@ function INIT(){
             e.preventDefault(); 
         });
     });
-    fetch('session_data.php')
+    fetch('../backend/session_data.php')
     .then(response => response.json())
     .then(data => {
     console.log('Session Verisi:', data);

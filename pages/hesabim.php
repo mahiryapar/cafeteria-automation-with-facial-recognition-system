@@ -3,7 +3,7 @@ session_start();
 if(isset($_SESSION['nickname'])){
     $nickname = $_SESSION['nickname'];
     $role = $_SESSION['role'];
-    include "hesap_bilgileri.php";
+    include "../backend/hesap_bilgileri.php";
     $isim = $_SESSION['isim'];
     $soyisim = $_SESSION['soyisim'];
     $bakiye = $_SESSION['bakiye'];
@@ -43,8 +43,8 @@ else{
                 <li class="liler" id="ogrenci-li"><a class="linkler" href="#">Yemekhanem</a></li>
                 <li class="liler" id="admin-li"><a class="linkler" href="#">Öğrenciler</a></li>
                 <li class="liler" id="ogrenci-li"><a class="linkler" href="#">İletişim</a></li>
-                <li class="liler" id="ogrenci-li"><a class="linkler" href="logout.php">Çıkış</a></li>
-                <li class="liler" id="admin-li"><a class="linkler" href="logout.php">Çıkış</a></li>
+                <li class="liler" id="ogrenci-li"><a class="linkler" href="../backend/logout.php">Çıkış</a></li>
+                <li class="liler" id="admin-li"><a class="linkler" href="../backend/logout.php">Çıkış</a></li>
         </nav>
         <div id="icerik">
             
@@ -64,12 +64,12 @@ else{
         
         
             <div id="pp_ayar">
-            <form action="upload.php" method="POST" enctype="multipart/form-data">
+            <form action="../backend/upload.php" method="POST" enctype="multipart/form-data">
                 <label for="profile_photo">Profil Fotoğrafı:</label>
                 <input type="file" name="profile_photo" id="profile_photo" required>
                 <button type="submit">Yükle</button>
             </form>
-            <form action="remove_pp.php" method="POST" enctype="multipart/form-data">
+            <form action="../backend/remove_pp.php" method="POST" enctype="multipart/form-data">
                 <button type="submit">Profil Fotoğrafını Kaldır</button>
             </form>
             </div>
@@ -82,9 +82,9 @@ else{
         }
         };
     </script>
-    <script src="app.js"></script>
-    <link rel="stylesheet" href="design.css">
-    <link rel="stylesheet" href="hesabim_design.css">
+    <script src="../js/app.js"></script>
+    <link rel="stylesheet" href="../css/design.css">
+    <link rel="stylesheet" href="../css/hesabim_design.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
