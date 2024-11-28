@@ -1,0 +1,29 @@
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin: 20px;
+}
+.calendar-day {
+    padding: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    text-align: center;
+    cursor: pointer;
+}
+.calendar-day:hover {
+    background-color: #e9ecef;
+}
+.today {
+    background-color: #ffd966;
+    font-weight: bold;
+}
+
+.container{
+    margin-top: 100px;
+    display: none;
+}
+
+#warn{
+    display: none;
+}

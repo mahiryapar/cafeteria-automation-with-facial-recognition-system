@@ -20,7 +20,6 @@ if(isset($_GET['giris'])){
         <nav id="nav">
             <ul id="liste">
                 <li class="liler" id = "ortak-li"><a class="linkler" href="index.php">Ana Sayfa</a></li>
-                <li class="liler" id = "ortak-li"><a class="linkler" href="#">Yemek Takvimi</a></li>
                 <li class="liler" id="signin"><a class="linkler" href="giris_kayit.php?giris=1">Giriş Yap</a></li>
                 <li class="liler" id="signin"><a class="linkler" href="giris_kayit.php?giris=0">Kaydol</a></li>
         </nav>
