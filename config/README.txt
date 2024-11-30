@@ -5,4 +5,6 @@
 5- Download your bucket key json file in this config dir.
 6- Create a google cloud database with mssql and give database_infos.json its infos.
 7- You must create your db and tables and change querys in this backend codes.
-8- You are ready!
+8- You must download php sql server extensions from microsoft and put php/ext dir. (they must same version with ur php version)
+9- and then you must append this extensions name to php.ini file.
+10- You are ready!
