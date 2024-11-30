@@ -1,7 +1,6 @@
 <?php 
 session_start();
 $yemekhane_id = $_SESSION['yemekhane_id'];
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

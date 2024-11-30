@@ -17,8 +17,8 @@ for (let i = 0; i < 30; i++) {
     if (i === 0) dayElement.classList.add('today');
     dayElement.textContent = `${day.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long' })}\n${day.toLocaleDateString('tr-TR', {weekday: 'long'})}`;
     dayElement.onclick = () => {
-        const selectedDate = day.toISOString().split('T')[0]; // YYYY-MM-DD formatı
-        window.location.href = `yemekler.php?date=${selectedDate}`;
+        const selectedDate = day.toISOString().split('T')[0]; 
+        window.location.href = `yemek_takvimi_info.php?date=${selectedDate}`;
     };
 
     calendar.appendChild(dayElement);
