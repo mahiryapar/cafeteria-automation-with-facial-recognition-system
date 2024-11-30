@@ -38,7 +38,51 @@ if( $conn ) {
          die(print_r(sqlsrv_errors(), true));
     }
     while($row = sqlsrv_fetch_array($stmt_kategori, SQLSRV_FETCH_ASSOC)){
-        $sql = "SELECT 
+        if($row['kategori'] == 'Kahvaltı'){
+            $sql = "SELECT 
+                        MAX(CASE WHEN yemekler.kategori = 'Ana yemek' THEN yemekler.yemek_ismi END) AS ana_yemek,
+                        MAX(CASE WHEN yemekler.kategori = 'Ana yemek' THEN yemekler.aciklama END) AS ana_yemek_aciklama,
+                        STRING_AGG(CASE WHEN yemekler.kategori = 'Ara Sıcak' THEN yemekler.yemek_ismi END, ', ') AS ara_sicaklar,
+                        STRING_AGG(CASE WHEN yemekler.kategori = 'Ara Sıcak' THEN yemekler.aciklama END, ', ') AS ara_sicaklar_aciklama,
+                        MAX(CASE WHEN yemekler.kategori = 'İçecek' THEN yemekler.yemek_ismi END) AS icecek,
+                        MAX(CASE WHEN yemekler.kategori = 'İçecek' THEN yemekler.aciklama END) AS icecek_aciklama
+                        FROM 
+                            users
+                        INNER JOIN 
+                            yemekhaneler ON users.yemekhane_id = yemekhaneler.id
+                        INNER JOIN 
+                            menu ON menu.yemekhane_id = yemekhaneler.id
+                        INNER JOIN 
+                            menudeki_yemekler ON menu.id = menudeki_yemekler.menu_id
+                        INNER JOIN 
+                            yemekler ON yemekler.id = menudeki_yemekler.yemek_id
+                        WHERE 
+                            users.nickname = ?
+                            AND menu.menu_tarihi = ?
+                            AND menu.kategori = ?";
+                $params = [$_SESSION['nickname'],$date,$row['kategori']];
+                $stmt_yemek = sqlsrv_query($conn, $sql,$params);
+                if ($stmt_yemek === false) {
+                     die(print_r(sqlsrv_errors(), true));
+                }
+                $row_1 = sqlsrv_fetch_array($stmt_yemek, SQLSRV_FETCH_ASSOC);
+                $ara_sicaklar = explode(', ', $row_1['ara_sicaklar']);
+                $ara_sicaklar_aciklama = explode(', ', $row_1['ara_sicaklar_aciklama']);
+                $prefix = "kahvalti";
+                $_SESSION[$prefix] = "setted";
+                $_SESSION[$prefix."_ana_yemek"] = $row_1['ana_yemek'];
+                $_SESSION[$prefix."_ana_yemek_aciklama"] = $row_1['ana_yemek_aciklama'];
+                $_SESSION[$prefix."_ara_sicak_aciklama"] = $ara_sicaklar_aciklama[0];
+                $_SESSION[$prefix."_ara_sicak"] = $ara_sicaklar[0];
+                $_SESSION[$prefix."_icecek"] = $row_1['icecek'];
+                $_SESSION[$prefix."_icecek_aciklama"] = $row_1['icecek_aciklama'];
+                $_SESSION[$prefix."_tatli"] = $ara_sicaklar[1];
+                $_SESSION[$prefix."_tatli_aciklama"] = $ara_sicaklar_aciklama[1];
+                $_SESSION[$prefix."_corba"] = $ara_sicaklar[2];
+                $_SESSION[$prefix."_corba_aciklama"] = $ara_sicaklar_aciklama[2];
+                }
+        else{
+            $sql = "SELECT 
                 MAX(CASE WHEN yemekler.kategori = 'Ana yemek' THEN yemekler.yemek_ismi END) AS ana_yemek,
 	            MAX(CASE WHEN yemekler.kategori = 'Ana yemek' THEN yemekler.aciklama END) AS ana_yemek_aciklama,
                 MAX(CASE WHEN yemekler.kategori = 'Ara Sıcak' THEN yemekler.yemek_ismi END) AS ara_sicak,
@@ -58,36 +102,32 @@ if( $conn ) {
                 users.nickname = ?
                 AND menu.menu_tarihi = ? 
                 AND menu.kategori = ?";
-        $params = [$_SESSION['nickname'],$date,$row['kategori']];
-        $stmt_yemek = sqlsrv_query($conn, $sql,$params);
-        if ($stmt_yemek === false) {
-             die(print_r(sqlsrv_errors(), true));
-        }
-        $row_1 = sqlsrv_fetch_array($stmt_yemek, SQLSRV_FETCH_ASSOC);
-        $prefix;
-        if($row['kategori'] == 'Kahvaltı'){
-            $prefix = "kahvalti";
-        }
-        else if($row['kategori']=='Öğle Yemeği'){
-            $prefix = "ogle_yemegi";
-        }
-        else{
-            $prefix = "aksam_yemegi";
-        }
-        $_SESSION[$prefix] = "setted";
-        $_SESSION[$prefix."_ana_yemek"] = $row_1['ana_yemek'];
-        $_SESSION[$prefix."_ana_yemek_aciklama"] = $row_1['ana_yemek_aciklama'];
-        $_SESSION[$prefix."_ara_sicak_aciklama"] = $row_1['ara_sicak_aciklama'];
-        $_SESSION[$prefix."_ara_sicak"] = $row_1['ara_sicak'];
-        $_SESSION[$prefix."_icecek"] = $row_1['icecek'];
-        $_SESSION[$prefix."_icecek_aciklama"] = $row_1['icecek_aciklama'];
-        $_SESSION[$prefix."_tatli"] = $row_1['tatli'];
-        $_SESSION[$prefix."_tatli_aciklama"] = $row_1['tatli_aciklama'];
-        $_SESSION[$prefix."_corba"] = $row_1['corba'];
-        $_SESSION[$prefix."_corba_aciklama"] = $row_1['corba_aciklama'];
+            $params = [$_SESSION['nickname'],$date,$row['kategori']];
+            $stmt_yemek = sqlsrv_query($conn, $sql,$params);
+            if ($stmt_yemek === false) {
+                 die(print_r(sqlsrv_errors(), true));
+            }
+            $row_1 = sqlsrv_fetch_array($stmt_yemek, SQLSRV_FETCH_ASSOC);
+            $prefix;
+            if($row['kategori']=='Öğle Yemeği'){
+                $prefix = "ogle_yemegi";
+            }
+            else{
+                $prefix = "aksam_yemegi";
+            }
+            $_SESSION[$prefix] = "setted";
+            $_SESSION[$prefix."_ana_yemek"] = $row_1['ana_yemek'];
+            $_SESSION[$prefix."_ana_yemek_aciklama"] = $row_1['ana_yemek_aciklama'];
+            $_SESSION[$prefix."_ara_sicak_aciklama"] = $row_1['ara_sicak_aciklama'];
+            $_SESSION[$prefix."_ara_sicak"] = $row_1['ara_sicak'];
+            $_SESSION[$prefix."_icecek"] = $row_1['icecek'];
+            $_SESSION[$prefix."_icecek_aciklama"] = $row_1['icecek_aciklama'];
+            $_SESSION[$prefix."_tatli"] = $row_1['tatli'];
+            $_SESSION[$prefix."_tatli_aciklama"] = $row_1['tatli_aciklama'];
+            $_SESSION[$prefix."_corba"] = $row_1['corba'];
+            $_SESSION[$prefix."_corba_aciklama"] = $row_1['corba_aciklama'];
+        }  
+        
     }  
 }
-
-
-
 ?>

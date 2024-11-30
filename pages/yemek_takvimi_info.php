@@ -97,21 +97,21 @@ $resimler = tumYemekFotolariniGetir($yemek_isimleri);
                 <span>Kahvaltı:<br> </span>
                 <span>
                     Ana yemek: <?php echo !empty($kahvalti_ana_yemek) ? $kahvalti_ana_yemek : "Yok"; ?><br> 
-                    Açıklama: <?php echo !empty($kahvalti_ana_yemek) ? $kahvalti_ana_yemek : "Yok"; ?><br>
+                    Açıklama: <?php echo !empty($kahvalti_ana_yemek_aciklama) ? $kahvalti_ana_yemek_aciklama : "Yok"; ?><br>
                 </span>
                 <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$kahvalti_ana_yemek] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
                 <span>
-                    Ara sıcak: <?php echo !empty($kahvalti_ara_sicak) ? $kahvalti_ara_sicak : "Yok"; ?><br>
+                    Kahvaltılık 1: <?php echo !empty($kahvalti_ara_sicak) ? $kahvalti_ara_sicak : "Yok"; ?><br>
                     Açıklama: <?php echo !empty($kahvalti_ara_sicak_aciklama) ? $kahvalti_ara_sicak_aciklama : "Yok"; ?><br>
                 </span>
                 <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$kahvalti_ara_sicak] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
                 <span>
-                    Çorba: <?php echo !empty($kahvalti_corba) ? $kahvalti_corba : "Yok"; ?><br>
+                    Kahvaltılık 2: <?php echo !empty($kahvalti_corba) ? $kahvalti_corba : "Yok"; ?><br>
                     Açıklama: <?php echo !empty($kahvalti_corba_aciklama) ? $kahvalti_corba_aciklama : "Yok"; ?><br>
                 </span>
                 <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$kahvalti_corba] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
                 <span>
-                    Tatlı: <?php echo !empty($kahvalti_tatli) ? $kahvalti_tatli : "Yok"; ?><br>
+                    Kahvaltılık 3: <?php echo !empty($kahvalti_tatli) ? $kahvalti_tatli : "Yok"; ?><br>
                     Açıklama: <?php echo !empty($kahvalti_tatli_aciklama) ? $kahvalti_tatli_aciklama : "Yok"; ?><br>
                 </span>
                 <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$kahvalti_tatli] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
