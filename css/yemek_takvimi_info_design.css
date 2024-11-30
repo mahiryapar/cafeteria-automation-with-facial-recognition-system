@@ -28,3 +28,6 @@
     object-fit: cover;
   }
   
+  img:not([src]){
+    visibility: hidden;
+  }

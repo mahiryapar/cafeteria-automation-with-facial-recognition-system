@@ -96,86 +96,86 @@ $resimler = tumYemekFotolariniGetir($yemek_isimleri);
             <div id="kahvalti">
                 <span>Kahvaltı:<br> </span>
                 <span>
-                    Ana yemek: <?php echo $kahvalti_ana_yemek?><br> 
-                    Açıklama: <?php echo $kahvalti_ana_yemek_aciklama?><br>
+                    Ana yemek: <?php echo !empty($kahvalti_ana_yemek) ? $kahvalti_ana_yemek : "Yok"; ?><br> 
+                    Açıklama: <?php echo !empty($kahvalti_ana_yemek) ? $kahvalti_ana_yemek : "Yok"; ?><br>
                 </span>
-                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$kahvalti_ana_yemek] ?>" alt=""></div>
+                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$kahvalti_ana_yemek] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
                 <span>
-                    Ara sıcak: <?php echo $kahvalti_ara_sicak?><br>
-                    Açıklama: <?php echo $kahvalti_ara_sicak_aciklama?><br>
+                    Ara sıcak: <?php echo !empty($kahvalti_ara_sicak) ? $kahvalti_ara_sicak : "Yok"; ?><br>
+                    Açıklama: <?php echo !empty($kahvalti_ara_sicak_aciklama) ? $kahvalti_ara_sicak_aciklama : "Yok"; ?><br>
                 </span>
-                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$kahvalti_ara_sicak] ?>" alt=""></div>
+                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$kahvalti_ara_sicak] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
                 <span>
-                    Çorba: <?php echo $kahvalti_corba?><br>
-                    Açıklama: <?php echo $kahvalti_corba_aciklama?><br>
+                    Çorba: <?php echo !empty($kahvalti_corba) ? $kahvalti_corba : "Yok"; ?><br>
+                    Açıklama: <?php echo !empty($kahvalti_corba_aciklama) ? $kahvalti_corba_aciklama : "Yok"; ?><br>
                 </span>
-                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$kahvalti_corba] ?>" alt=""></div>
+                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$kahvalti_corba] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
                 <span>
-                    Tatlı: <?php echo $kahvalti_tatli?><br>
-                    Açıklama: <?php echo $kahvalti_tatli_aciklama?><br>
+                    Tatlı: <?php echo !empty($kahvalti_tatli) ? $kahvalti_tatli : "Yok"; ?><br>
+                    Açıklama: <?php echo !empty($kahvalti_tatli_aciklama) ? $kahvalti_tatli_aciklama : "Yok"; ?><br>
                 </span>
-                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$kahvalti_tatli] ?>" alt=""></div>
+                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$kahvalti_tatli] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
                 <span>
-                    içecek: <?php echo $kahvalti_icecek?><br>
-                    Açıklama: <?php echo $kahvalti_icecek_aciklama?><br>
+                    içecek: <?php echo !empty($kahvalti_icecek) ? $kahvalti_icecek : "Yok"; ?><br>
+                    Açıklama: <?php echo !empty($kahvalti_icecek_aciklama) ? $kahvalti_icecek_aciklama : "Yok"; ?><br>
                 </span>
-                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$kahvalti_icecek] ?>" alt=""></div>
+                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$kahvalti_icecek] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
             </div>
             <div id="ogle">
                 <span>Öğle Yemeği: <br> </span>
                 <span>
-                    Ana yemek: <?php echo $ogle_yemegi_ana_yemek?><br>
-                    Açıklama: <?php echo $ogle_yemegi_ana_yemek_aciklama?>
+                    Ana yemek: <?php echo !empty($ogle_yemegi_ana_yemek) ? $ogle_yemegi_ana_yemek : "Yok"; ?><br>
+                    Açıklama: <?php echo !empty($ogle_yemegi_ana_yemek_aciklama) ? $ogle_yemegi_ana_yemek_aciklama : "Yok"; ?><br>
                 </span>
-                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$ogle_yemegi_ana_yemek] ?>" alt=""></div>
+                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$ogle_yemegi_ana_yemek] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
                 <span>
-                    Ara sıcak: <?php echo $ogle_yemegi_ara_sicak?><br>
-                    Açıklama: <?php echo $ogle_yemegi_ara_sicak_aciklama?><br>
+                    Ara sıcak: <?php echo !empty($ogle_yemegi_ara_sicak) ? $ogle_yemegi_ara_sicak : "Yok"; ?><br>
+                    Açıklama: <?php echo !empty($ogle_yemegi_ara_sicak_aciklama) ? $ogle_yemegi_ara_sicak_aciklama : "Yok"; ?><br>
                 </span>
-                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$ogle_yemegi_ara_sicak] ?>" alt=""></div>
+                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$ogle_yemegi_ara_sicak] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
                 <span>
-                    Çorba: <?php echo $ogle_yemegi_corba?><br>
-                    Açıklama: <?php echo $ogle_yemegi_corba_aciklama?><br>
+                    Çorba: <?php echo !empty($ogle_yemegi_corba) ? $ogle_yemegi_corba : "Yok"; ?><br>
+                    Açıklama: <?php echo !empty($ogle_yemegi_corba_aciklama) ? $ogle_yemegi_corba_aciklama : "Yok"; ?><br>
                 </span>
-                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$ogle_yemegi_corba] ?>" alt=""></div>
+                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$ogle_yemegi_corba] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
                 <span>
-                    Tatlı: <?php echo $ogle_yemegi_tatli?><br>
-                    Açıklama: <?php echo $ogle_yemegi_tatli_aciklama?><br>
+                    Tatlı: <?php echo !empty($ogle_yemegi_tatli) ? $ogle_yemegi_tatli : "Yok"; ?><br>
+                    Açıklama: <?php echo !empty($ogle_yemegi_tatli_aciklama) ? $ogle_yemegi_tatli_aciklama : "Yok"; ?><br>
                 </span>
-                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$ogle_yemegi_tatli] ?>" alt=""></div>
+                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$ogle_yemegi_tatli] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
                 <span>
-                    içecek: <?php echo $ogle_yemegi_icecek?><br>
-                    Açıklama: <?php echo $ogle_yemegi_icecek_aciklama?><br>
+                    içecek: <?php echo !empty($ogle_yemegi_icecek) ? $ogle_yemegi_icecek : "Yok"; ?><br>
+                    Açıklama: <?php echo !empty($ogle_yemegi_icecek_aciklama) ? $ogle_yemegi_icecek_aciklama : "Yok"; ?><br>
                 </span>
-                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$ogle_yemegi_icecek] ?>" alt=""></div>
+                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$ogle_yemegi_icecek] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
             </div>
             <div id="aksam">
                 <span>Akşam Yemeği: <br> </span>
                 <span>
-                    Ana yemek: <?php echo $aksam_yemegi_ana_yemek?><br>
-                    Açıklama: <?php echo $aksam_yemegi_ana_yemek_aciklama?><br>
+                    Ana yemek: <?php echo !empty($aksam_yemegi_ana_yemek) ? $aksam_yemegi_ana_yemek : "Yok"; ?><br>
+                    Açıklama: <?php echo !empty($aksam_yemegi_ana_yemek_aciklama) ? $aksam_yemegi_ana_yemek_aciklama : "Yok"; ?><br>
                 </span>
-                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$aksam_yemegi_ana_yemek]?>" alt=""></div>
+                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$aksam_yemegi_ana_yemek]?>" alt="" onerror="this.style.visibility='hidden';"></div>
                 <span>
-                    Ara sıcak: <?php echo $aksam_yemegi_ara_sicak?><br>
-                    Açıklama: <?php echo $aksam_yemegi_ara_sicak_aciklama?><br>
+                    Ara sıcak: <?php echo !empty($aksam_yemegi_ara_sicak) ? $aksam_yemegi_ara_sicak : "Yok"; ?><br>
+                    Açıklama: <?php echo !empty($aksam_yemegi_ara_sicak_aciklama) ? $aksam_yemegi_ara_sicak_aciklama : "Yok"; ?><br>
                 </span>
-                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$aksam_yemegi_ara_sicak] ?>" alt=""></div>
+                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$aksam_yemegi_ara_sicak] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
                 <span>
-                    Çorba: <?php echo $aksam_yemegi_corba?><br>
-                    Açıklama: <?php echo $aksam_yemegi_corba_aciklama?><br>
+                    Çorba: <?php echo !empty($aksam_yemegi_corba) ? $aksam_yemegi_corba : "Yok"; ?><br>
+                    Açıklama: <?php echo !empty($aksam_yemegi_corba_aciklama) ? $aksam_yemegi_corba_aciklama : "Yok"; ?><br>
                 </span>
-                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$aksam_yemegi_corba] ?>" alt=""></div>
+                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$aksam_yemegi_corba] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
                 <span>
-                    Tatlı: <?php echo $aksam_yemegi_tatli?><br>
-                    Açıklama: <?php echo $aksam_yemegi_tatli_aciklama?><br>
+                    Tatlı: <?php echo !empty($aksam_yemegi_tatli) ? $aksam_yemegi_tatli : "Yok"; ?><br>
+                    Açıklama: <?php echo !empty($aksam_yemegi_tatli_aciklama) ? $aksam_yemegi_tatli_aciklama : "Yok"; ?><br>
                 </span>
-                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$aksam_yemegi_tatli] ?>" alt=""></div>
+                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$aksam_yemegi_tatli] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
                 <span>
-                    içecek: <?php echo $aksam_yemegi_icecek?><br>
-                    Açıklama: <?php echo $aksam_yemegi_icecek_aciklama?><br>
+                    içecek: <?php echo !empty($aksam_yemegi_icecek) ? $aksam_yemegi_icecek : "Yok"; ?><br>
+                    Açıklama: <?php echo !empty($aksam_yemegi_icecek_aciklama) ? $aksam_yemegi_icecek_aciklama : "Yok"; ?><br>
                 </span>
-                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$aksam_yemegi_icecek] ?>" alt=""></div>
+                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$aksam_yemegi_icecek] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
             </div>
             </div>
         </div>
