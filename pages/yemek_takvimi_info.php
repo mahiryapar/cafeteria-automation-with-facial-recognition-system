@@ -9,64 +9,56 @@ $kahv = 0;
 $ogle = 0;
 $aksam = 0;
 include "../backend/yemek_takvimi_info_backend.php";
+$yemek_isimleri = [];
 if(isset($_SESSION['kahvalti'])){
     $kahv = 1;
     $kahvalti_ana_yemek = $_SESSION['kahvalti_ana_yemek'];  
-    $kahvalti_ana_yemek_resim = yemekfotogetir('kahvalti_ana_yemek');
     $kahvalti_ana_yemek_aciklama = $_SESSION['kahvalti_ana_yemek_aciklama'];
     $kahvalti_ara_sicak  = $_SESSION['kahvalti_ara_sicak'];
     $kahvalti_ara_sicak_aciklama  = $_SESSION['kahvalti_ara_sicak_aciklama'];
-    $kahvalti_ara_sicak_resim = yemekfotogetir('kahvalti_ara_sicak');
     $kahvalti_corba  = $_SESSION['kahvalti_corba'];
     $kahvalti_corba_aciklama  = $_SESSION['kahvalti_corba_aciklama'];
-    $kahvalti_corba_resim = yemekfotogetir('kahvalti_corba');
     $kahvalti_tatli  = $_SESSION['kahvalti_tatli'];
     $kahvalti_tatli_aciklama  = $_SESSION['kahvalti_tatli_aciklama'];
-    $kahvalti_tatli_resim = yemekfotogetir('kahvalti_tatli');
     $kahvalti_icecek  = $_SESSION['kahvalti_icecek'];
     $kahvalti_icecek_aciklama  = $_SESSION['kahvalti_icecek_aciklama'];  
-    $kahvalti_icecek_resim = yemekfotogetir('kahvalti_icecek');  
     unset($_SESSION['kahvalti']);
+    $kahvalti_yemekleri = [$kahvalti_ana_yemek,$kahvalti_ara_sicak,$kahvalti_corba,$kahvalti_icecek,$kahvalti_tatli];
+    $yemek_isimleri = array_merge($kahvalti_yemekleri,$yemek_isimleri);
 }
 if(isset($_SESSION['ogle_yemegi'])){
     $ogle = 1;
     $ogle_yemegi_ana_yemek = $_SESSION['ogle_yemegi_ana_yemek'];    
     $ogle_yemegi_ana_yemek_aciklama = $_SESSION['ogle_yemegi_ana_yemek_aciklama'];
-    $ogle_yemegi_ana_yemek_resim = yemekfotogetir('ogle_yemegi_ana_yemek');
     $ogle_yemegi_ara_sicak  = $_SESSION['ogle_yemegi_ara_sicak'];
     $ogle_yemegi_ara_sicak_aciklama  = $_SESSION['ogle_yemegi_ara_sicak_aciklama'];
-    $ogle_yemegi_ara_sicak_resim = yemekfotogetir('ogle_yemegi_ara_sicak');
     $ogle_yemegi_corba  = $_SESSION['ogle_yemegi_corba'];
     $ogle_yemegi_corba_aciklama  = $_SESSION['ogle_yemegi_corba_aciklama'];
-    $ogle_yemegi_corba_resim = yemekfotogetir('ogle_yemegi_corba');
     $ogle_yemegi_tatli  = $_SESSION['ogle_yemegi_tatli'];
     $ogle_yemegi_tatli_aciklama  = $_SESSION['ogle_yemegi_tatli_aciklama'];
-    $ogle_yemegi_tatli_resim = yemekfotogetir('ogle_yemegi_tatli');
     $ogle_yemegi_icecek  = $_SESSION['ogle_yemegi_icecek'];
     $ogle_yemegi_icecek_aciklama  = $_SESSION['ogle_yemegi_icecek_aciklama'];
-    $ogle_yemegi_icecek_resim = yemekfotogetir('ogle_yemegi_icecek');
+    $ogle_yemekleri = [$ogle_yemegi_ana_yemek,$ogle_yemegi_ara_sicak,$ogle_yemegi_corba,$ogle_yemegi_icecek,$ogle_yemegi_tatli];
     unset($_SESSION['ogle_yemegi']);
+    $yemek_isimleri = array_merge($ogle_yemekleri,$yemek_isimleri);
 }
 if(isset($_SESSION['aksam_yemegi'])){
     $aksam=1;
     $aksam_yemegi_ana_yemek = $_SESSION['aksam_yemegi_ana_yemek'];    
     $aksam_yemegi_ana_yemek_aciklama = $_SESSION['aksam_yemegi_ana_yemek_aciklama'];
-    $aksam_yemegi_ana_yemek_resim = yemekfotogetir('aksam_yemegi_ana_yemek');
     $aksam_yemegi_ara_sicak  = $_SESSION['aksam_yemegi_ara_sicak'];
     $aksam_yemegi_ara_sicak_aciklama  = $_SESSION['aksam_yemegi_ara_sicak_aciklama'];
-    $aksam_yemegi_ara_sicak_resim = yemekfotogetir('aksam_yemegi_ara_sicak');
     $aksam_yemegi_corba  = $_SESSION['aksam_yemegi_corba'];
     $aksam_yemegi_corba_aciklama  = $_SESSION['aksam_yemegi_corba_aciklama'];
-    $aksam_yemegi_corba_resim = yemekfotogetir('aksam_yemegi_corba');
     $aksam_yemegi_tatli  = $_SESSION['aksam_yemegi_tatli'];
     $aksam_yemegi_tatli_aciklama  = $_SESSION['aksam_yemegi_tatli_aciklama'];
-    $aksam_yemegi_tatli_resim = yemekfotogetir('aksam_yemegi_tatli');
     $aksam_yemegi_icecek  = $_SESSION['aksam_yemegi_icecek'];
     $aksam_yemegi_icecek_aciklama  = $_SESSION['aksam_yemegi_icecek_aciklama'];
-    $aksam_yemegi_icecek_resim = yemekfotogetir('aksam_yemegi_icecek');
     unset($_SESSION['aksam_yemegi']);
+    $aksam_yemekleri = [$aksam_yemegi_ana_yemek,$aksam_yemegi_ara_sicak,$aksam_yemegi_corba,$aksam_yemegi_icecek,$aksam_yemegi_tatli];
+    $yemek_isimleri = array_merge($aksam_yemekleri,$yemek_isimleri);
 }
-
+$resimler = tumYemekFotolariniGetir($yemek_isimleri);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -107,27 +99,27 @@ if(isset($_SESSION['aksam_yemegi'])){
                     Ana yemek: <?php echo $kahvalti_ana_yemek?><br> 
                     Açıklama: <?php echo $kahvalti_ana_yemek_aciklama?><br>
                 </span>
-                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $kahvalti_ana_yemek_resim ?>" alt=""></div>
+                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$kahvalti_ana_yemek] ?>" alt=""></div>
                 <span>
                     Ara sıcak: <?php echo $kahvalti_ara_sicak?><br>
                     Açıklama: <?php echo $kahvalti_ara_sicak_aciklama?><br>
                 </span>
-                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $kahvalti_ara_sicak_resim ?>" alt=""></div>
+                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$kahvalti_ara_sicak] ?>" alt=""></div>
                 <span>
                     Çorba: <?php echo $kahvalti_corba?><br>
                     Açıklama: <?php echo $kahvalti_corba_aciklama?><br>
                 </span>
-                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $kahvalti_corba_resim ?>" alt=""></div>
+                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$kahvalti_corba] ?>" alt=""></div>
                 <span>
                     Tatlı: <?php echo $kahvalti_tatli?><br>
                     Açıklama: <?php echo $kahvalti_tatli_aciklama?><br>
                 </span>
-                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $kahvalti_tatli_resim ?>" alt=""></div>
+                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$kahvalti_tatli] ?>" alt=""></div>
                 <span>
                     içecek: <?php echo $kahvalti_icecek?><br>
                     Açıklama: <?php echo $kahvalti_icecek_aciklama?><br>
                 </span>
-                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $kahvalti_icecek_resim ?>" alt=""></div>
+                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$kahvalti_icecek] ?>" alt=""></div>
             </div>
             <div id="ogle">
                 <span>Öğle Yemeği: <br> </span>
@@ -135,27 +127,27 @@ if(isset($_SESSION['aksam_yemegi'])){
                     Ana yemek: <?php echo $ogle_yemegi_ana_yemek?><br>
                     Açıklama: <?php echo $ogle_yemegi_ana_yemek_aciklama?>
                 </span>
-                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $ogle_yemegi_ana_yemek_resim ?>" alt=""></div>
+                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$ogle_yemegi_ana_yemek] ?>" alt=""></div>
                 <span>
                     Ara sıcak: <?php echo $ogle_yemegi_ara_sicak?><br>
                     Açıklama: <?php echo $ogle_yemegi_ara_sicak_aciklama?><br>
                 </span>
-                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $ogle_yemegi_ara_sicak_resim ?>" alt=""></div>
+                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$ogle_yemegi_ara_sicak] ?>" alt=""></div>
                 <span>
                     Çorba: <?php echo $ogle_yemegi_corba?><br>
                     Açıklama: <?php echo $ogle_yemegi_corba_aciklama?><br>
                 </span>
-                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $ogle_yemegi_corba_resim ?>" alt=""></div>
+                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$ogle_yemegi_corba] ?>" alt=""></div>
                 <span>
                     Tatlı: <?php echo $ogle_yemegi_tatli?><br>
                     Açıklama: <?php echo $ogle_yemegi_tatli_aciklama?><br>
                 </span>
-                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $ogle_yemegi_tatli_resim ?>" alt=""></div>
+                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$ogle_yemegi_tatli] ?>" alt=""></div>
                 <span>
                     içecek: <?php echo $ogle_yemegi_icecek?><br>
                     Açıklama: <?php echo $ogle_yemegi_icecek_aciklama?><br>
                 </span>
-                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $ogle_yemegi_icecek_resim ?>" alt=""></div>
+                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$ogle_yemegi_icecek] ?>" alt=""></div>
             </div>
             <div id="aksam">
                 <span>Akşam Yemeği: <br> </span>
@@ -163,27 +155,27 @@ if(isset($_SESSION['aksam_yemegi'])){
                     Ana yemek: <?php echo $aksam_yemegi_ana_yemek?><br>
                     Açıklama: <?php echo $aksam_yemegi_ana_yemek_aciklama?><br>
                 </span>
-                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $aksam_yemegi_ana_yemek_resim?>" alt=""></div>
+                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$aksam_yemegi_ana_yemek]?>" alt=""></div>
                 <span>
                     Ara sıcak: <?php echo $aksam_yemegi_ara_sicak?><br>
                     Açıklama: <?php echo $aksam_yemegi_ara_sicak_aciklama?><br>
                 </span>
-                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $aksam_yemegi_ara_sicak_resim ?>" alt=""></div>
+                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$aksam_yemegi_ara_sicak] ?>" alt=""></div>
                 <span>
                     Çorba: <?php echo $aksam_yemegi_corba?><br>
                     Açıklama: <?php echo $aksam_yemegi_corba_aciklama?><br>
                 </span>
-                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $aksam_yemegi_corba_resim ?>" alt=""></div>
+                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$aksam_yemegi_corba] ?>" alt=""></div>
                 <span>
                     Tatlı: <?php echo $aksam_yemegi_tatli?><br>
                     Açıklama: <?php echo $aksam_yemegi_tatli_aciklama?><br>
                 </span>
-                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $aksam_yemegi_tatli_resim ?>" alt=""></div>
+                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$aksam_yemegi_tatli] ?>" alt=""></div>
                 <span>
                     içecek: <?php echo $aksam_yemegi_icecek?><br>
                     Açıklama: <?php echo $aksam_yemegi_icecek_aciklama?><br>
                 </span>
-                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $aksam_yemegi_icecek_resim ?>" alt=""></div>
+                <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$aksam_yemegi_icecek] ?>" alt=""></div>
             </div>
             </div>
         </div>

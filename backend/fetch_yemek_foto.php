@@ -8,17 +8,8 @@ function yemekIsminiResimDosyasinaCevir($yemekIsmi) {
     $yemekIsmi = strtolower($yemekIsmi);
     return $yemekIsmi;
 }
-function yemekfotogetir($sessionad){
-    $yemek = $_SESSION[$sessionad];
-    $degistirilmis_isim_yemek = yemekIsminiResimDosyasinaCevir($yemek); 
-
-
-
-
+function tumYemekFotolariniGetir($yemekIsimleri) {
     require 'vendor/autoload.php';
-    session_start();
-  
-
 
     $configPath ='../config/database_infos.json';
     if (!file_exists($configPath)) {
@@ -29,9 +20,8 @@ function yemekfotogetir($sessionad){
         die('Config dosyası okunamadı veya geçersiz JSON formatı.');
     }
 
-    $projectId =$config["bucket_project_id"];
+    $projectId = $config["bucket_project_id"];
     $bucketName = $config["bucket_name"];
-    $prefix = "yemekler/" . $degistirilmis_isim_yemek;
 
     if (!file_exists("../config/".$config["bucket_key_name"])) {
         die('Kimlik doğrulama dosyası bulunamadı.');
@@ -52,37 +42,29 @@ function yemekfotogetir($sessionad){
         if (!$bucket->exists()) {
             die('Bucket bulunamadı.');
         }
-        $objects = $bucket->objects(['prefix' => $prefix]);
-        $object = null;
-        foreach ($objects as $obj) {
-            $object = $obj;
-            break;
-        }
-        if (!$object || !$object->exists()) {
-            $nickname = "default_pp"; 
-            $prefix = "photos/" . $degistirilmis_isim_yemek; 
+
+        $resimler = [];
+        foreach ($yemekIsimleri as $yemek) {
+            $degistirilmisIsim = yemekIsminiResimDosyasinaCevir($yemek);
+            $prefix = "yemekler/" . $degistirilmisIsim;
             $objects = $bucket->objects(['prefix' => $prefix]);
             $object = null;
-
             foreach ($objects as $obj) {
                 $object = $obj;
-                break;
+                break; 
+            }
+
+            if ($object && $object->exists()) {
+                $contents = $object->downloadAsString();
+                $resimler[$yemek] = 'data:image/png;base64,' . base64_encode($contents);
+            } else {
+                $resimler[$yemek] = "Resim Bulunamadı";
             }
         }
-        if ($object && $object->exists()) {
-            $contents = $object->downloadAsString();
-        } else {
-            $contents = false;
-        }
+        return $resimler;
+
     } catch (Exception $e) {
         die('Hata: ' . $e->getMessage());
-    }
-
-    if ($contents === false || empty($contents)) {
-        return "Resim Bulunamadı";
-    } else {
-        $base64Image = 'data:image/png;base64,' . base64_encode($contents);
-        return $base64Image;
     }
 }
 
