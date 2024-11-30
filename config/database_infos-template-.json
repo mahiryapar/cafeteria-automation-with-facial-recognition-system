@@ -1,0 +1,9 @@
+{
+    "db_host":"YOUR-HOST_IP_ADDRESS-HERE",
+    "db_user":"YOUR-USER-NAME-HERE",
+    "db_password":"YOUR-PASSWORD-HERE",
+    "db_name":"YOUR-DATABASE-NAME-HERE",
+    "bucket_project_id":"YOUR-BUCKET-PROJECT-ID-HERE",
+    "bucket_name":"YOUR-BUCKET-NAME-HERE",
+    "bucket_key_name":"YOUR-BUCKET-KEY-NAME"
+}

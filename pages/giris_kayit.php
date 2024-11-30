@@ -35,8 +35,10 @@ if(isset($_GET['giris'])){
         <div id="sonuc"></div> 
         <div id= "giris">
         <form id="myFormlogin" action="../backend/giris_bcknd.php" method="post"> 
-            <div><span style="color:black">Kullanıcı Adı: </span>       
-            <input type="text" id= "login_ncknm" name="login_kullanici_adi"></div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">@</span>
+                <input type="text" class="form-control" id= "login_ncknm" name="login_kullanici_adi" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
             <div><span style="color:black">Şifre:</span>
             <input type="password" id= "login_psw" name="login_sifre"></div>
             <button type="submit" id="loginbutton">Onayla</button>

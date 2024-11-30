@@ -65,9 +65,10 @@ else{
         
             <div id="pp_ayar">
             <form action="../backend/upload.php" method="POST" enctype="multipart/form-data">
-                <label for="profile_photo">Profil Fotoğrafı:</label>
-                <input type="file" name="profile_photo" id="profile_photo" required>
-                <button type="submit">Yükle</button>
+                <div class="input-group">
+                    <input type="file" class="form-control" name="profile_photo" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                     <button class="btn btn-outline-secondary" type="submit" id="inputGroupFileAddon04">Yükle</button>
+                </div>
             </form>
             <form action="../backend/remove_pp.php" method="POST" enctype="multipart/form-data">
                 <button type="submit">Profil Fotoğrafını Kaldır</button>
