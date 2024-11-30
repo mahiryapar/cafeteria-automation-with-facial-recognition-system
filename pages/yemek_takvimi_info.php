@@ -65,7 +65,7 @@ $resimler = tumYemekFotolariniGetir($yemek_isimleri);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yemekhane</title>
+    <title>Yemek Takvimi</title>
     <link href ="../css/yemek_takvimi_design.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
@@ -84,8 +84,8 @@ $resimler = tumYemekFotolariniGetir($yemek_isimleri);
                 <li class="liler" id = "ogrenci-li"><a class="linkler" href="bakiye_yukle.php">Bakiye Yükle</a></li>
                 <li class="liler" id="admin-li"><a class="linkler" href="#">Yemekhanem</a></li>
                 <li class="liler" id="ogrenci-li"><a class="linkler" href="#">Yemekhanem</a></li>
-                <li class="liler" id="admin-li"><a class="linkler" href="#">Öğrenciler</a></li>
-                <li class="liler" id="ogrenci-li"><a class="linkler" href="#">İletişim</a></li>
+                <li class="liler" id="admin-li"><a class="linkler" href="uyeler.php">Üyeler</a></li>
+                <li class="liler" id="ogrenci-li"><a class="linkler" href="iletisim.php">İletişim</a></li>
                 <li class="liler" id="ogrenci-li"><a class="linkler" href="../backend/logout.php">Çıkış</a></li>
                 <li class="liler" id="admin-li"><a class="linkler" href="../backend/logout.php">Çıkış</a></li>
         </nav>

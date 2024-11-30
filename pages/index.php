@@ -49,8 +49,8 @@ if(isset($_SESSION['flash_message'])){
                 <li class="liler" id = "ogrenci-li"><a class="linkler" href="bakiye_yukle.php">Bakiye Yükle</a></li>
                 <li class="liler" id="admin-li"><a class="linkler" href="#">Yemekhanem</a></li>
                 <li class="liler" id="ogrenci-li"><a class="linkler" href="#">Yemekhanem</a></li>
-                <li class="liler" id="admin-li"><a class="linkler" href="#">Öğrenciler</a></li>
-                <li class="liler" id="ogrenci-li"><a class="linkler" href="#">İletişim</a></li>
+                <li class="liler" id="admin-li"><a class="linkler" href="uyeler.php">Üyeler</a></li>
+                <li class="liler" id="ogrenci-li"><a class="linkler" href="iletisim.php">İletişim</a></li>
                 <li class="liler" id="ogrenci-li"><a class="linkler" href="../backend/logout.php">Çıkış</a></li>
                 <li class="liler" id="admin-li"><a class="linkler" href="../backend/logout.php">Çıkış</a></li>
         </nav>
