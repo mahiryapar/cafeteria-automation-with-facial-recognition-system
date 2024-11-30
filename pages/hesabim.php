@@ -38,7 +38,7 @@ else{
                 <li class="liler" id="signin"><a class="linkler" href="giris_kayit.php?giris=1">Giriş Yap</a></li>
                 <li class="prfl" ><div id="prfl-foto"><img src="<?php echo $_SESSION['pp']; ?>" alt="Profil Fotoğrafı" id="prfl-foto-img"></div></li>
                 <li class="liler" id="signin"><a class="linkler" href="giris_kayit.php?giris=0">Kaydol</a></li>
-                <li class="liler" id = "ogrenci-li"><a class="linkler" href="#">Bakiye Yükle</a></li>
+                <li class="liler" id = "ogrenci-li"><a class="linkler" href="bakiye_yukle.php">Bakiye Yükle</a></li>
                 <li class="liler" id="admin-li"><a class="linkler" href="#">Yemekhanem</a></li>
                 <li class="liler" id="ogrenci-li"><a class="linkler" href="#">Yemekhanem</a></li>
                 <li class="liler" id="admin-li"><a class="linkler" href="#">Öğrenciler</a></li>

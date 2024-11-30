@@ -13,7 +13,7 @@ session_start();
     <div id="sayfa">
         <nav id="nav">
             <ul id="liste">
-                <li class="liler" id = "ortak-li"><a class="linkler" href="#">Ana Sayfa</a></li>
+                <li class="liler" id = "ortak-li"><a class="linkler" href="index.php">Ana Sayfa</a></li>
                 <li class="liler" id = "admin-li"><a class="linkler" href="hesabim.php">Hesabım</a></li>
                 <li class="liler" id = "ogrenci-li"><a class="linkler" href="hesabim.php">Hesabım</a></li>
                 <li class="liler" id = "ogrenci-li"><a class="linkler" href="yemek_takvimi.php">Yemek Takvimi</a></li>
@@ -29,11 +29,38 @@ session_start();
                 <li class="liler" id="admin-li"><a class="linkler" href="../backend/logout.php">Çıkış</a></li>
         </nav>
         <div id="icerik">
-
+            <div id="sonuc"></div> 
+            <span id="mevcut_bakiye">Şu anki bakiyeniz: <?php include '../backend/bakiye_bilgisi_cek.php'?></span>
+            <form id="para_yukle_form" action="../backend/bakiye_yukle_backend.php" method="post"><br>
+                <input type="number" id="kart_no" name="kart_no" placeholder="kart numarası"><br>
+                <input type="text"   id="skt" name="skt" placeholder="son kullanma tarihi"><br>
+                <input type="number" id="cvv" name="cvv" placeholder="cvv kodu"><br>
+                <input type="number" id="bakiye" name="bakiye"placeholder="yüklemek istediğin bakiye"><br>
+                <button type="submit">Para Yükle</button><br>
+            </form>
 
         </div>
     </div>
     <script>
+        document.getElementById("para_yukle_form").addEventListener("submit", function(event) {
+            event.preventDefault(); 
+            const formData = new FormData(this);
+            fetch("../backend/bakiye_yukle_backend.php", {
+                method: "POST",
+                body: formData,
+            })
+            .then(response => response.text()) 
+            .then(data => {
+            document.getElementById("sonuc").innerHTML = data;
+            const scripts = document.getElementById("sonuc").getElementsByTagName("script");
+            for (let script of scripts) {
+                eval(script.textContent); 
+            }
+            })
+            .catch(error => {
+                console.error("Hata:", error);
+            });
+        });
     </script>
     <script src="../js/app.js"></script>
     <link rel="stylesheet" href="../css/design.css">
