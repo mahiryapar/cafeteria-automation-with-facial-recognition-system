@@ -4,17 +4,16 @@ if(isset($_SESSION['nickname'])){
     $_SESSION['nickname'] = "default_pp";
     $_SESSION['role'] = "guest";
     $_SESSION['flash_message'] = "Başarıyla çıkış yaptınız!";
-    if(isset($_SESSION['isim'])){
-        unset($_SESSION['isim']);
-        unset($_SESSION['soyisim']);
-        unset($_SESSION['mail']);
-        unset($_SESSION['tel']);
-        unset($_SESSION['bakiye']);
-        unset($_SESSION['yemekhane']);
-        unset($_SESSION['yemekhane_id']);
-        unset($_SESSION['user_id']);
-        unset($_SESSION['suanki_mesaj']);
-    }
+    unset($_SESSION['suanki_mesaj']);
+    unset($_SESSION['isim']);
+    unset($_SESSION['soyisim']);
+    unset($_SESSION['mail']);
+    unset($_SESSION['tel']);
+    unset($_SESSION['bakiye']);
+    unset($_SESSION['yemekhane']);
+    unset($_SESSION['yemekhane_id']);
+    unset($_SESSION['user_id']);    
+
     
     header("Location: ../pages/index.php");
     exit(1);

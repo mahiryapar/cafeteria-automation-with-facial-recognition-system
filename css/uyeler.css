@@ -28,8 +28,13 @@
     display:none;
   }
 
-  #gelen_mesajlar{
+  #uyeler_listesi{
     display:block;
+  }
+
+
+  #gelen_mesajlar{
+    display:none;
   }
 
   #giden_mesajlar{

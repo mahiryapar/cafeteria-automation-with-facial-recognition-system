@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <script>
                 document.getElementById('sonuc').style.display = 'block';
                 setTimeout(function() {
-                    window.location.href = 'iletisim.php';
+                    window.location.href = '".$_SESSION['sayfa'].".php';
                 }, 2000);
             </script>";
         sqlsrv_free_stmt($stmt);

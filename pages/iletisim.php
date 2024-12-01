@@ -1,5 +1,6 @@
 <?php 
 session_start();
+$_SESSION['sayfa'] = 'iletisim';
 header('Content-Type: text/html; charset=utf-8');
 $configPath ='../config/database_infos.json';
 if (!file_exists($configPath)) {
@@ -38,7 +39,8 @@ $sql_1 = "select mesajlar.id,konu,mesaj,okundu,
 from users
 inner join mesajlar
 on users.id = mesajlar.kime
-where users.id = ?";
+where users.id = ?
+order by mesaj_saati desc";
 $params_1 = [$_SESSION['user_id']];
 $stmt_1 = sqlsrv_query($conn, $sql_1,$params_1);
 if ($stmt_1 === false) {
@@ -50,7 +52,8 @@ $sql_3 = "select mesajlar.id,konu,
 from users
 inner join mesajlar
 on users.id = mesajlar.kimden
-where users.id = ?";
+where users.id = ?
+order by mesaj_saati desc";
 $params_3 = [$_SESSION['user_id']];
 $stmt_3 = sqlsrv_query($conn, $sql_3,$params_3);
 if ($stmt_3 === false) {
@@ -175,10 +178,10 @@ else if(isset($_SESSION['suanki_mesaj'])){
                         <?php
                             while ($row_1 = sqlsrv_fetch_array($stmt_1, SQLSRV_FETCH_ASSOC)) {
                                 if($row_1['okundu'] == 'Hayır'){
-                                    echo "<li id='gelen_mesaj_li'><a href='../backend/mesaj_goster.php?mesaj_id=".$row_1['id']."&gelgit=0'><span>". $row_1['name'] ." ". $row_1['surname']."--" .$row_1['konu']."-- Mesaj Okunmadı</span></a></li><br><hr>";
+                                    echo "<li id='gelen_mesaj_li'><a href='../backend/mesaj_goster.php?mesaj_id=".$row_1['id']."&gelgit=0&sayfa=iletisim'><span>". $row_1['name'] ." ". $row_1['surname']."--" .$row_1['konu']."-- Mesaj Okunmadı</span></a></li><br><hr>";
                                 }
                                 else{
-                                    echo "<li id='gelen_mesaj_li'><a href='../backend/mesaj_goster.php?mesaj_id=".$row_1['id']."&gelgit=0'><span>". $row_1['name'] ." ". $row_1['surname']."--" .$row_1['konu']."-- Mesaj Okundu</span></a></li><br><hr>";
+                                    echo "<li id='gelen_mesaj_li'><a href='../backend/mesaj_goster.php?mesaj_id=".$row_1['id']."&gelgit=0&sayfa=iletisim'><span>". $row_1['name'] ." ". $row_1['surname']."--" .$row_1['konu']."-- Mesaj Okundu</span></a></li><br><hr>";
                                 }
 
                             }
@@ -189,7 +192,7 @@ else if(isset($_SESSION['suanki_mesaj'])){
                     <ul id="mesajlar_ul">
                         <?php
                             while ($row_3 = sqlsrv_fetch_array($stmt_3, SQLSRV_FETCH_ASSOC)) {
-                                echo "<li id='giden_mesaj_li'><a href='../backend/mesaj_goster.php?mesaj_id=".$row_3['id']."&gelgit=1'><span>
+                                echo "<li id='giden_mesaj_li'><a href='../backend/mesaj_goster.php?mesaj_id=".$row_3['id']."&gelgit=1&sayfa=iletisim'><span>
                                 ". $row_3['name'] ." ". $row_3['surname']."--" .$row_3['konu']."</span></a></li><br><hr>";
 
                             }
