@@ -20,7 +20,7 @@ $conn = sqlsrv_connect($serverName, $connectionOptions);
 if ($conn === false) {
     die(print_r(sqlsrv_errors(), true));
 }
-if(isset($_SESSION['suanki_mesaj'])){
+if(isset($_SESSION['suanki_mesaj'])&&$_SESSION['gelgit']==0){
     $sql_2 = "update mesajlar set okundu = 'Evet' where mesajlar.id = ?";
     $params_2 = [$_SESSION['suanki_mesaj']];
     $stmt_2 = sqlsrv_query($conn, $sql_2,$params_2);
@@ -44,20 +44,44 @@ $stmt_1 = sqlsrv_query($conn, $sql_1,$params_1);
 if ($stmt_1 === false) {
     die(print_r(sqlsrv_errors(), true));
 }
+$sql_3 = "select mesajlar.id,konu,
+(select name from users where users.id=mesajlar.kime) as name,
+(select surname from users where users.id=mesajlar.kime) as surname
+from users
+inner join mesajlar
+on users.id = mesajlar.kimden
+where users.id = ?";
+$params_3 = [$_SESSION['user_id']];
+$stmt_3 = sqlsrv_query($conn, $sql_3,$params_3);
+if ($stmt_3 === false) {
+    die(print_r(sqlsrv_errors(), true));
+}
+
 if(!isset($_SESSION['suanki_mesaj'])){
     $_SESSION['suanki_mesaj'] = -1; 
 }
 else if(isset($_SESSION['suanki_mesaj'])){
-    $sql_2 = "select mesajlar.id,konu,mesaj,okundu,mesaj_saati,
+    if($_SESSION['gelgit'] == 0){
+        $sql_2 = "select mesajlar.id,konu,mesaj,okundu,mesaj_saati,
               (select name from users where users.id=mesajlar.kimden) as name,
               (select surname from users where users.id=mesajlar.kimden) as surname
               from users
               inner join mesajlar
               on users.id = mesajlar.kime
               where users.id = ? and mesajlar.id = ?";
-$params_2 = [$_SESSION['user_id'],$_SESSION['suanki_mesaj']];
-$stmt_2 = sqlsrv_query($conn, $sql_2,$params_2);
-$row_2 = sqlsrv_fetch_array($stmt_2,SQLSRV_FETCH_ASSOC);
+    }
+    else{
+        $sql_2 = "select mesajlar.id,konu,mesaj,okundu,mesaj_saati,
+              (select name from users where users.id=mesajlar.kime) as name,
+              (select surname from users where users.id=mesajlar.kime) as surname
+              from users
+              inner join mesajlar
+              on users.id = mesajlar.kimden
+              where users.id = ? and mesajlar.id = ?";
+    }
+    $params_2 = [$_SESSION['user_id'],$_SESSION['suanki_mesaj']];
+    $stmt_2 = sqlsrv_query($conn, $sql_2,$params_2);
+    $row_2 = sqlsrv_fetch_array($stmt_2,SQLSRV_FETCH_ASSOC);
 }
 
 
@@ -114,7 +138,13 @@ $row_2 = sqlsrv_fetch_array($stmt_2,SQLSRV_FETCH_ASSOC);
             <div id='mesaj_detay'>
                 <div id="mesaj_gozukuyor">
                     <?php 
-                            echo "<span id='mh_kimden'>Yazan: ".$row_2['name']." ".$row_2['surname']."</span><br>
+                    if($_SESSION['gelgit']==0){
+                        $prefix = 'Yazan';
+                    }
+                    else{
+                        $prefix = 'Alıcı';
+                    }
+                    echo "<span id='mh_kimden'>".$prefix.": ".$row_2['name']." ".$row_2['surname']."</span><br>
                                   <span id='mh_konu'>Konu: ".$row_2['konu']."</span><br>
                                   <span id='mh_mesaj'>Mesaj: ".$row_2['mesaj']."</span><br>";
 
@@ -133,28 +163,39 @@ $row_2 = sqlsrv_fetch_array($stmt_2,SQLSRV_FETCH_ASSOC);
                     ?>
                 </div>
             </div> 
-            <div id=gelen_mesajlar>
-            <label>
-                 <input type="radio" name="mesaj_tipi" value="gelen" checked> Gelen Mesajlar
-            </label>
-            <label>
-                <input type="radio" name="mesaj_tipi" value="giden"> Giden Mesajlar
-            </label>
-                <ul id="mesajlar_ul">
-                    <?php
-                        while ($row_1 = sqlsrv_fetch_array($stmt_1, SQLSRV_FETCH_ASSOC)) {
-                            if($row_1['okundu'] == 'Hayır'){
-                                echo "<li id='gelen_mesaj_li'><a href='../backend/mesaj_goster.php?mesaj_id=".$row_1['id']."'><span>". $row_1['name'] ." ". $row_1['surname']."--" .$row_1['konu']."-- Mesaj Okunmadı</span><br>
-                                         <span> ".$row_1['mesaj']."</span></a></li><br><hr>";
+            <div id='mesaj_ve_ogrenciler'>
+                <label>
+                     <input type="radio" name="mesaj_tipi" value="gelen" checked> Gelen Mesajlar
+                </label>
+                <label>
+                    <input type="radio" name="mesaj_tipi" value="giden"> Giden Mesajlar
+                </label>
+                <div id="gelen_mesajlar">
+                    <ul id="mesajlar_ul">
+                        <?php
+                            while ($row_1 = sqlsrv_fetch_array($stmt_1, SQLSRV_FETCH_ASSOC)) {
+                                if($row_1['okundu'] == 'Hayır'){
+                                    echo "<li id='gelen_mesaj_li'><a href='../backend/mesaj_goster.php?mesaj_id=".$row_1['id']."&gelgit=0'><span>". $row_1['name'] ." ". $row_1['surname']."--" .$row_1['konu']."-- Mesaj Okunmadı</span></a></li><br><hr>";
+                                }
+                                else{
+                                    echo "<li id='gelen_mesaj_li'><a href='../backend/mesaj_goster.php?mesaj_id=".$row_1['id']."&gelgit=0'><span>". $row_1['name'] ." ". $row_1['surname']."--" .$row_1['konu']."-- Mesaj Okundu</span></a></li><br><hr>";
+                                }
+
                             }
-                            else{
-                                echo "<li id='gelen_mesaj_li'><a href='../backend/mesaj_goster.php?mesaj_id=".$row_1['id']."'><span>". $row_1['name'] ." ". $row_1['surname']."--" .$row_1['konu']."-- Mesaj Okundu</span><br>
-                                         <span> ".$row_1['mesaj']."</span></a></li><br><hr>";
+                        ?>
+                    </ul>
+                </div>
+                <div id="giden_mesajlar">
+                    <ul id="mesajlar_ul">
+                        <?php
+                            while ($row_3 = sqlsrv_fetch_array($stmt_3, SQLSRV_FETCH_ASSOC)) {
+                                echo "<li id='giden_mesaj_li'><a href='../backend/mesaj_goster.php?mesaj_id=".$row_3['id']."&gelgit=1'><span>
+                                ". $row_3['name'] ." ". $row_3['surname']."--" .$row_3['konu']."</span></a></li><br><hr>";
+
                             }
-                            
-                        }
-                    ?>
-                </ul>
+                        ?>
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -191,6 +232,7 @@ $row_2 = sqlsrv_fetch_array($stmt_2,SQLSRV_FETCH_ASSOC);
             });
     </script>
     <script src="../js/app.js"></script>
+    <script src="../js/iletisim_app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -10,7 +10,7 @@
     gap: 10px; 
 }
 
-#iletisim_sayfa #mesaj_yaz_div,#gelen_mesajlar,#mesaj_detay {
+#iletisim_sayfa #mesaj_yaz_div,#mesaj_ve_ogrenciler,#mesaj_detay {
     flex: 1; 
     text-align: center; 
     padding: 10px;
@@ -25,5 +25,14 @@
 
 
   #mesaj_gozukuyor{
+    display:none;
+  }
+
+
+  #gelen_mesajlar{
+    display:block;
+  }
+
+  #giden_mesajlar{
     display:none;
   }
