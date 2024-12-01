@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if($_GET['giris'] == 1){
             $kullaniciAdi = $_POST['login_kullanici_adi'] ?? '';
             $sifre = $_POST['login_sifre'] ?? '';
-            $sql = "SELECT rol,yemekhane_id FROM Users where nickname = ? and password_hash = ?";      
+            $sql = "SELECT id,rol,yemekhane_id FROM Users where nickname = ? and password_hash = ?";      
             $params = [$kullaniciAdi, $sifre];
             $stmt = sqlsrv_query($conn, $sql,$params);
             if ($stmt === false) {
@@ -38,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['nickname'] = $kullaniciAdi; 
                 $_SESSION['role'] = $row['rol'];
                 $_SESSION['yemekhane_id'] = $row['yemekhane_id'];
+                $_SESSION['user_id'] = $row['id'];
                 echo "
                 <div id='cikis' class='alert alert-success'>
                     <strong>Başarılı!</strong> Giriş yaptınız ana sayfaya yönlendiriliyorsunuz.

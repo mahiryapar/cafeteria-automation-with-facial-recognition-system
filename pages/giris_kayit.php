@@ -13,6 +13,8 @@ if(isset($_GET['giris'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php if($giris ==1){echo "Giriş Yap";}else{echo "Kayıt Ol";} ?></title>
+    <link rel="stylesheet" href="../css/design.css">
+    <link rel="stylesheet" href="../css/giris_kayit_design.css">
     <style>
         #sonuc{
             display:none;
@@ -111,6 +113,4 @@ if(isset($_GET['giris'])){
         }       
 </script>
     <script src="../js/app.js"></script>
-    <link rel="stylesheet" href="../css/design.css">
-    <link rel="stylesheet" href="../css/giris_kayit_design.css">
 </html>
