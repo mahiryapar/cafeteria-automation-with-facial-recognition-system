@@ -17,7 +17,6 @@ function INIT(){
     fetch('../backend/session_data.php')
     .then(response => response.json())
     .then(data => {
-    console.log('Session Verisi:', data);
     if (data.role == "admin") {
         for (let i = 0; i < signlar.length; i++) {
             signlar[i].style.display = "none";

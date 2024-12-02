@@ -12,7 +12,7 @@ if(isset($_SESSION['nickname'])){
     unset($_SESSION['bakiye']);
     unset($_SESSION['yemekhane']);
     unset($_SESSION['yemekhane_id']);
-    unset($_SESSION['user_id']);    
+    unset($_SESSION['user_id']); 
 
     
     header("Location: ../pages/index.php");

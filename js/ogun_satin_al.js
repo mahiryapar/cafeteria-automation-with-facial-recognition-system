@@ -24,6 +24,7 @@ for (let i = 0; i < 30; i++) {
     breakfastOption.className = 'meal-option';
     const breakfastCheckbox = document.createElement('input');
     breakfastCheckbox.type = 'checkbox';
+    breakfastCheckbox.value = 'Kahvaltı';
     breakfastCheckbox.name = `breakfast-${day.toISOString().split('T')[0]}`;
     breakfastOption.appendChild(breakfastCheckbox);
     breakfastOption.appendChild(document.createTextNode(' Kahvaltı'));
@@ -33,6 +34,7 @@ for (let i = 0; i < 30; i++) {
     lunchOption.className = 'meal-option';
     const lunchCheckbox = document.createElement('input');
     lunchCheckbox.type = 'checkbox';
+    lunchCheckbox.value = "Öğle Yemeği";
     lunchCheckbox.name = `lunch-${day.toISOString().split('T')[0]}`;
     lunchOption.appendChild(lunchCheckbox);
     lunchOption.appendChild(document.createTextNode(' Öğle Yemeği'));
@@ -42,6 +44,7 @@ for (let i = 0; i < 30; i++) {
     dinnerOption.className = 'meal-option';
     const dinnerCheckbox = document.createElement('input');
     dinnerCheckbox.type = 'checkbox';
+    dinnerCheckbox.value = "Akşam Yemeği";
     dinnerCheckbox.name = `dinner-${day.toISOString().split('T')[0]}`;
     dinnerOption.appendChild(dinnerCheckbox);
     dinnerOption.appendChild(document.createTextNode(' Akşam Yemeği'));
