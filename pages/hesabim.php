@@ -35,7 +35,7 @@ else{
                 <li class="liler" id = "ogrenci-li"><a class="linkler" href="#">Hesabım</a></li>
                 <li class="liler" id = "ogrenci-li"><a class="linkler" href="yemek_takvimi.php">Yemek Takvimi</a></li>
                 <li class="liler" id = "admin-li"><a class="linkler" href="yemek_takvimi.php">Yemek Takvimi</a></li>
-                <li class="liler" id = "ogrenci-li"><a class="linkler" href="#">Öğün Satın Al</a></li>
+                <li class="liler" id = "ogrenci-li"><a class="linkler" href="ogun_satin_al.php">Öğün Satın Al</a></li>
                 <li class="liler" id="signin"><a class="linkler" href="giris_kayit.php?giris=1">Giriş Yap</a></li>
                 <li class="prfl" ><div id="prfl-foto"><img src="<?php echo $_SESSION['pp']; ?>" alt="Profil Fotoğrafı" id="prfl-foto-img"></div></li>
                 <li class="liler" id="signin"><a class="linkler" href="giris_kayit.php?giris=0">Kaydol</a></li>
