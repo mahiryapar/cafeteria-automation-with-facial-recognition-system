@@ -23,6 +23,9 @@
     display:none;
   }
 
+  #ogrenci_gozukuyor{
+    display: none;
+  }
 
   #mesaj_gozukuyor{
     display:none;

@@ -69,9 +69,26 @@ if ($stmt_4 === false) {
 }
 
 
-if(!isset($_SESSION['suanki_mesaj'])){
+if(!isset($_SESSION['suanki_mesaj']) || $_SESSION['suanki_mesaj'] == -1){
     $_SESSION['suanki_mesaj'] = -1; 
+    $sql_5 = "select name, surname, count(mesajlar.id) as okunmamis
+              from users
+              inner join mesajlar
+              on users.id = mesajlar.kime
+              where users.id = ? and mesajlar.okundu = 'Hayır'
+              group by users.name,users.surname";
+    $params_5 = [$_SESSION['user_id']];
+    $stmt_5 = sqlsrv_query($conn, $sql_5,$params_5);
+    $row_5 = sqlsrv_fetch_array($stmt_5,SQLSRV_FETCH_ASSOC);
+    if(sqlsrv_has_rows($stmt_5)){
+        $okunmamis_mesaj = 1;
+    }
+    else{
+        $okunmamis_mesaj = 0;
+    }
 }
+
+
 else if(isset($_SESSION['suanki_mesaj'])){
     if($_SESSION['gelgit'] == 0){
         $sql_2 = "select mesajlar.id,konu,mesaj,okundu,mesaj_saati,
@@ -81,6 +98,17 @@ else if(isset($_SESSION['suanki_mesaj'])){
               inner join mesajlar
               on users.id = mesajlar.kime
               where users.id = ? and mesajlar.id = ?";
+              $params_2 = [$_SESSION['user_id'],$_SESSION['suanki_mesaj']];
+              $stmt_2 = sqlsrv_query($conn, $sql_2,$params_2);
+              $row_2 = sqlsrv_fetch_array($stmt_2,SQLSRV_FETCH_ASSOC);
+    }
+    else if($_SESSION['gelgit']==-1){
+        $sql_2 = "select id,name,surname,mail,phonenum,moneyy,nickname
+              from users
+              where users.id = ?";
+              $params_2 = [$_SESSION['gosterilen_ogrenci']];
+              $stmt_2 = sqlsrv_query($conn, $sql_2,$params_2);
+              $row_2 = sqlsrv_fetch_array($stmt_2,SQLSRV_FETCH_ASSOC);
     }
     else{
         $sql_2 = "select mesajlar.id,konu,mesaj,okundu,mesaj_saati,
@@ -90,10 +118,10 @@ else if(isset($_SESSION['suanki_mesaj'])){
               inner join mesajlar
               on users.id = mesajlar.kimden
               where users.id = ? and mesajlar.id = ?";
+              $params_2 = [$_SESSION['user_id'],$_SESSION['suanki_mesaj']];
+              $stmt_2 = sqlsrv_query($conn, $sql_2,$params_2);
+              $row_2 = sqlsrv_fetch_array($stmt_2,SQLSRV_FETCH_ASSOC);
     }
-    $params_2 = [$_SESSION['user_id'],$_SESSION['suanki_mesaj']];
-    $stmt_2 = sqlsrv_query($conn, $sql_2,$params_2);
-    $row_2 = sqlsrv_fetch_array($stmt_2,SQLSRV_FETCH_ASSOC);
 }
 
 
@@ -113,7 +141,7 @@ else if(isset($_SESSION['suanki_mesaj'])){
     <div id="sayfa">
         <nav id="nav">
             <ul id="liste">
-                <li class="liler" id = "ortak-li"><a class="linkler" href="#">Ana Sayfa</a></li>
+                <li class="liler" id = "ortak-li"><a class="linkler" href="index.php">Ana Sayfa</a></li>
                 <li class="liler" id = "admin-li"><a class="linkler" href="hesabim.php">Hesabım</a></li>
                 <li class="liler" id = "admin-li"><a class="linkler" href="yemek_takvimi.php">Yemek Takvimi</a></li>
                 <li class="prfl" ><div id="prfl-foto"><img src="<?php echo $_SESSION['pp']; ?>"alt="Profil Fotoğrafı" id="prfl-foto-img"></div></li>
@@ -144,6 +172,15 @@ else if(isset($_SESSION['suanki_mesaj'])){
                 </form>
             </div>
             <div id='mesaj_detay'>
+                <div id="ogrenci_gozukuyor">
+                <?php
+                        echo "<span id='oh_isim'>İsim: ".$row_2['name']."<br>Soyisim: ".$row_2['surname']."</span><br>
+                        <span id='oh_nickname'>Kullanıcı Adı: ".$row_2['nickname']."</span><br>
+                        <span id='oh_mail'>E-Posta: ".$row_2['mail']."</span><br>
+                        <span id='oh_tel'>Telefon Numarası: ".$row_2['phonenum']."</span><br>
+                        <span id='oh_bakiye'>Bakiye: ".$row_2['moneyy']."</span><br>";    
+                    ?>
+                </div>
                 <div id="mesaj_gozukuyor">
                     <?php 
                     if($_SESSION['gelgit']==0){
@@ -166,7 +203,12 @@ else if(isset($_SESSION['suanki_mesaj'])){
                 </div>
                 <div id="mesajlar_hakkinda_gozukuyor">
                     <?php
-                    
+                    if($okunmamis_mesaj==0){
+                        echo "<span>Hoş geldiniz ".$row_5['name']." ".$row_5['surname']."<br>Okunmamış mesajınız yok.</span>";
+                    }
+                    else{
+                        echo "<span>Hoş geldiniz ".$row_5['name']." ".$row_5['surname']."<br>".$row_5['okunmamis']." okunmamış mesajınız var.</span>";
+                    }
                     
                     ?>
                 </div>
@@ -185,7 +227,7 @@ else if(isset($_SESSION['suanki_mesaj'])){
                     <ul id="uyeler_ul">
                     <?php
                             while ($row_4 = sqlsrv_fetch_array($stmt_4, SQLSRV_FETCH_ASSOC)) {
-                                echo "<li id='uyeler_li'><a href=''><span>ID: ". $row_4['id'] ." - ". $row_4['name']." " .$row_4['surname']."</span></a></li><br><hr>";
+                                echo "<li id='uyeler_li'><a href='../backend/ogrenci_goster.php?ogrenci_id=".$row_4['id']."&sayfa=uyeler'><span>ID: ". $row_4['id'] ." - ". $row_4['name']." " .$row_4['surname']."</span></a></li><br><hr>";
                             }
                         ?>
                     </ul>
@@ -225,6 +267,9 @@ else if(isset($_SESSION['suanki_mesaj'])){
         document.addEventListener("DOMContentLoaded", ()=>{
             if(<?php echo $_SESSION['suanki_mesaj']?> == -1){
                 document.getElementById('mesajlar_hakkinda_gozukuyor').style.display = 'block';    
+            }
+            else if(<?php echo $_SESSION['suanki_mesaj']?> == -2){
+                document.getElementById('ogrenci_gozukuyor').style.display = 'block';
             }
             else{
                 document.getElementById('mesaj_gozukuyor').style.display = 'block';

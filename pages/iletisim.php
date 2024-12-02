@@ -60,8 +60,23 @@ if ($stmt_3 === false) {
     die(print_r(sqlsrv_errors(), true));
 }
 
-if(!isset($_SESSION['suanki_mesaj'])){
+if(!isset($_SESSION['suanki_mesaj']) || $_SESSION['suanki_mesaj'] == -1){
     $_SESSION['suanki_mesaj'] = -1; 
+    $sql_5 = "select name, surname, count(mesajlar.id) as okunmamis
+              from users
+              inner join mesajlar
+              on users.id = mesajlar.kime
+              where users.id = ? and mesajlar.okundu = 'Hayır'
+              group by users.name,users.surname";
+    $params_5 = [$_SESSION['user_id']];
+    $stmt_5 = sqlsrv_query($conn, $sql_5,$params_5);
+    $row_5 = sqlsrv_fetch_array($stmt_5,SQLSRV_FETCH_ASSOC);
+    if(sqlsrv_has_rows($stmt_5)){
+        $okunmamis_mesaj = 1;
+    }
+    else{
+        $okunmamis_mesaj = 0;
+    }
 }
 else if(isset($_SESSION['suanki_mesaj'])){
     if($_SESSION['gelgit'] == 0){
@@ -161,7 +176,12 @@ else if(isset($_SESSION['suanki_mesaj'])){
                 </div>
                 <div id="mesajlar_hakkinda_gozukuyor">
                     <?php
-                    
+                    if($okunmamis_mesaj==0){
+                        echo "<span>Hoş geldiniz ".$row_5['name']." ".$row_5['surname']."<br>Okunmamış mesajınız yok.</span>";
+                    }
+                    else{
+                        echo "<span>Hoş geldiniz ".$row_5['name']." ".$row_5['surname']."<br>".$row_5['okunmamis']." okunmamış mesajınız var.</span>";
+                    }
                     
                     ?>
                 </div>
