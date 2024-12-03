@@ -45,7 +45,8 @@ if( $conn ) {
                         STRING_AGG(CASE WHEN yemekler.kategori = 'Ara Sıcak' THEN yemekler.yemek_ismi END, ', ') AS ara_sicaklar,
                         STRING_AGG(CASE WHEN yemekler.kategori = 'Ara Sıcak' THEN yemekler.aciklama END, ', ') AS ara_sicaklar_aciklama,
                         MAX(CASE WHEN yemekler.kategori = 'İçecek' THEN yemekler.yemek_ismi END) AS icecek,
-                        MAX(CASE WHEN yemekler.kategori = 'İçecek' THEN yemekler.aciklama END) AS icecek_aciklama
+                        MAX(CASE WHEN yemekler.kategori = 'İçecek' THEN yemekler.aciklama END) AS icecek_aciklama,
+                        menudeki_yemekler.menu_id
                         FROM 
                             users
                         INNER JOIN 
@@ -59,7 +60,8 @@ if( $conn ) {
                         WHERE 
                             users.nickname = ?
                             AND menu.menu_tarihi = ?
-                            AND menu.kategori = ?";
+                            AND menu.kategori = ?
+                        group by menudeki_yemekler.menu_id";
                 $params = [$_SESSION['nickname'],$date,$row['kategori']];
                 $stmt_yemek = sqlsrv_query($conn, $sql,$params);
                 if ($stmt_yemek === false) {
@@ -70,6 +72,7 @@ if( $conn ) {
                 $ara_sicaklar_aciklama = explode(', ', $row_1['ara_sicaklar_aciklama']);
                 $prefix = "kahvalti";
                 $_SESSION[$prefix] = "setted";
+                $_SESSION[$prefix."_menu_id"] = $row_1['menu_id'];
                 $_SESSION[$prefix."_ana_yemek"] = $row_1['ana_yemek'];
                 $_SESSION[$prefix."_ana_yemek_aciklama"] = $row_1['ana_yemek_aciklama'];
                 $_SESSION[$prefix."_ara_sicak_aciklama"] = $ara_sicaklar_aciklama[0];
@@ -92,7 +95,8 @@ if( $conn ) {
                 MAX(CASE WHEN yemekler.kategori = 'Tatlı' THEN yemekler.yemek_ismi END) AS tatli,
 	            MAX(CASE WHEN yemekler.kategori = 'Tatlı' THEN yemekler.aciklama END) AS tatli_aciklama,
                 MAX(CASE WHEN yemekler.kategori = 'Çorba' THEN yemekler.yemek_ismi END) AS corba,
-	            MAX(CASE WHEN yemekler.kategori = 'Çorba' THEN yemekler.aciklama END) AS corba_aciklama
+	            MAX(CASE WHEN yemekler.kategori = 'Çorba' THEN yemekler.aciklama END) AS corba_aciklama,
+                menudeki_yemekler.menu_id
             FROM users
                 INNER JOIN yemekhaneler ON users.yemekhane_id = yemekhaneler.id
                 INNER JOIN menu ON menu.yemekhane_id = yemekhaneler.id
@@ -101,7 +105,8 @@ if( $conn ) {
             WHERE 
                 users.nickname = ?
                 AND menu.menu_tarihi = ? 
-                AND menu.kategori = ?";
+                AND menu.kategori = ?
+            group by menudeki_yemekler.menu_id";
             $params = [$_SESSION['nickname'],$date,$row['kategori']];
             $stmt_yemek = sqlsrv_query($conn, $sql,$params);
             if ($stmt_yemek === false) {
@@ -116,6 +121,7 @@ if( $conn ) {
                 $prefix = "aksam_yemegi";
             }
             $_SESSION[$prefix] = "setted";
+            $_SESSION[$prefix."_menu_id"] = $row_1['menu_id'];
             $_SESSION[$prefix."_ana_yemek"] = $row_1['ana_yemek'];
             $_SESSION[$prefix."_ana_yemek_aciklama"] = $row_1['ana_yemek_aciklama'];
             $_SESSION[$prefix."_ara_sicak_aciklama"] = $row_1['ara_sicak_aciklama'];

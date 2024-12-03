@@ -8,6 +8,39 @@ if(isset($_GET['date'])){
 $kahv = 0;
 $ogle = 0;
 $aksam = 0;
+$configPath ='../config/database_infos.json';
+if (!file_exists($configPath)) {
+    die('Config dosyası bulunamadı.');
+}
+$config = json_decode(file_get_contents($configPath), true);
+if ($config === null) {
+    die('Config dosyası okunamadı veya geçersiz JSON formatı.');
+}
+$date = $_GET['date'];
+$serverName = $config['db_host']; 
+$database = $config['db_name'];
+$uid = $config['db_user'];
+$pass = $config['db_password'];
+$connection_info = [
+    "Database" =>   $database,
+    "Uid" => $uid,
+    "PWD" => $pass,
+    "CharacterSet"=>"UTF-8"
+];
+$conn = sqlsrv_connect($serverName,$connection_info);
+function yorumlariGetir($menu_id, $conn) {
+    $query = "SELECT * FROM yorumlar WHERE menu_id = ?";
+    $params = [$menu_id];
+    $stmt = sqlsrv_query($conn, $query, $params);
+
+    $yorumlar = [];
+    print_r($yorumlar[0]);
+    while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+        $yorumlar[] = $row;
+    }
+    return $yorumlar;
+}
+
 include "../backend/yemek_takvimi_info_backend.php";
 $yemek_isimleri = [];
 if(isset($_SESSION['kahvalti'])){
@@ -92,6 +125,7 @@ $resimler = tumYemekFotolariniGetir($yemek_isimleri);
                 <li class="liler" id="admin-li"><a class="linkler" href="../backend/logout.php">Çıkış</a></li>
         </nav>
         <div id="icerik">
+            <div id="sonuc"></div>
             <span id="warn">Şu anda bir yemekhaneye kayıtlı değilsiniz.</span>
             <span>Tarih: <?php echo $date?></span>
             <div id="yemekler">
@@ -122,6 +156,27 @@ $resimler = tumYemekFotolariniGetir($yemek_isimleri);
                     Açıklama: <?php echo !empty($kahvalti_icecek_aciklama) ? $kahvalti_icecek_aciklama : "Yok"; ?><br>
                 </span>
                 <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$kahvalti_icecek] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
+                <div class="yorum_yaz">
+                    <form id="kahvalti_yorum_yaz" action="../backend/yorum_ekle.php" method="post">
+                    <input type="hidden" name="form_id" value="kahvalti_yorum_yaz">
+                    <textarea id="yorum_input" name="yazilan_yorum" placeholder="Yorumunuzu yazın.." rows="5" cols="50"></textarea>
+                        <button type="submit">Yorumu gönder</button>
+                    </form>
+                </div>
+                <div class="yorumlar">
+                    <h4>Yorumlar:</h4>
+                    <ul class="yorumlar_ul"></ul>
+                    <?php 
+                    $kahvalti_yorumlar = yorumlariGetir($_SESSION['kahvalti_menu_id'], $conn); 
+                    if (!empty($kahvalti_yorumlar)) {
+                        foreach ($kahvalti_yorumlar as $yorum) {
+                            echo "<li class='yorumlar_li'><b>{$yorum['sahibi_nickname']}:</b> {$yorum['yorum']}</p>";
+                        }
+                    } else {
+                        echo "<p>Henüz yorum yok.</p>";
+                    }
+                    ?>
+                </div>
             </div>
             <div id="ogle">
                 <span>Öğle Yemeği: <br> </span>
@@ -150,6 +205,27 @@ $resimler = tumYemekFotolariniGetir($yemek_isimleri);
                     Açıklama: <?php echo !empty($ogle_yemegi_icecek_aciklama) ? $ogle_yemegi_icecek_aciklama : "Yok"; ?><br>
                 </span>
                 <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$ogle_yemegi_icecek] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
+                <div class="yorum_yaz">
+                    <form id="ogle_yorum_yaz" action="../backend/yorum_ekle.php" method="post">
+                    <input type="hidden" name="form_id" value="ogle_yorum_yaz">
+                    <textarea id="yorum_input" name="yazilan_yorum" placeholder="Yorumunuzu yazın.." rows="5" cols="50"></textarea>
+                        <button type="submit">Yorumu gönder</button>
+                    </form>
+                </div>
+                <div class="yorumlar">
+                    <h4>Yorumlar:</h4>
+                    <ul class="yorumlar_ul"></ul>
+                    <?php 
+                    $ogle_yorumlar = yorumlariGetir($_SESSION['ogle_yemegi_menu_id'], $conn); 
+                    if (!empty($ogle_yorumlar)) {
+                        foreach ($ogle_yorumlar as $yorum) {
+                            echo "<li class='yorumlar_li'><b>{$yorum['sahibi_nickname']}:</b> {$yorum['yorum']}</li>";
+                        }
+                    } else {
+                        echo "<p>Henüz yorum yok.</p>";
+                    }
+                    ?>
+                </div>
             </div>
             <div id="aksam">
                 <span>Akşam Yemeği: <br> </span>
@@ -178,11 +254,89 @@ $resimler = tumYemekFotolariniGetir($yemek_isimleri);
                     Açıklama: <?php echo !empty($aksam_yemegi_icecek_aciklama) ? $aksam_yemegi_icecek_aciklama : "Yok"; ?><br>
                 </span>
                 <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$aksam_yemegi_icecek] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
+                <div class="yorum_yaz">
+                    <form id="aksam_yorum_yaz" action="../backend/yorum_ekle.php" method="post">
+                    <input type="hidden" name="form_id" value="aksam_yorum_yaz">    
+                    <textarea id="yorum_input" name="yazilan_yorum" placeholder="Yorumunuzu yazın.." rows="5" cols="50"></textarea>
+                        <button type="submit">Yorumu gönder</button>
+                    </form>
+                </div>
+                <div class="yorumlar">
+                    <h4>Yorumlar:</h4>
+                    <ul class="yorumlar_ul"></ul>
+                    <?php 
+                    $aksam_yorumlar = yorumlariGetir($_SESSION['aksam_yemegi_menu_id'], $conn); 
+                    if (!empty($aksam_yorumlar)) {
+                        foreach ($aksam_yorumlar as $yorum) {
+                            echo "<li class='yorumlar_li'><b>{$yorum['sahibi_nickname']}:</b> {$yorum['yorum']}</li>";
+                        }
+                    } else {
+                        echo "<p>Henüz yorum yok.</p>";
+                    }
+                    ?>
+                </div>            
             </div>
             </div>
         </div>
     </div>
     <script>
+        document.getElementById("kahvalti_yorum_yaz").addEventListener("submit", function(event) {
+            event.preventDefault(); 
+            const formData = new FormData(this);
+            fetch("../backend/yorum_ekle.php", {
+                method: "POST",
+                body: formData,
+            })
+            .then(response => response.text()) 
+            .then(data => {
+            document.getElementById("sonuc").innerHTML = data;
+            const scripts = document.getElementById("sonuc").getElementsByTagName("script");
+            for (let script of scripts) {
+                eval(script.textContent); 
+            }
+            })
+            .catch(error => {
+                console.error("Hata:", error);
+            });
+            });
+        document.getElementById("ogle_yorum_yaz").addEventListener("submit", function(event) {
+            event.preventDefault(); 
+            const formData = new FormData(this);
+            fetch("../backend/yorum_ekle.php", {
+                method: "POST",
+                body: formData,
+            })
+            .then(response => response.text()) 
+            .then(data => {
+            document.getElementById("sonuc").innerHTML = data;
+            const scripts = document.getElementById("sonuc").getElementsByTagName("script");
+            for (let script of scripts) {
+                eval(script.textContent); 
+            }
+            })
+            .catch(error => {
+                console.error("Hata:", error);
+            });
+            });
+        document.getElementById("aksam_yorum_yaz").addEventListener("submit", function(event) {
+            event.preventDefault(); 
+            const formData = new FormData(this);
+            fetch("../backend/yorum_ekle.php", {
+                method: "POST",
+                body: formData,
+            })
+            .then(response => response.text()) 
+            .then(data => {
+            document.getElementById("sonuc").innerHTML = data;
+            const scripts = document.getElementById("sonuc").getElementsByTagName("script");
+            for (let script of scripts) {
+                eval(script.textContent); 
+            }
+            })
+            .catch(error => {
+                console.error("Hata:", error);
+            });
+            });
         document.addEventListener("DOMContentLoaded", ()=>{
             if(<?php echo $yemekhane_id?> == 1){
                 document.getElementById('warn').style.display = 'block';
