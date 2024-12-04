@@ -145,8 +145,8 @@ else if(isset($_SESSION['suanki_mesaj'])){
                 <li class="liler" id = "admin-li"><a class="linkler" href="hesabim.php">Hesabım</a></li>
                 <li class="liler" id = "admin-li"><a class="linkler" href="yemek_takvimi.php">Yemek Takvimi</a></li>
                 <li class="prfl" ><div id="prfl-foto"><img src="<?php echo $_SESSION['pp']; ?>"alt="Profil Fotoğrafı" id="prfl-foto-img"></div></li>
-                <li class="liler" id="admin-li"><a class="linkler" href="#">Yemekhanem</a></li>
-                <li class="liler" id="admin-li"><a class="linkler" href="uyeler.php">Üyeler</a></li>
+                <li class="liler" id="admin-li"><a class="linkler" href="yemekhanem.php">Yemekhanem</a></li>
+                <li class="liler" id="admin-li"><a class="linkler" href="#">Üyeler</a></li>
                 <li class="liler" id="admin-li"><a class="linkler" href="../backend/logout.php">Çıkış</a></li>
         </nav>
         <div id="icerik">
