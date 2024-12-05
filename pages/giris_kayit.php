@@ -42,7 +42,7 @@ if(isset($_GET['giris'])){
                 <input type="text" class="form-control" id= "login_ncknm" name="login_kullanici_adi" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
             </div>
             <div><span style="color:black">Şifre:</span>
-            <input type="password" id= "login_psw" name="login_sifre"></div>
+            <input type="password" id= "login_psw" name="login_sifre" placeholder="Password"></div>
             <button type="submit" id="loginbutton">Onayla</button>
         </form>  
         </div>
@@ -55,7 +55,7 @@ if(isset($_GET['giris'])){
             <div><span style="color:black">Kullanıcı Adı: </span>
             <input type="text" id= "ncknm" name="kullanici_adi"></div>
             <div><span style="color:black">Mail: </span>
-            <input type="email" id= "mail" name="mail"></div>
+            <input type="email" id= "mail" name="mail" placeholder="example@gmail.com"></div>
             <div><span style="color:black">Telefon Numarası: </span>
             <input type="text" id="number" name="number" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '');"></div>
             <div><span style="color:black">Şifre:</span>
