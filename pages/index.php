@@ -65,7 +65,7 @@ if(isset($_SESSION['flash_message'])){
         </div>
 
         <div class="gunun-menusu">
-            <h3>Günün Menüsü</h3>
+            <h3>Bu günün Menüsü</h3>
             <?php
             foreach ($_SESSION['ogunler'] as $ogun) {
                 if($ogun['ogun'] == "Kahvaltı"){

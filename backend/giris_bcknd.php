@@ -8,7 +8,9 @@ $config = json_decode(file_get_contents($configPath), true);
 if ($config === null) {
     die('Config dosyası okunamadı veya geçersiz JSON formatı.'); # qweq
 }
-if ($_SERVER['REQUEST_METHOD'] === 'post') {
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $serverName = $config['db_host']; 
     $database = $config['db_name'];
     $uid = $config['db_user'];
