@@ -121,7 +121,7 @@ $conn = sqlsrv_connect($serverName,$connection_info);
             <h4>Bağlı Öğrenciler:</h4>
             <ul>
                 <?php
-                $sql = "SELECT * FROM users WHERE yemekhane_id = ?";
+                $sql = "SELECT * FROM users WHERE yemekhane_id = ? and rol='ogrenci'";
                 $stmt = sqlsrv_query($conn, $sql, $params);
                 if ($stmt === false) {
                     die(print_r(sqlsrv_errors(), true));
