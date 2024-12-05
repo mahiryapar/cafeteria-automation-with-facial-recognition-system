@@ -113,4 +113,5 @@ if(isset($_GET['giris'])){
         }       
 </script>
     <script src="../js/app.js"></script>
+    <script src="../js/giris_kayit.js"></script>
 </html>

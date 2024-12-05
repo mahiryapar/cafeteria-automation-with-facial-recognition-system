@@ -6,7 +6,7 @@ if (!file_exists($configPath)) {
 }
 $config = json_decode(file_get_contents($configPath), true);
 if ($config === null) {
-    die('Config dosyası okunamadı veya geçersiz JSON formatı.'); # qweq
+    die('Config dosyası okunamadı veya geçersiz JSON formatı.');
 }
 
 
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['user_id'] = $row['id'];
                 echo "
                 <div id='cikis' class='alert alert-success'>
-                    <strong>Başarılı!</strong> Giriş yaptınız ana sayfaya yönlendiriliyorsunuz.
+                    <strong>Başarılı!</strong> Giriş yapıldı. Ana sayfaya yönlendiriliyorsunuz.
                 </div>
                 <script>
                     document.getElementById('sonuc').style.display = 'block';
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             else{
                 echo "<div id='cikis' class='alert alert-danger'>
-                    <strong>Hata!</strong> Kullanıcı adı ve şifre hatalı.
+                    <strong>Hata!</strong> Kullanıcı adı veya şifre hatalı.
                 </div>
                 <script>
                     document.getElementById('sonuc').style.display = 'block';
@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if(sqlsrv_has_rows($stmt)){
                 echo "
                 <div id='cikis' class='alert alert-danger'>
-                    <strong>Hata!</strong> Bu kullanıcı adı telefon veya maile sahip biri bulunuyor.
+                    <strong>Hata!</strong> Bu kullanıcı adı, telefon veya maile sahip biri bulunmaktadır.
                 </div>
                 <script>
                     document.getElementById('sonuc').style.display = 'block';
@@ -100,12 +100,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
                 echo "
                 <div id='cikis' class='alert alert-success'>
-                    <strong>Başarılı!</strong> Kayıt olundu ana sayfaya yönlendiriliyor lütfen giriş yapın.
+                    <strong>Başarılı!</strong> Kayıt olundu. Giriş sayfasına yönlendiriliyorsunuz..
                 </div>
                 <script>
                     document.getElementById('sonuc').style.display = 'block';
                     setTimeout(function() {
-                        window.location.href = 'index.php';
+                        window.location.href = 'giris_kayit.php?giris=1';
                     }, 2000);
                 </script>";
             }
