@@ -135,14 +135,18 @@ $conn = sqlsrv_connect($serverName,$connection_info);
             <h4>Katılma İstekleri:</h4>
             <ul>
                 <?php
-                $sql = "SELECT * FROM katilma_istekleri WHERE yemekhane_id = ?";
+                $sql = "SELECT * FROM katilma_istekleri 
+                inner join users
+                on users.id = katilma_istekleri.user__id
+                WHERE katilma_istekleri.yemekhane_id = ?";
+                $params = [$_SESSION['yemekhane_id']];
                 $stmt = sqlsrv_query($conn, $sql, $params);
                 if ($stmt === false) {
                     die(print_r(sqlsrv_errors(), true));
                 }
                 while ($istek = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)): ?>
                     <li>
-                        <?php echo $istek['ogrenci_adi']; ?> 
+                        <?php echo $istek['name']." ".$istek['surname'] ?> 
                         - <a href="../backend/approve_request.php?id=<?php echo $istek['id']; ?>">Onayla</a>
                         - <a href="../backend/reject_request.php?id=<?php echo $istek['id']; ?>">Reddet</a>
                     </li>
