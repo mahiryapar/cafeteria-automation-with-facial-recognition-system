@@ -6,9 +6,11 @@
 
 #prfl-foto-img {
     user-select: none;
-    width: 7vw;
-    height: 7vw;
+    width: 5vw;
+    height: 5vw;
     border-radius: 50%; 
+    min-width: 70px;
+    min-height: 70px; 
     object-fit: cover; 
 }
 
@@ -60,6 +62,7 @@
     box-shadow: 0px 2px 2px 0px;
     transition: 0.2s ease-in-out;
 }
+
 #liste #ortak-li{
     display: block;
 }
@@ -88,8 +91,8 @@
 #prfl-foto{
     position:absolute;
     background-color: #3e3b3b;   
-    height: 8vw;
-    width: 8vw;   
+    height: 6vw;
+    width: 6vw;   
     min-width: 80px;
     min-height: 80px; 
     margin-top: 100px; 
@@ -102,7 +105,8 @@
     border:solid 2px;
     border-top: 0px;
     border-left:0px ;
-    border-radius: 100% 100% 100% 100%;
+    /*border-radius: 100% 100% 100% 100%;*/
+    border-radius: 50%;
     box-shadow: 0px 2px 2px 0px;
 }
 
