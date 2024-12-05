@@ -49,7 +49,48 @@
                     'ogun_bitis_saati' => $row['ogun_bitis_saati']
                 ];
             }
+            $sql = "SELECT * FROM yemekhaneler WHERE id = ?";
+            $params = [$_SESSION['yemekhane_id']];
+            $stmt = sqlsrv_query($conn, $sql, $params);
+            if ($stmt === false) {
+                die(print_r(sqlsrv_errors(), true));
+            }
+            $yemekhane = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
+            $sql_ogrenci = "SELECT * FROM users WHERE yemekhane_id = ? and rol='ogrenci'";
+            $params = [$_SESSION['yemekhane_id']];
+            $stmt_ogrenci = sqlsrv_query($conn, $sql_ogrenci, $params);
+            if ($stmt_ogrenci === false) {
+                die(print_r(sqlsrv_errors(), true));
+            }
+            $sql_istek = "SELECT * FROM katilma_istekleri 
+                    inner join users
+                    on users.id = katilma_istekleri.user__id
+                    WHERE katilma_istekleri.yemekhane_id = ?";
+            $params_istek = [$_SESSION['yemekhane_id']];
+            $stmt_istek = sqlsrv_query($conn, $sql_istek, $params_istek);
+            if ($stmt_istek === false) {
+                die(print_r(sqlsrv_errors(), true));
+            }
+            $yemekhane_id = $_SESSION['yemekhane_id'];
+            $sqlOgünler = "SELECT ogun FROM yemekhane_ogunleri WHERE yemekhane_id = ?";
+            $stmtOgünler = sqlsrv_query($conn, $sqlOgünler, [$yemekhane_id]);
+            if ($stmtOgünler === false) {
+                die(print_r(sqlsrv_errors(), true));
+            }
+            $sqlYemekler = "SELECT yemek_ismi, kategori FROM yemekler";
+            $stmtYemekler = sqlsrv_query($conn, $sqlYemekler);
+            if ($stmtYemekler === false) {
+                die(print_r(sqlsrv_errors(), true));
+            }
+            $yemekKategorileri = [
+                'Ana Yemek' => [],
+                'Ara Sıcak' => [],
+                'Çorba' => [],
+                'Tatlı' => [],
+                'İçecek' => []
+            ];
+
+
         }
 
 ?>
-    

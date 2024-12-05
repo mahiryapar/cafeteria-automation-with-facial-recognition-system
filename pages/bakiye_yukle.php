@@ -38,27 +38,7 @@ session_start();
 
         </div>
     </div>
-    <script>
-        document.getElementById("para_yukle_form").addEventListener("submit", function(event) {
-            event.preventDefault(); 
-            const formData = new FormData(this);
-            fetch("../backend/bakiye_yukle_backend.php", {
-                method: "POST",
-                body: formData,
-            })
-            .then(response => response.text()) 
-            .then(data => {
-            document.getElementById("sonuc").innerHTML = data;
-            const scripts = document.getElementById("sonuc").getElementsByTagName("script");
-            for (let script of scripts) {
-                eval(script.textContent); 
-            }
-            })
-            .catch(error => {
-                console.error("Hata:", error);
-            });
-        });
-    </script>
+    <script src="../js/bakiye_yukle.js"></script>
     <script src="../js/app.js"></script>   
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

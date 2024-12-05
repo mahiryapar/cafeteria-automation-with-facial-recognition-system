@@ -1,28 +1,8 @@
 <?php 
 session_start();
-include 'yemekhanem_backend.php';
-$configPath ='../config/database_infos.json';
-if (!file_exists($configPath)) {
-    die('Config dosyası bulunamadı.');
-}
-$config = json_decode(file_get_contents($configPath), true);
-if ($config === null) {
-    die('Config dosyası okunamadı veya geçersiz JSON formatı.');
-}
-$serverName = $config['db_host']; 
-$database = $config['db_name'];
-$uid = $config['db_user'];
-$pass = $config['db_password'];
-$connection_info = [
-    "Database" =>   $database,
-    "Uid" => $uid,
-    "PWD" => $pass,
-    "CharacterSet"=>"UTF-8",
-    'ReturnDatesAsStrings'=>true
-];
-$conn = sqlsrv_connect($serverName,$connection_info);
-?>
+include '../backend/yemekhanem_backend.php';
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,7 +35,7 @@ $conn = sqlsrv_connect($serverName,$connection_info);
                 <li class="liler" id="admin-li"><a class="linkler" href="../backend/logout.php">Çıkış</a></li>
         </nav>
         <div id="icerik" class="container">
-        <?php if ($_SESSION['yemekhane_id'] == null): ?>    
+        <?php if ($_SESSION['yemekhane_id'] == 1&&$_SESSION['role'] =="ogrenci"): ?>    
                 <div id="yemekhane_yok" class="box">
                     <h3>Henüz bir yemekhaneye bağlı değilsiniz.</h3>
                     <form action="../backend/join_yemekhane.php" method="POST">
@@ -76,15 +56,6 @@ $conn = sqlsrv_connect($serverName,$connection_info);
             <?php else: ?>
                 <div id="yemekhane_bilgileri" class="box">
                 <h3>Yemekhanenizin Bilgileri:</h3>
-                <?php
-                $sql = "SELECT * FROM yemekhaneler WHERE id = ?";
-                $params = [$_SESSION['yemekhane_id']];
-                $stmt = sqlsrv_query($conn, $sql, $params);
-                if ($stmt === false) {
-                    die(print_r(sqlsrv_errors(), true));
-                }
-                $yemekhane = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
-                ?>
                 <p><strong>İsim:</strong> <?php echo $yemekhane['isim']; ?></p>
                 <p><strong>Kurum:</strong> <?php echo $yemekhane['kurum']; ?></p>
                 <p><strong>Kapasite:</strong> <?php echo $yemekhane['kapasite']; ?></p>
@@ -93,7 +64,7 @@ $conn = sqlsrv_connect($serverName,$connection_info);
         <?php endif; ?>
         <?php if($_SESSION['role'] === 'admin'): ?>
         <?php if ($_SESSION['yemekhane_id'] == 1): ?>
-        <!-- Yemekhane Oluşturma -->
+
         <div id="yemekhane_olustur" class="box">
             <h3>Yemekhaneniz bulunmuyor. Yeni bir yemekhane oluşturabilirsiniz:</h3>
             <form action="../backend/create_yemekhane.php" method="POST">
@@ -121,12 +92,7 @@ $conn = sqlsrv_connect($serverName,$connection_info);
             <h4>Bağlı Öğrenciler:</h4>
             <ul>
                 <?php
-                $sql = "SELECT * FROM users WHERE yemekhane_id = ? and rol='ogrenci'";
-                $stmt = sqlsrv_query($conn, $sql, $params);
-                if ($stmt === false) {
-                    die(print_r(sqlsrv_errors(), true));
-                }
-                while ($ogrenci = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)): ?>
+                while ($ogrenci = sqlsrv_fetch_array($stmt_ogrenci, SQLSRV_FETCH_ASSOC)): ?>
                     <li><?php echo $ogrenci['name']; ?> - <?php echo $ogrenci['surname']; ?></li>
                 <?php endwhile; ?>
             </ul>
@@ -135,16 +101,7 @@ $conn = sqlsrv_connect($serverName,$connection_info);
             <h4>Katılma İstekleri:</h4>
             <ul>
                 <?php
-                $sql = "SELECT * FROM katilma_istekleri 
-                inner join users
-                on users.id = katilma_istekleri.user__id
-                WHERE katilma_istekleri.yemekhane_id = ?";
-                $params = [$_SESSION['yemekhane_id']];
-                $stmt = sqlsrv_query($conn, $sql, $params);
-                if ($stmt === false) {
-                    die(print_r(sqlsrv_errors(), true));
-                }
-                while ($istek = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)): ?>
+                while ($istek = sqlsrv_fetch_array($stmt_istek, SQLSRV_FETCH_ASSOC)): ?>
                     <li>
                         <?php echo $istek['name']." ".$istek['surname'] ?> 
                         - <a href="../backend/approve_request.php?id=<?php echo $istek['id']; ?>">Onayla</a>
@@ -157,24 +114,6 @@ $conn = sqlsrv_connect($serverName,$connection_info);
             <h4>Yeni Menü Ekle:</h4>
             <form action="../backend/add_menu.php" method="POST">
                 <?php
-                $yemekhane_id = $_SESSION['yemekhane_id'];
-                $sqlOgünler = "SELECT ogun FROM yemekhane_ogunleri WHERE yemekhane_id = ?";
-                $stmtOgünler = sqlsrv_query($conn, $sqlOgünler, [$yemekhane_id]);
-                if ($stmtOgünler === false) {
-                    die(print_r(sqlsrv_errors(), true));
-                }
-                $sqlYemekler = "SELECT yemek_ismi, kategori FROM yemekler";
-                $stmtYemekler = sqlsrv_query($conn, $sqlYemekler);
-                if ($stmtYemekler === false) {
-                    die(print_r(sqlsrv_errors(), true));
-                }
-                $yemekKategorileri = [
-                    'Ana Yemek' => [],
-                    'Ara Sıcak' => [],
-                    'Çorba' => [],
-                    'Tatlı' => [],
-                    'İçecek' => []
-                ];
                 while ($yemek = sqlsrv_fetch_array($stmtYemekler, SQLSRV_FETCH_ASSOC)) {
                     $kategori = $yemek['kategori'];
                     if (isset($yemekKategorileri[$kategori])) {
@@ -210,73 +149,9 @@ $conn = sqlsrv_connect($serverName,$connection_info);
         <?php endif; ?>
         </div>
     </div>
+    <script src="../js/yemekhanem.js"></script>
     <script>
-        window.onload = () => {
-            if(<?php echo json_encode($message);?> != null){
-                document.getElementById('cikis').style.display = 'block';
-                setTimeout(() => {
-                    document.getElementById('cikis').style.display = 'none';
-                }, 2000);
-                const ogun = document.getElementById('ogun')
-        }
-        };
-        document.addEventListener('DOMContentLoaded', function () {
-            const ogunSelect = document.getElementById('ogun');
-            ogunSelect.addEventListener('change', updateInputs);
-        });
-        const yemekler = <?php echo json_encode($yemekKategorileri); ?>;
-        function updateInputs() {
-            const ogun = document.getElementById('ogun').value;
-            const yemekSecenekleriDiv = document.getElementById('yemek_secenekleri');
-            yemekSecenekleriDiv.innerHTML = ''; 
-            if (ogun === 'Kahvaltı') {
-                addDropdown('Ana Yemek', 'ana_yemek','Ana Yemek');
-                addDropdown('Kahvaltılık 1', 'kahvaltilik_1', 'Ara Sıcak');
-                addDropdown('Kahvaltılık 2', 'kahvaltilik_2', 'Ara Sıcak');
-                addDropdown('Kahvaltılık 3', 'kahvaltilik_3', 'Ara Sıcak');
-                addDropdown('İçecek', 'icecek', 'İçecek');
-            } else {
-                addDropdown('Ana Yemek', 'ana_yemek','Ana Yemek');
-                addDropdown('Ara Sıcak', 'ara_sicak', 'Ara Sıcak');
-                addDropdown('Çorba', 'corba', 'Çorba');
-                addDropdown('Tatlı', 'tatli', 'Tatlı');
-                addDropdown('İçecek', 'icecek', 'İçecek');
-            }
-        }
-        function addDropdown(labelText, name, kategori = null) {
-            const yemekSecenekleriDiv = document.getElementById('yemek_secenekleri');
-            const label = document.createElement('label');
-            label.textContent = labelText + ':';
-            label.className = 'form-label mt-3';
-            const select = document.createElement('select');
-            select.name = name;
-            select.id = name;
-            select.className = 'form-control';
-            select.required = true;
-            const defaultOption = document.createElement('option');
-            defaultOption.value = '';
-            defaultOption.disabled = true;
-            defaultOption.selected = true;
-            defaultOption.textContent = labelText + ' seçiniz';
-            select.appendChild(defaultOption);
-            if (kategori && yemekler[kategori]) {
-                yemekler[kategori].forEach(yemek => {
-                    const option = document.createElement('option');
-                    option.value = yemek;
-                    option.textContent = yemek;
-                    select.appendChild(option);
-                });
-            } else if (!kategori) {
-                Object.values(yemekler).flat().forEach(yemek => {
-                    const option = document.createElement('option');
-                    option.value = yemek;
-                    option.textContent = yemek;
-                    select.appendChild(option);
-                });
-            }
-            yemekSecenekleriDiv.appendChild(label);
-            yemekSecenekleriDiv.appendChild(select);
-        }
+        deger_al( <?php echo json_encode($yemekKategorileri); ?>)
     </script>
     <script src="../js/app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

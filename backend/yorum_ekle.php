@@ -21,8 +21,8 @@ $connection_info = [
 ];
 $conn = sqlsrv_connect($serverName,$connection_info);
 if($conn){
-    $sql = "insert into yorumlar (yorum,sahibi_nickname,sahibi,begeni_sayisi,menu_id) values
-           (?,?,?,0,?)";
+    $sql = "insert into yorumlar (yorum,sahibi_nickname,sahibi,menu_id) values
+           (?,?,?,?)";
     if($_POST['form_id'] == 'kahvalti_yorum_yaz'){
         $menu_id = $_SESSION['kahvalti_menu_id'];
     }
