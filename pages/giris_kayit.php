@@ -57,7 +57,7 @@ if(isset($_GET['giris'])){
             <div><span style="color:black">Mail: </span>
             <input type="email" id= "mail" name="mail"></div>
             <div><span style="color:black">Telefon Numarası: </span>
-            <input type="number" id= "number" name="number"></div>
+            <input type="text" id="number" name="number" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '');"></div>
             <div><span style="color:black">Şifre:</span>
             <input type="password" id= "psw" name="sifre"></div>
             <button type="submit" id="signupbutton">Onayla</button>
@@ -65,53 +65,11 @@ if(isset($_GET['giris'])){
         </div>
         </div>
     </div>
-    <script>
-        console.log(<?php echo $giris?>);
-        if(<?php echo $giris?> == 0){
-            document.getElementById("kayit").style.display  = "block";
-            document.getElementById("myFormsignup").addEventListener("submit", function(event) {
-            event.preventDefault(); 
-            const formData = new FormData(this);
-            fetch("../backend/giris_bcknd.php?giris=0", {
-                method: "POST",
-                body: formData,
-            })
-            .then(response => response.text()) 
-            .then(data => {
-            document.getElementById("sonuc").innerHTML = data;
-            const scripts = document.getElementById("sonuc").getElementsByTagName("script");
-            for (let script of scripts) {
-                eval(script.textContent); 
-            }
-            })
-            .catch(error => {
-                console.error("Hata:", error);
-            });
-            });
-        }
-        else{      
-            document.getElementById("giris").style.display = "block";
-            document.getElementById("myFormlogin").addEventListener("submit", function(event) {
-            event.preventDefault(); 
-            const formData = new FormData(this);
-            fetch("../backend/giris_bcknd.php?giris=1", {
-                method: "POST",
-                body: formData,
-            })
-            .then(response => response.text()) 
-            .then(data => {
-                document.getElementById("sonuc").innerHTML = data;
-                const scripts = document.getElementById("sonuc").getElementsByTagName("script");
-                for (let script of scripts) {
-                    eval(script.textContent); 
-                }
-            })
-            .catch(error => {
-                console.error("Hata:", error);
-            });
-            });
-        }       
-</script>
-    <script src="../js/app.js"></script>
     <script src="../js/giris_kayit.js"></script>
+    <script>
+        php_degeral(<?php echo $giris?>);
+        
+    </script>
+    <script src="../js/app.js"></script>
+   
 </html>
