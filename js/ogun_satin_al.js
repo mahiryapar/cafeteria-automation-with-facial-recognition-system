@@ -1,6 +1,58 @@
 const calendar = document.getElementById('calendar');
 const today = new Date();
 const firstDayOfWeek = today.getDay();
+var deger,ogunler,alinan_menuler;
+function deger_al(value,ogunler_value,alinan_menuler_value){
+    deger = value;
+    ogunler = ogunler_value;
+    alinan_menuler = alinan_menuler_value;
+}
+document.addEventListener("DOMContentLoaded", ()=>{
+    if(deger== 1){
+        document.getElementById('warn').style.display = 'block';
+    }
+    else{
+        document.querySelector('.container').style.display = 'block';
+    }
+    var ogunSecenekleri = document.querySelectorAll('.meal-option');
+    var alinanMenuler = alinan_menuler;
+    ogunSecenekleri.forEach(function(option) {
+        var input = option.querySelector('input');
+        var ogunAdi = input.value;
+        var ogunTarihi = input.name.split('-')[1]+"-"+input.name.split('-')[2]+"-"+input.name.split('-')[3];
+        var menuBilgisi = alinanMenuler.find(
+                m => m.kategori === ogunAdi && m.tarih === ogunTarihi
+        );
+        
+        if (menuBilgisi) {
+                input.checked = true;
+                input.disabled = true;
+        }
+        if (!ogunler.includes(ogunAdi)) {
+            option.style.display = 'none';
+        } 
+});
+});
+document.getElementById("ogun_al").addEventListener("submit", function(event) {
+    event.preventDefault(); 
+    const formData = new FormData(this);
+    fetch("../backend/ogunleri_al.php", {
+        method: "POST",
+        body: formData,
+    })
+    .then(response => response.text()) 
+    .then(data => {
+    document.getElementById("sonuc").innerHTML = data;
+    const scripts = document.getElementById("sonuc").getElementsByTagName("script");
+    for (let script of scripts) {
+        eval(script.textContent); 
+    }
+    })
+    .catch(error => {
+        console.error("Hata:", error);
+    });
+    });
+
 
 for (let i = 1; i < (firstDayOfWeek === 0 ? 7 : firstDayOfWeek); i++) {
     const emptyDiv = document.createElement('div');

@@ -123,58 +123,11 @@ while ($row_2 = sqlsrv_fetch_array($stmt_2, SQLSRV_FETCH_ASSOC)) {
             </div>
         </div>
     </div>
+    <script src="../js/ogun_satin_al.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", ()=>{
-            if(<?php echo $yemekhane_id?> == 1){
-                document.getElementById('warn').style.display = 'block';
-            }
-            else{
-                document.querySelector('.container').style.display = 'block';
-            }
-            
-            var ogunler = <?php echo json_encode($ogunler, JSON_UNESCAPED_UNICODE); ?>;
-            var ogunSecenekleri = document.querySelectorAll('.meal-option');
-            var alinanMenuler = <?php echo json_encode($alinan_menuler, JSON_UNESCAPED_UNICODE); ?>;
-            ogunSecenekleri.forEach(function(option) {
-                var input = option.querySelector('input');
-                var ogunAdi = input.value;
-                var ogunTarihi = input.name.split('-')[1]+"-"+input.name.split('-')[2]+"-"+input.name.split('-')[3];
-                var menuBilgisi = alinanMenuler.find(
-                        m => m.kategori === ogunAdi && m.tarih === ogunTarihi
-                );
-                
-                if (menuBilgisi) {
-                        input.checked = true;
-                        input.disabled = true;
-                }
-                if (!ogunler.includes(ogunAdi)) {
-                    option.style.display = 'none';
-                } 
-        });
-        });
-        document.getElementById("ogun_al").addEventListener("submit", function(event) {
-            event.preventDefault(); 
-            const formData = new FormData(this);
-            fetch("../backend/ogunleri_al.php", {
-                method: "POST",
-                body: formData,
-            })
-            .then(response => response.text()) 
-            .then(data => {
-            document.getElementById("sonuc").innerHTML = data;
-            const scripts = document.getElementById("sonuc").getElementsByTagName("script");
-            for (let script of scripts) {
-                eval(script.textContent); 
-            }
-            })
-            .catch(error => {
-                console.error("Hata:", error);
-            });
-            });
-        
+        deger_al(<?php echo $yemekhane_id?>,<?php echo json_encode($ogunler, JSON_UNESCAPED_UNICODE); ?>, <?php echo json_encode($alinan_menuler, JSON_UNESCAPED_UNICODE); ?>);
     </script>
     <script src="../js/app.js"></script>
-    <script src="../js/ogun_satin_al.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
