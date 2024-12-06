@@ -23,6 +23,7 @@ if(isset($_GET['giris'])){
             margin-top:3vh;
         }
     </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
@@ -38,12 +39,17 @@ if(isset($_GET['giris'])){
         <div id= "giris">
         <form id="myFormlogin" action="../backend/giris_bcknd.php" method="post"> 
             <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">@</span>
                 <input type="text" class="form-control" id= "login_ncknm" name="login_kullanici_adi" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                <span class="icon"><i class="fa fa-user"></i></span>
             </div>
-            <div><span style="color:black">Şifre:</span>
-            <input type="password" id= "login_psw" name="login_sifre" placeholder="Password"></div>
-            <button type="submit" id="loginbutton">Onayla</button>
+            <div>
+            <input type="password" id= "login_psw" name="login_sifre" placeholder="Password">
+            <span class="icon"><i class="fa fa-lock"></i></span>
+            </div>
+            <button type="submit" id="loginbutton">Giriş Yap</button>
+            <div class="register-link">
+                Hesabın yok mu? <a href="giris_kayit.php?giris=0">Kayıt Ol</a>
+            </div>
         </form>  
         </div>
         <div id= "kayit">
@@ -60,7 +66,7 @@ if(isset($_GET['giris'])){
             <input type="text" id="number" name="number" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '');"></div>
             <div><span style="color:black">Şifre:</span>
             <input type="password" id= "psw" name="sifre"></div>
-            <button type="submit" id="signupbutton">Onayla</button>
+            <button type="submit" id="signupbutton">Kayıt Ol</button>
         </form>   
         </div>
         </div>
