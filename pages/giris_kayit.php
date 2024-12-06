@@ -40,14 +40,15 @@ if(isset($_GET['giris'])){
         <form id="myFormlogin" action="../backend/giris_bcknd.php" method="post"> 
             <div class="input-group mb-3">
                 <input type="text" class="form-control" id= "login_ncknm" name="login_kullanici_adi" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-                <i class="icon fa fa-user"></i>
+                <span class="icon"><i class="fa fa-user"></i></span>
             </div>
             <div>
             <input type="password" id= "login_psw" name="login_sifre" placeholder="Password">
-            <i class="icon fa fa-lock"></i></div>
+            <span class="icon"><i class="fa fa-lock"></i></span>
+            </div>
             <button type="submit" id="loginbutton">Giriş Yap</button>
             <div class="register-link">
-                Hesabın yok mu? <a href="#">Kayıt Ol</a>
+                Hesabın yok mu? <a href="giris_kayit.php?giris=0">Kayıt Ol</a>
             </div>
         </form>  
         </div>

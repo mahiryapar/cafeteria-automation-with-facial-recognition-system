@@ -22,8 +22,8 @@ else{
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hesabım</title>
-    <link rel="stylesheet" href="../css/design.css">
     <link rel="stylesheet" href="../css/hesabim_design.css">
+    <link rel="stylesheet" href="../css/design.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
@@ -48,7 +48,7 @@ else{
                 <li class="liler" id="admin-li"><a class="linkler" href="../backend/logout.php">Çıkış</a></li>
         </nav>
         <div id="icerik">
-            
+            <div id='anakart'>
             <div id="hesap_bilgileri">
                 <h3>Hesap Bilgilerim</h3>
                 <span id="nickname">Kullanıcı Adı: <?php echo $nickname?></span><br>
@@ -74,6 +74,7 @@ else{
             <form action="../backend/remove_pp.php" method="POST" enctype="multipart/form-data">
                 <button type="submit">Profil Fotoğrafını Kaldır</button>
             </form>
+            </div>
             </div>
         </div>
     </div>

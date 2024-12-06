@@ -2,6 +2,8 @@
     display: none;
     width: 24vw;
     height: 60vh;
+    min-width: 400px;
+    min-height: 600px;
     margin-left: 38vw;
     margin-top: 18vh;
     border: 2px solid #41494e; /* Eski renk :2b2c2a*/
@@ -14,43 +16,48 @@
 
 #kayit{
     display: none;
-    width: 34vw;
+    width: 24vw;
     height: 60vh;
     margin-left: 38vw;
     margin-top: 18vh;
-    border: 2px solid #2b2c2a;
+    border: 2px solid #41494e; /* Eski renk :2b2c2a*/
     border-radius: 20px 20px 20px 20px;
     background: linear-gradient(155deg,#636262 -30%,#575555 90%);
-    box-shadow: 0px 10px 10px 3px;
-
+    box-shadow: 0px 10px 10px 0px;
+    backdrop-filter: blur(1px); /* Bulanıklaştırma efekti */
+    background: rgba(79, 113, 133, 0.3);
 }
 
 #myFormsignup{
     height: 100%;
     width: 100%;
+    gap: 3px;
     display: flex;
     flex-direction: column; 
     align-items: center;    
     justify-content: center;
+    
 }
 
 #myFormsignup div {
     display: flex;         /* Her bir grup span ve input için yan yana hizalama */
     align-items: center;   /* Dikey hizalama */
-    margin-bottom: 2px;    /* Gruplar arasında daha küçük boşluk */
+    margin-bottom: 5px;    /* Gruplar arasında daha küçük boşluk */
+    margin-right: 120px;
 }
 
 #myFormsignup span {
     display: inline-block; /* Yan yana hizalama için */
     width: 200px;          /* Sabit genişlik */
     text-align: right;     /* Yazıları sağa hizala */
-    margin-right: 5px;     /* Span ile input arasında daha küçük bir boşluk */
+    margin-right: 15px;     /* Span ile input arasında daha küçük bir boşluk */
 }
 
 #myFormsignup input {
     display: inline-block; /* Yan yana hizalama için */
-    width: 200px;          /* Input genişliği */
-    padding: 3px;          /* İçerik ile kenar arası küçük bir boşluk */
+    width: 180px;         /*  Input genişliği 
+    padding: 5px;     /* İçerik ile kenar arası küçük bir boşluk */
+
 }
 
 #myFormsignup button {
@@ -69,39 +76,85 @@
     justify-content: center;
 }
 
-
-#login_ncknm, #login_psw {
-    width: 70%;
-    max-width: 300px;
-    margin: 10px auto;
-    padding: 10px;
+#isim, #soyisim, #ncknm, #mail, #number, #psw{
+    width: 100%;
+    max-width: 200px;
+    margin: 8px auto;
+    margin-bottom: 5px;
+    padding: 6px;
     font-size: 16px;
     border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 8px;
+    border-radius: 19px;
     background: rgba(255, 255, 255, 0.1);
-    color: white;
+    color: rgb(97, 97, 112);
     outline: none;
 }
-
-#login_ncknm:focus, #login_psw:focus {
+#isim:hover, #soyisim:hover, #ncknm:hover, #mail:hover, #number:hover, #psw:hover{
     border-color: white;
     background: rgba(255, 255, 255, 0.2);
 }
+#isim:focus, #soyisim:focus, #ncknm:focus, #mail:focus, #number:focus, #psw:focus{
+    border: 2px solid #3c88a1;
+    box-shadow: 0 0 5px rgba(107, 140, 255, 0.5);
+}
+#login_ncknm, #login_psw {
+    width: 100%;
+    max-width: 215px;
+    margin: 8px auto;
+    padding: 13px;
+    font-size: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 19px;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgb(97, 97, 112);
+    outline: none;
+}
 
+#login_ncknm:hover, #login_psw:hover {
+    border-color: white;
+    background: rgba(255, 255, 255, 0.2);
+}
+#login_ncknm:focus, #login_psw:focus {
+    border: 2px solid #3c88a1;
+    box-shadow: 0 0 5px rgba(107, 140, 255, 0.5);
+}
+
+
+/* Simgeler */
+.icon {
+    position: absolute;
+    right: 135px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.8);
+    pointer-events: none;
+}
 
 
 
 /* Submit butonları */
 #signupbutton, #loginbutton {
-    width: 70%; /* Buton genişliği */
-    max-width: 300px; /* Maksimum genişlik */
-    padding: 10px;
+    width: 100%;
+    max-width: 215px;
+    padding: 9px;
+    margin: 11px auto;
+    margin-right: 120px;
+    justify-content: center;
+    display: flex;
     font-size: 16px;
     border: none;
-    border-radius: 8px;
+    border-radius: 19px;
     cursor: pointer;
     background-color: rgba(255, 255, 255, 0.8); /* Şeffaf beyaz arka plan */
+
+    transition: all 0.3s ease;
 }
+#signupbutton:hover, #loginbutton:hover{
+    border-color: white;
+    background: rgba(169, 210, 233, 0.523);
+} 
+
 
 .register-link {
     margin-top: 15px;
