@@ -35,45 +35,15 @@ include '../backend/yemekhanem_backend.php';
                 <li class="liler" id="admin-li"><a class="linkler" href="../backend/logout.php">Çıkış</a></li>
         </nav>     
         <?php if(isset($_GET['message']) && $_GET['message']=="Onaylandı"):?>
-            <div id="alertdiv" class="alert alert-success">
-                <strong>Başarılı!</strong> İstek onaylandı üye yemekhaneye eklendi.
-                <script>
-                    setTimeout(() => {
-                        document.getElementById("alertdiv").style.display = "none";
-                        window.location.href = "yemekhanem.php";
-                    }, 2000);    
-                </script>
-            </div>
+            <?php echo alertver("success","Başarılı","Katılma isteği onaylandı.");?>
         <?php elseif(isset($_GET['message']) && $_GET['message']=="Reddedildi"): ?>
-            <div id="alertdiv" class="alert alert-success">
-                <strong>Başarılı!</strong> İstek reddedildi.
-                <script>
-                    setTimeout(() => {
-                        document.getElementById("alertdiv").style.display = "none";
-                        window.location.href = "yemekhanem.php";
-                    }, 2000);
-                </script>
-            </div>
+            <?php echo alertver("success","Başarılı","Katılma isteği reddedildi.");?>
         <?php elseif(isset($_GET['message']) && $_GET['message']=="IstekGonderildi"): ?>
-        <div id="alertdiv" class="alert alert-success">
-            <strong>Başarılı!</strong> İsteğiniz yemekhane adminine gönderildi.
-            <script>
-                setTimeout(() => {
-                    document.getElementById("alertdiv").style.display = "none";
-                    window.location.href = "yemekhanem.php";
-                }, 2000);
-            </script>
-        </div>
+            <?php echo alertver("success","Başarılı","Katılma isteği gönderildi.");?>
         <?php elseif(isset($_GET['message']) && $_GET['message']=="ZatenBuYemekhaneyeIstekGonderdiniz"): ?>
-        <div id="alertdiv" class="alert alert-danger">
-            <strong>Hata!</strong> Zaten bir yemekhaneye istek gönderdiniz.
-            <script>
-                setTimeout(() => {
-                    document.getElementById("alertdiv").style.display = "none";
-                    window.location.href = "yemekhanem.php";
-                }, 2000);
-            </script>
-        </div>
+            <?php echo alertver("danger","Hata","Zaten bir yemekhaneye istek gönderdiniz.");?>
+        <?php elseif(isset($_GET['message']) && $_GET['message']=="OgrenciKaldirildi"): ?>
+            <?php echo alertver("success","Başarılı","Öğrenci kaldırıldı.");?>
         <?php endif;?>
         <div id="icerik" class="container">
         <?php if ($_SESSION['yemekhane_id'] == 1&&$_SESSION['role'] =="ogrenci"): ?>    
@@ -134,7 +104,10 @@ include '../backend/yemekhanem_backend.php';
             <ul>
                 <?php
                 while ($ogrenci = sqlsrv_fetch_array($stmt_ogrenci, SQLSRV_FETCH_ASSOC)): ?>
-                    <li><?php echo $ogrenci['name']; ?> - <?php echo $ogrenci['surname']; ?></li>
+                    <li>
+                        <?php echo $ogrenci['name']; ?> - <?php echo $ogrenci['surname']; ?> 
+                        - <a href="../backend/remove_student.php?user_id=<?php echo $ogrenci['id']; ?>" onclick="return confirm('Bu öğrenciyi yemekhaneden kaldırmak istediğinize emin misiniz?');">Kaldır</a>
+                    </li>
                 <?php endwhile; ?>
             </ul>
         </div>
