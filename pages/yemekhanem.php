@@ -40,32 +40,37 @@ include '../backend/yemekhanem_backend.php';
             <?php echo alertver("success","Başarılı","Katılma isteği reddedildi.");?>
         <?php elseif(isset($_GET['message']) && $_GET['message']=="IstekGonderildi"): ?>
             <?php echo alertver("success","Başarılı","Katılma isteği gönderildi.");?>
-        <?php elseif(isset($_GET['message']) && $_GET['message']=="ZatenBuYemekhaneyeIstekGonderdiniz"): ?>
-            <?php echo alertver("danger","Hata","Zaten bir yemekhaneye istek gönderdiniz.");?>
         <?php elseif(isset($_GET['message']) && $_GET['message']=="OgrenciKaldirildi"): ?>
             <?php echo alertver("success","Başarılı","Öğrenci kaldırıldı.");?>
         <?php elseif(isset($_GET['message']) && $_GET['message']=="YemekhaneOlusturuldu"): ?>
             <?php echo alertver("success","Başarılı","Yemekhane başarıyla oluşturuldu.");?>
+            <?php elseif(isset($_GET['message']) && $_GET['message']=="menueklendi"): ?>
+                <?php echo alertver("success","Başarılı","Menü Eklendi.");?>
         <?php endif;?>
         <div id="icerik" class="container">
             <?php if ($_SESSION['yemekhane_id'] == 1&&$_SESSION['role'] =="ogrenci"): ?>    
-                    <div id="yemekhane_yok" class="box">
-                        <h3>Henüz bir yemekhaneye bağlı değilsiniz.</h3>
-                        <form action="../backend/join_yemekhane.php" method="POST">
-                            <div class="form-group">
-                                <label for="yemekhane">Yemekhane Seç:</label>
-                                <select name="yemekhane_id" id="yemekhane" class="form-control" required>
-                                    <option value="" disabled selected>Yemekhane seçiniz</option>
-                                    <?php foreach ($yemekhaneler as $yemekhane): ?>
-                                        <option value="<?php echo $yemekhane['id']; ?>">
-                                            <?php echo $yemekhane['isim']; ?>
-                                        </option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-primary mt-3">Katıl</button>
-                        </form>
-                    </div>
+                <div id="yemekhane_yok" class="box">
+                <h3>Henüz bir yemekhaneye bağlı değilsiniz.</h3>
+
+                <?php if ($istek): ?>
+                    <p>Katılma isteğiniz onay bekliyor: <strong><?php echo htmlspecialchars($istek['yemekhane_ismi']); ?></strong></p>
+                <?php else: ?>
+                    <form action="../backend/join_yemekhane.php" method="POST">
+                        <div class="form-group">
+                            <label for="yemekhane">Yemekhane Seç:</label>
+                            <select name="yemekhane_id" id="yemekhane" class="form-control" required>
+                                <option value="" disabled selected>Yemekhane seçiniz</option>
+                                <?php foreach ($yemekhaneler as $yemekhane): ?>
+                                    <option value="<?php echo $yemekhane['id']; ?>">
+                                        <?php echo htmlspecialchars($yemekhane['isim']); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3">Katıl</button>
+                    </form>
+                <?php endif; ?>
+            </div>
             <?php elseif($_SESSION['yemekhane_id'] != 1): ?>
                 <div id="yemekhane_bilgileri" class="box">
                     <h3>Yemekhanenizin Bilgileri:</h3>
@@ -73,7 +78,29 @@ include '../backend/yemekhanem_backend.php';
                     <p><strong>Kurum:</strong> <?php echo $yemekhane['kurum']; ?></p>
                     <p><strong>Kapasite:</strong> <?php echo $yemekhane['kapasite']; ?></p>
                     <p><strong>Adres:</strong> <?php echo $yemekhane['adres']; ?></p>
-                </div>
+                    <?php if (!empty($ogunler)): ?>
+                    <h4>Öğün Bilgileri:</h4>
+                        <ul>
+                            <?php foreach ($ogunler as $ogun): ?>
+                                <li>
+                                    <?php
+                                    if (isset($ogun['ogun_saati']) && isset($ogun['ogun_bitis_saati'])) {
+                                        $ogunsaatiRaw = explode('.', $ogun['ogun_saati'])[0];
+                                        $ogunbitissaatiRaw = explode('.', $ogun['ogun_bitis_saati'])[0];
+                                        $ogunsaati = DateTime::createFromFormat('H:i:s', $ogunsaatiRaw);
+                                        $ogunbitissaati = DateTime::createFromFormat('H:i:s', $ogunbitissaatiRaw);
+                                    }
+                                    ?>
+                                    <strong>Öğün:</strong> <?php echo htmlspecialchars($ogun['ogun']); ?><br>
+                                    <strong>Başlangıç Saati:</strong> <?php echo $ogunsaati->format('H:i'); ?><br>
+                                    <strong>Bitiş Saati:</strong> <?php echo $ogunbitissaati->format('H:i'); ?><br>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php else: ?>
+                        <p>Bu yemekhane için öğün bilgisi bulunmamaktadır.</p>
+                    <?php endif; ?>
+                </div> 
             <?php endif; ?>
             <?php if($_SESSION['role'] === 'admin'): ?>
             <?php if ($_SESSION['yemekhane_id'] == 1): ?>

@@ -75,7 +75,6 @@ function alertver($type,$about_mesaj,$mesaj){
                     ];
                 } 
             }
-            $yemekhane = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
             $sql = "SELECT * FROM yemekhaneler WHERE id = ?";
             $params = [$_SESSION['yemekhane_id']];
             $stmt = sqlsrv_query($conn, $sql, $params);
@@ -83,6 +82,17 @@ function alertver($type,$about_mesaj,$mesaj){
                 die(print_r(sqlsrv_errors(), true));
             }
             $yemekhane = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
+            $ogun_sql = "SELECT ogun, ogun_saati, ogun_bitis_saati FROM yemekhane_ogunleri WHERE yemekhane_id = ?";
+            $ogun_params = [$_SESSION['yemekhane_id']];
+            $ogun_stmt = sqlsrv_query($conn, $ogun_sql, $ogun_params);
+            if ($ogun_stmt === false) {
+                die(print_r(sqlsrv_errors(), true));
+            }
+
+            $ogunler = [];
+            while ($row = sqlsrv_fetch_array($ogun_stmt, SQLSRV_FETCH_ASSOC)) {
+                $ogunler[] = $row;
+}
             $sql_ogrenci = "SELECT * FROM users WHERE yemekhane_id = ? and rol='ogrenci'";
             $params = [$_SESSION['yemekhane_id']];
             $stmt_ogrenci = sqlsrv_query($conn, $sql_ogrenci, $params);
@@ -98,6 +108,18 @@ function alertver($type,$about_mesaj,$mesaj){
             if ($stmt_istek === false) {
                 die(print_r(sqlsrv_errors(), true));
             }
+            $istek_sql = "SELECT ki.yemekhane_id, y.isim AS yemekhane_ismi 
+                          FROM katilma_istekleri ki 
+                          INNER JOIN yemekhaneler y ON ki.yemekhane_id = y.id 
+                          WHERE ki.user__id = ?";
+            $istek_params = [$_SESSION['user_id']];
+            $istek_stmt = sqlsrv_query($conn, $istek_sql, $istek_params);
+
+            if ($istek_stmt === false) {
+                die(print_r(sqlsrv_errors(), true));
+            }
+
+            $istek = sqlsrv_fetch_array($istek_stmt, SQLSRV_FETCH_ASSOC);
             $yemekhane_id = $_SESSION['yemekhane_id'];
             $sqlOgünler = "SELECT ogun FROM yemekhane_ogunleri WHERE yemekhane_id = ?";
             $stmtOgünler = sqlsrv_query($conn, $sqlOgünler, [$yemekhane_id]);

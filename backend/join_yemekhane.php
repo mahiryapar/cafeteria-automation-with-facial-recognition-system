@@ -28,22 +28,7 @@ if (!isset($_POST['yemekhane_id']) || empty(trim($_POST['yemekhane_id']))) {
 }
 $yemekhane_id = intval(trim($_POST['yemekhane_id']));
 
-$sql_check = "SELECT COUNT(*) AS count FROM katilma_istekleri WHERE user__id = ?";
-$params_check = [$user_id];
-$stmt_check = sqlsrv_query($conn, $sql_check, $params_check);
 
-if ($stmt_check === false) {
-    die(print_r(sqlsrv_errors(), true));
-}
-
-$row_check = sqlsrv_fetch_array($stmt_check, SQLSRV_FETCH_ASSOC);
-
-if ($row_check['count'] > 0) {
-    header("Location: ../pages/yemekhanem.php?message=ZatenBuYemekhaneyeIstekGonderdiniz");
-    exit;
-}
-
-// Kullanıcının isteğini ekle
 $sql_insert = "INSERT INTO katilma_istekleri (user__id, yemekhane_id) VALUES (?, ?)";
 $params_insert = [$user_id, $yemekhane_id];
 $stmt_insert = sqlsrv_query($conn, $sql_insert, $params_insert);
@@ -52,7 +37,6 @@ if ($stmt_insert === false) {
     die("İstek eklenirken bir hata oluştu: " . print_r(sqlsrv_errors(), true));
 }
 
-// Başarılıysa kullanıcıyı yönlendir
 header("Location: ../pages/yemekhanem.php?message=IstekGonderildi");
 exit;
 ?>

@@ -61,7 +61,7 @@ include '../backend/yemek_takvimi_info_init_backend.php';
                 </span>
                 <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$kahvalti_tatli] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
                 <span>
-                    içecek: <?php echo !empty($kahvalti_icecek) ? $kahvalti_icecek : "Yok"; ?><br>
+                    İçecek: <?php echo !empty($kahvalti_icecek) ? $kahvalti_icecek : "Yok"; ?><br>
                     Açıklama: <?php echo !empty($kahvalti_icecek_aciklama) ? $kahvalti_icecek_aciklama : "Yok"; ?><br>
                 </span>
                 <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$kahvalti_icecek] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
@@ -110,7 +110,7 @@ include '../backend/yemek_takvimi_info_init_backend.php';
                 </span>
                 <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$ogle_yemegi_tatli] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
                 <span>
-                    içecek: <?php echo !empty($ogle_yemegi_icecek) ? $ogle_yemegi_icecek : "Yok"; ?><br>
+                    İçecek: <?php echo !empty($ogle_yemegi_icecek) ? $ogle_yemegi_icecek : "Yok"; ?><br>
                     Açıklama: <?php echo !empty($ogle_yemegi_icecek_aciklama) ? $ogle_yemegi_icecek_aciklama : "Yok"; ?><br>
                 </span>
                 <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$ogle_yemegi_icecek] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
@@ -159,7 +159,7 @@ include '../backend/yemek_takvimi_info_init_backend.php';
                 </span>
                 <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$aksam_yemegi_tatli] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
                 <span>
-                    içecek: <?php echo !empty($aksam_yemegi_icecek) ? $aksam_yemegi_icecek : "Yok"; ?><br>
+                    İçecek: <?php echo !empty($aksam_yemegi_icecek) ? $aksam_yemegi_icecek : "Yok"; ?><br>
                     Açıklama: <?php echo !empty($aksam_yemegi_icecek_aciklama) ? $aksam_yemegi_icecek_aciklama : "Yok"; ?><br>
                 </span>
                 <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$aksam_yemegi_icecek] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
