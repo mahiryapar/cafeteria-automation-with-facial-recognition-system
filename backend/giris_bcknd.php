@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if($_GET['giris'] == 1){
             $kullaniciAdi = $_POST['login_kullanici_adi'] ?? '';
             $sifre = $_POST['login_sifre'] ?? '';
-            $sql = "SELECT id,rol,yemekhane_id FROM Users where nickname = ? and password_hash = ?";      
+            $sql = "SELECT id,rol,yemekhane_id,name,surname FROM Users where nickname = ? and password_hash = ?";      
             $params = [$kullaniciAdi, $sifre];
             $stmt = sqlsrv_query($conn, $sql,$params);
             if ($stmt === false) {
@@ -38,6 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 session_start();
                 $row = sqlsrv_fetch_array($stmt,SQLSRV_FETCH_ASSOC);
                 $_SESSION['nickname'] = $kullaniciAdi; 
+                $_SESSION['isim'] = $row['name'];
+                $_SESSION['soyisim'] = $row['surname'];
                 $_SESSION['role'] = $row['rol'];
                 $_SESSION['yemekhane_id'] = $row['yemekhane_id'];
                 $_SESSION['user_id'] = $row['id'];

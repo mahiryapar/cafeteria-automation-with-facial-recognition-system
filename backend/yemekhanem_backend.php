@@ -1,4 +1,16 @@
 <?php
+function alertver($type,$about_mesaj,$mesaj){
+    return "<div id='alertdiv' class='alert alert-$type'>
+                <strong>$about_mesaj!</strong> $mesaj
+                <script>
+                    setTimeout(() => {
+                        document.getElementById('alertdiv').style.display = 'none';
+                        window.location.href = 'yemekhanem.php';
+                    }, 2000);    
+                </script>
+            </div>";
+}
+        
         $connection_alert;
         $query;
         session_start();
@@ -49,6 +61,21 @@
                     'ogun_bitis_saati' => $row['ogun_bitis_saati']
                 ];
             }
+            $sql = "SELECT * FROM yemekhaneler";
+            $stmt = sqlsrv_query($conn, $sql);
+            if ($stmt === false) {
+                die(print_r(sqlsrv_errors(), true));
+            }
+            $yemekhaneler = [];
+            while($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)){
+                if($row['id'] != 1){
+                    $yemekhaneler[] = [
+                        "isim" => $row['isim'],
+                        "id" => $row['id']
+                    ];
+                } 
+            }
+            $yemekhane = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
             $sql = "SELECT * FROM yemekhaneler WHERE id = ?";
             $params = [$_SESSION['yemekhane_id']];
             $stmt = sqlsrv_query($conn, $sql, $params);
@@ -62,7 +89,7 @@
             if ($stmt_ogrenci === false) {
                 die(print_r(sqlsrv_errors(), true));
             }
-            $sql_istek = "SELECT * FROM katilma_istekleri 
+            $sql_istek = "SELECT users.name,users.surname,katilma_istekleri.id FROM katilma_istekleri 
                     inner join users
                     on users.id = katilma_istekleri.user__id
                     WHERE katilma_istekleri.yemekhane_id = ?";
