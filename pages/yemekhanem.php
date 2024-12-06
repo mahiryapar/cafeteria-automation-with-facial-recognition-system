@@ -44,123 +44,155 @@ include '../backend/yemekhanem_backend.php';
             <?php echo alertver("danger","Hata","Zaten bir yemekhaneye istek gönderdiniz.");?>
         <?php elseif(isset($_GET['message']) && $_GET['message']=="OgrenciKaldirildi"): ?>
             <?php echo alertver("success","Başarılı","Öğrenci kaldırıldı.");?>
+        <?php elseif(isset($_GET['message']) && $_GET['message']=="YemekhaneOlusturuldu"): ?>
+            <?php echo alertver("success","Başarılı","Yemekhane başarıyla oluşturuldu.");?>
         <?php endif;?>
         <div id="icerik" class="container">
-        <?php if ($_SESSION['yemekhane_id'] == 1&&$_SESSION['role'] =="ogrenci"): ?>    
-                <div id="yemekhane_yok" class="box">
-                    <h3>Henüz bir yemekhaneye bağlı değilsiniz.</h3>
-                    <form action="../backend/join_yemekhane.php" method="POST">
+            <?php if ($_SESSION['yemekhane_id'] == 1&&$_SESSION['role'] =="ogrenci"): ?>    
+                    <div id="yemekhane_yok" class="box">
+                        <h3>Henüz bir yemekhaneye bağlı değilsiniz.</h3>
+                        <form action="../backend/join_yemekhane.php" method="POST">
+                            <div class="form-group">
+                                <label for="yemekhane">Yemekhane Seç:</label>
+                                <select name="yemekhane_id" id="yemekhane" class="form-control" required>
+                                    <option value="" disabled selected>Yemekhane seçiniz</option>
+                                    <?php foreach ($yemekhaneler as $yemekhane): ?>
+                                        <option value="<?php echo $yemekhane['id']; ?>">
+                                            <?php echo $yemekhane['isim']; ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-3">Katıl</button>
+                        </form>
+                    </div>
+            <?php elseif($_SESSION['yemekhane_id'] != 1): ?>
+                <div id="yemekhane_bilgileri" class="box">
+                    <h3>Yemekhanenizin Bilgileri:</h3>
+                    <p><strong>İsim:</strong> <?php echo $yemekhane['isim']; ?></p>
+                    <p><strong>Kurum:</strong> <?php echo $yemekhane['kurum']; ?></p>
+                    <p><strong>Kapasite:</strong> <?php echo $yemekhane['kapasite']; ?></p>
+                    <p><strong>Adres:</strong> <?php echo $yemekhane['adres']; ?></p>
+                </div>
+            <?php endif; ?>
+            <?php if($_SESSION['role'] === 'admin'): ?>
+            <?php if ($_SESSION['yemekhane_id'] == 1): ?>
+
+                <div id="yemekhane_olustur" class="box">
+                    <h3>Yemekhaneniz bulunmuyor. Yeni bir yemekhane oluşturabilirsiniz:</h3>
+                    <form action="../backend/create_yemekhane.php" method="POST">
                         <div class="form-group">
-                            <label for="yemekhane">Yemekhane Seç:</label>
-                            <select name="yemekhane_id" id="yemekhane" class="form-control" required>
-                                <option value="" disabled selected>Yemekhane seçiniz</option>
-                                <?php foreach ($yemekhaneler as $yemekhane): ?>
-                                    <option value="<?php echo $yemekhane['id']; ?>">
-                                        <?php echo $yemekhane['isim']; ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
+                            <label for="isim">Yemekhane İsmi:</label>
+                            <input type="text" name="isim" id="isim" class="form-control" required>
                         </div>
-                        <button type="submit" class="btn btn-primary mt-3">Katıl</button>
+                        <div class="form-group mt-3">
+                            <label for="kurum">Kurum:</label>
+                            <input type="text" name="kurum" id="kurum" class="form-control" required>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="kapasite">Kapasite:</label>
+                            <input type="number" name="kapasite" id="kapasite" class="form-control" required>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="adres">Adres:</label>
+                            <textarea name="adres" id="adres" class="form-control" required></textarea>
+                        </div>
+                        <div class="form-group mt-4">
+                            <h4>Öğünler:</h4>
+                            <div>
+                                <input type="checkbox" id="kahvalti" name="ogunler[Kahvaltı][secilen]" value="1">
+                                <label for="kahvalti">Kahvaltı</label>
+                                <br>
+                                <label for="kahvalti_baslangic">Başlangıç Saati:</label>
+                                <input type="time" id="kahvalti_baslangic" name="ogunler[Kahvaltı][baslangic]">
+                                <label for="kahvalti_bitis">Bitiş Saati:</label>
+                                <input type="time" id="kahvalti_bitis" name="ogunler[Kahvaltı][bitis]">
+                            </div>
+                            <div class="mt-2">
+                                <input type="checkbox" id="ogle" name="ogunler[Öğle Yemeği][secilen]" value="1">
+                                <label for="ogle">Öğle Yemeği</label>
+                                <br>
+                                <label for="ogle_baslangic">Başlangıç Saati:</label>
+                                <input type="time" id="ogle_baslangic" name="ogunler[Öğle Yemeği][baslangic]">
+                                <label for="ogle_bitis">Bitiş Saati:</label>
+                                <input type="time" id="ogle_bitis" name="ogunler[Öğle Yemeği][bitis]">
+                            </div>
+                            <div class="mt-2">
+                                <input type="checkbox" id="aksam" name="ogunler[Akşam Yemeği][secilen]" value="1">
+                                <label for="aksam">Akşam Yemeği</label>
+                                <br>
+                                <label for="aksam_baslangic">Başlangıç Saati:</label>
+                                <input type="time" id="aksam_baslangic" name="ogunler[Akşam Yemeği][baslangic]">
+                                <label for="aksam_bitis">Bitiş Saati:</label>
+                                <input type="time" id="aksam_bitis" name="ogunler[Akşam Yemeği][bitis]">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-4">Yemekhane Oluştur</button>
                     </form>
                 </div>
             <?php else: ?>
-                <div id="yemekhane_bilgileri" class="box">
-                <h3>Yemekhanenizin Bilgileri:</h3>
-                <p><strong>İsim:</strong> <?php echo $yemekhane['isim']; ?></p>
-                <p><strong>Kurum:</strong> <?php echo $yemekhane['kurum']; ?></p>
-                <p><strong>Kapasite:</strong> <?php echo $yemekhane['kapasite']; ?></p>
-                <p><strong>Adres:</strong> <?php echo $yemekhane['adres']; ?></p>
-        </div>
-        <?php endif; ?>
-        <?php if($_SESSION['role'] === 'admin'): ?>
-        <?php if ($_SESSION['yemekhane_id'] == 1): ?>
-
-        <div id="yemekhane_olustur" class="box">
-            <h3>Yemekhaneniz bulunmuyor. Yeni bir yemekhane oluşturabilirsiniz:</h3>
-            <form action="../backend/create_yemekhane.php" method="POST">
-                <div class="form-group">
-                    <label for="isim">Yemekhane İsmi:</label>
-                    <input type="text" name="isim" id="isim" class="form-control" required>
-                </div>
-                <div class="form-group mt-3">
-                    <label for="kurum">Kurum:</label>
-                    <input type="text" name="kurum" id="kurum" class="form-control" required>
-                </div>
-                <div class="form-group mt-3">
-                    <label for="kapasite">Kapasite:</label>
-                    <input type="number" name="kapasite" id="kapasite" class="form-control" required>
-                </div>
-                <div class="form-group mt-3">
-                    <label for="adres">Adres:</label>
-                    <textarea name="adres" id="adres" class="form-control" required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary mt-3">Yemekhane Oluştur</button>
-            </form>
-        </div>
-    <?php else: ?>
-        <div id="ogrenciler" class="box">
-            <h4>Bağlı Öğrenciler:</h4>
-            <ul>
-                <?php
-                while ($ogrenci = sqlsrv_fetch_array($stmt_ogrenci, SQLSRV_FETCH_ASSOC)): ?>
-                    <li>
-                        <?php echo $ogrenci['name']; ?> - <?php echo $ogrenci['surname']; ?> 
-                        - <a href="../backend/remove_student.php?user_id=<?php echo $ogrenci['id']; ?>" onclick="return confirm('Bu öğrenciyi yemekhaneden kaldırmak istediğinize emin misiniz?');">Kaldır</a>
-                    </li>
-                <?php endwhile; ?>
-            </ul>
-        </div>
-        <div id="istekler" class="box">
-            <h4>Katılma İstekleri:</h4>
-            <ul>
-                <?php
-                while ($istek = sqlsrv_fetch_array($stmt_istek, SQLSRV_FETCH_ASSOC)): ?>
-                    <li>
-                        <?php echo $istek['name']." ".$istek['surname'] ?> 
-                        - <a href="../backend/approve_request.php?id=<?php echo $istek['id']; ?>">Onayla</a>
-                        - <a href="../backend/reject_request.php?id=<?php echo $istek['id']; ?>">Reddet</a>
-                    </li>
-                <?php endwhile; ?>
-            </ul>
-        </div>
-        <div id="menu_ekle" class="box scrollable">
-            <h4>Yeni Menü Ekle:</h4>
-            <form action="../backend/add_menu.php" method="POST">
-                <?php
-                while ($yemek = sqlsrv_fetch_array($stmtYemekler, SQLSRV_FETCH_ASSOC)) {
-                    $kategori = $yemek['kategori'];
-                    if (isset($yemekKategorileri[$kategori])) {
-                        $yemekKategorileri[$kategori][] = $yemek['yemek_ismi'];
+            <div id="ogrenciler" class="box">
+                <h4>Bağlı Öğrenciler:</h4>
+                <ul>
+                    <?php
+                    while ($ogrenci = sqlsrv_fetch_array($stmt_ogrenci, SQLSRV_FETCH_ASSOC)): ?>
+                        <li>
+                            <?php echo $ogrenci['name']; ?> - <?php echo $ogrenci['surname']; ?> 
+                            - <a href="../backend/remove_student.php?user_id=<?php echo $ogrenci['id']; ?>" onclick="return confirm('Bu öğrenciyi yemekhaneden kaldırmak istediğinize emin misiniz?');">Kaldır</a>
+                        </li>
+                    <?php endwhile; ?>
+                </ul>
+            </div>
+            <div id="istekler" class="box">
+                <h4>Katılma İstekleri:</h4>
+                <ul>
+                    <?php
+                    while ($istek = sqlsrv_fetch_array($stmt_istek, SQLSRV_FETCH_ASSOC)): ?>
+                        <li>
+                            <?php echo $istek['name']." ".$istek['surname'] ?> 
+                            - <a href="../backend/approve_request.php?id=<?php echo $istek['id']; ?>">Onayla</a>
+                            - <a href="../backend/reject_request.php?id=<?php echo $istek['id']; ?>">Reddet</a>
+                        </li>
+                    <?php endwhile; ?>
+                </ul>
+            </div>
+            <div id="menu_ekle" class="box scrollable">
+                <h4>Yeni Menü Ekle:</h4>
+                <form action="../backend/add_menu.php" method="POST">
+                    <?php
+                    while ($yemek = sqlsrv_fetch_array($stmtYemekler, SQLSRV_FETCH_ASSOC)) {
+                        $kategori = $yemek['kategori'];
+                        if (isset($yemekKategorileri[$kategori])) {
+                            $yemekKategorileri[$kategori][] = $yemek['yemek_ismi'];
+                        }
                     }
-                }
-                ?>
-                <div class="form-group">
-                    <label for="tarih">Tarih:</label>
-                    <input type="date" name="tarih" id="tarih" class="form-control" required>
-                </div>
-                <div class="form-group mt-3">
-                    <label for="ogun">Öğün:</label>
-                    <select name="ogun" id="ogun" class="form-control" required>
-                        <option value="" disabled selected>Öğün seçiniz</option>
-                        <?php while ($ogun = sqlsrv_fetch_array($stmtOgünler, SQLSRV_FETCH_ASSOC)): ?>
-                            <option value="<?php echo $ogun['ogun']; ?>">
-                                <?php echo $ogun['ogun']; ?>
-                            </option>
-                        <?php endwhile; ?>
-                    </select>
-                </div>
-                <div class="form-group mt-3">
-                    <label for="fiyat">Menü Fiyatı (₺):</label>
-                    <input type="number" name="fiyat" id="fiyat" class="form-control" required>
-                </div>
-                <div id="yemek_secenekleri">
-                </div>
-                <button type="submit" class="btn btn-primary mt-3">Menüyü Ekle</button>
-            </form>
-        </div>
-        <?php endif; ?>
-        <?php endif; ?>
+                    ?>
+                    <div class="form-group">
+                        <label for="tarih">Tarih:</label>
+                        <input type="date" name="tarih" id="tarih" class="form-control" required>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="ogun">Öğün:</label>
+                        <select name="ogun" id="ogun" class="form-control" required>
+                            <option value="" disabled selected>Öğün seçiniz</option>
+                            <?php while ($ogun = sqlsrv_fetch_array($stmtOgünler, SQLSRV_FETCH_ASSOC)): ?>
+                                <option value="<?php echo $ogun['ogun']; ?>">
+                                    <?php echo $ogun['ogun']; ?>
+                                </option>
+                            <?php endwhile; ?>
+                        </select>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="fiyat">Menü Fiyatı (₺):</label>
+                        <input type="number" name="fiyat" id="fiyat" class="form-control" required>
+                    </div>
+                    <div id="yemek_secenekleri">
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Menüyü Ekle</button>
+                </form>
+            </div>
+            <?php endif; ?>
+            <?php endif; ?>
         </div>
     </div>
     <script src="../js/yemekhanem.js"></script>
