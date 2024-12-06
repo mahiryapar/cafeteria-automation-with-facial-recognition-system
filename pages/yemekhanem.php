@@ -33,7 +33,48 @@ include '../backend/yemekhanem_backend.php';
                 <li class="liler" id="ogrenci-li"><a class="linkler" href="iletisim.php">İletişim</a></li>
                 <li class="liler" id="ogrenci-li"><a class="linkler" href="../backend/logout.php">Çıkış</a></li>
                 <li class="liler" id="admin-li"><a class="linkler" href="../backend/logout.php">Çıkış</a></li>
-        </nav>
+        </nav>     
+        <?php if(isset($_GET['message']) && $_GET['message']=="Onaylandı"):?>
+            <div id="alertdiv" class="alert alert-success">
+                <strong>Başarılı!</strong> İstek onaylandı üye yemekhaneye eklendi.
+                <script>
+                    setTimeout(() => {
+                        document.getElementById("alertdiv").style.display = "none";
+                        window.location.href = "yemekhanem.php";
+                    }, 2000);    
+                </script>
+            </div>
+        <?php elseif(isset($_GET['message']) && $_GET['message']=="Reddedildi"): ?>
+            <div id="alertdiv" class="alert alert-success">
+                <strong>Başarılı!</strong> İstek reddedildi.
+                <script>
+                    setTimeout(() => {
+                        document.getElementById("alertdiv").style.display = "none";
+                        window.location.href = "yemekhanem.php";
+                    }, 2000);
+                </script>
+            </div>
+        <?php elseif(isset($_GET['message']) && $_GET['message']=="IstekGonderildi"): ?>
+        <div id="alertdiv" class="alert alert-success">
+            <strong>Başarılı!</strong> İsteğiniz yemekhane adminine gönderildi.
+            <script>
+                setTimeout(() => {
+                    document.getElementById("alertdiv").style.display = "none";
+                    window.location.href = "yemekhanem.php";
+                }, 2000);
+            </script>
+        </div>
+        <?php elseif(isset($_GET['message']) && $_GET['message']=="ZatenBuYemekhaneyeIstekGonderdiniz"): ?>
+        <div id="alertdiv" class="alert alert-danger">
+            <strong>Hata!</strong> Zaten bir yemekhaneye istek gönderdiniz.
+            <script>
+                setTimeout(() => {
+                    document.getElementById("alertdiv").style.display = "none";
+                    window.location.href = "yemekhanem.php";
+                }, 2000);
+            </script>
+        </div>
+        <?php endif;?>
         <div id="icerik" class="container">
         <?php if ($_SESSION['yemekhane_id'] == 1&&$_SESSION['role'] =="ogrenci"): ?>    
                 <div id="yemekhane_yok" class="box">
