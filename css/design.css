@@ -2,6 +2,12 @@
     height: 100%;
     width: 100%;
     overflow: auto;
+
+    background-image: url('../arka_plan_resimler/3.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #b8b3b3;
 }
 
 #prfl-foto-img {
@@ -15,8 +21,6 @@
 }
 
 #sayfa{
-
-    background-color: #b8b3b3;
     height: 100%;
     width:100%;
     position: fixed;
