@@ -1,3 +1,18 @@
+#icerik{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-image: url('../arka_plan_resimler/3.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #b8b3b3;
+    position: relative;
+    z-index: 1;
+    margin: 0px;
+}
+
+
 #giris{
     display: none;
     width: 24vw;
@@ -83,6 +98,7 @@
     color: rgb(97, 97, 112);
     outline: none;
     box-sizing: border-box;
+    color: #333;
 }
 #isim:hover, #soyisim:hover, #ncknm:hover, #mail:hover, #number:hover, #psw:hover{
     border-color: white;
@@ -143,6 +159,10 @@
 }
 #login_ncknm{
     margin-top: 30%;
+    color: #333;
+}
+#login_ncknm::placeholder{
+    font-weight: lighter;
 }
 
 #login_ncknm:hover, #login_psw:hover {
