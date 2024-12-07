@@ -55,8 +55,8 @@
 
 #myFormsignup input {
     display: inline-block; /* Yan yana hizalama için */
-    width: 180px;         /*  Input genişliği 
-    padding: 5px;     /* İçerik ile kenar arası küçük bir boşluk */
+    width: 180px;          /*  Input genişliği */
+    padding: 5px;          /* İçerik ile kenar arası küçük bir boşluk */
 
 }
 
@@ -125,6 +125,7 @@
     position: absolute;
     right: 135px;
     top: 50%;
+    right: 30%;
     transform: translateY(-50%);
     font-size: 18px;
     color: rgba(255, 255, 255, 0.8);
@@ -138,6 +139,7 @@
     width: 100%;
     max-width: 215px;
     padding: 9px;
+    right: 10%;
     margin: 11px auto;
     margin-right: 120px;
     justify-content: center;
