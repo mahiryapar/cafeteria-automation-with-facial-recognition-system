@@ -3,19 +3,28 @@
     grid-template-columns: repeat(7, 1fr);
     gap: 10px;
     margin: 20px;
+    padding-left: 20px;
+    font-weight:600;
 }
+
+
 .calendar-day {
     padding: 10px;
-    background-color: #f8f9fa;
-    border: 1px solid #ddd;
+    font-weight: bold;
     text-align: center;
     cursor: pointer;
+    transition: 0.2s ease-in-out;
+    margin:5px;
 }
 .calendar-day:hover {
+    transform: scale(1.10,1.10);
     background-color: #e9ecef;
 }
-.today {
-    background-color: #ffd966;
+.today{
+    border: 2px solid #b39e25;
+}
+.today:hover{
+    background-color: #00ec08;
     font-weight: bold;
 }
 
