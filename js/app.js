@@ -70,6 +70,7 @@ function runeventlist() {
         linkler[i].addEventListener("click", createClickListener(i));
         linkler[i].addEventListener("mousedown", transformab(i));
         linkler[i].addEventListener("mouseup", transformbittiab(i));
+        linkler[i].addEventListener("mouseleave", transformbittiab(i));
     }
     nav.addEventListener("mouseenter", function () {
         nav.style.transition = "0.3s ease-in-out";
@@ -86,7 +87,7 @@ function runeventlist() {
 function transformab(index) {
     return function () {
         linkler[index].style.transform = "scale(0.85,0.85)";
-        linkler[index].style.backgroundColor = "#222020";
+        linkler[index].style.background = "rgba(69, 94, 108)";
     }
 }
 
