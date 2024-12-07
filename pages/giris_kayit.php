@@ -37,14 +37,18 @@ if(isset($_GET['giris'])){
         <div id="icerik">
         <div id="sonuc"></div> 
         <div id= "giris">
-        <form id="myFormlogin" action="../backend/giris_bcknd.php" method="post"> 
-            <div class="input-group mb-3">
+        
+        <form id="myFormlogin" action="../backend/giris_bcknd.php" method="post">
+        <div class='icon_container'>
+            <span id='icon_giris'><i class="fas fa-user-circle big-icon"></i></span> 
+        </div>
+            <div >
                 <input type="text" class="form-control" id= "login_ncknm" name="login_kullanici_adi" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-                <span class="icon"><i class="fa fa-user"></i></span>
+                <span class="icon_user"><i class="fa fa-user"></i></span>
             </div>
             <div>
             <input type="password" id= "login_psw" name="login_sifre" placeholder="Password">
-            <span class="icon"><i class="fa fa-lock"></i></span>
+            <span class="icon_password"><i class="fa fa-lock"></i></span>
             </div>
             <button type="submit" id="loginbutton">Giriş Yap</button>
             <div class="register-link">
