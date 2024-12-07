@@ -60,11 +60,11 @@ if(isset($_SESSION['flash_message'])){
             <div id="cikis" class="alert alert-success">
                 <strong>Logout!</strong> Başarıyla Çıkış Yapıldı.
             </div>
-            <div class="hosgeldiniz">
+            <div id="hosgeldiniz" class="box">
             <h3>Hoş Geldiniz <?php echo $_SESSION['isim']." ".$_SESSION['soyisim']; ?>!</h3>
         </div>
         <?php if($role != 'guest'):?>
-        <div class="gunun-menusu">
+        <div id="gunun-menusu" class="box">
             <h3>Bugünün Menü İçeriği:</h3>
             <?php
             foreach ($_SESSION['ogunler'] as $ogun) {
@@ -103,7 +103,7 @@ if(isset($_SESSION['flash_message'])){
         </div>
         <?php endif;?>
         <?php if($role === 'admin'): ?>
-        <div class="yemek-baslat">
+        <div id="yemek-baslat" class="box">
             <h3>Yemek Başlat</h3>
             <?php if ($aktifOgun): ?>
             <p>Şu anki öğün: <strong><?php echo htmlspecialchars($aktifOgun['ogun']); ?></strong></p>
@@ -115,8 +115,8 @@ if(isset($_SESSION['flash_message'])){
             <?php endif; ?>
         </div>
 
-        <div id="overlay" class="overlay">
-            <div class="overlay-content">
+        <div id="overlay">
+            <div id="overlay-content">
                 <h3>Kamera Açılıyor...</h3>
                 <video id="videoElement" width="640" height="480" autoplay></video>
                 <button id="startBtn">Yüz Tanımayı Başlat</button>
@@ -134,7 +134,7 @@ if(isset($_SESSION['flash_message'])){
                 document.getElementById('cikis').style.display = 'block';
                 setTimeout(() => {
                     document.getElementById('cikis').style.display = 'none';
-                }, 2000);
+                }, 2000000);
         }
         };
     </script> 

@@ -29,7 +29,7 @@ include '../backend/uyeler_init_backend.php';
         <div id="icerik">
             <div id="sonuc"></div>
         <div id=iletisim_sayfa>
-            <div id="mesaj_yaz_div">
+            <div id="mesaj_yaz_div" class="box">
                 <span>Öğrencilerinize Mesaj Yazın</span>
                 <hr><br><br>
                 <form action="../backend/iletisim_backend.php" method="post" id="mesaj_gonder">
@@ -48,7 +48,7 @@ include '../backend/uyeler_init_backend.php';
                 <button type="submit">Gönder</button>
                 </form>
             </div>
-            <div id='mesaj_detay'>
+            <div id='mesaj_detay' class="box scrollable">
                 <div id="ogrenci_gozukuyor">
                 <?php
                         echo "<span id='oh_isim'>İsim: ".$row_2['name']."<br>Soyisim: ".$row_2['surname']."</span><br>
@@ -90,7 +90,7 @@ include '../backend/uyeler_init_backend.php';
                     ?>
                 </div>
             </div> 
-            <div id='mesaj_ve_ogrenciler'>
+            <div id='mesaj_ve_ogrenciler' class="box scrollable">
                 <label>
                      <input type="radio" name="mesaj_tipi" value="uyeler" checked> Üyeler
                 </label>
