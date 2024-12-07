@@ -1,33 +1,44 @@
 
-.container {
+.containerr {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
-    justify-content: space-between;
+    row-gap: 0px;
+    column-gap: 0px;
+    justify-content: center;
+    height: 90%;
+    margin-bottom: 5%;
 }
 
-
-.box {
-
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    flex: 1 1 calc(48% - 20px); 
-    max-width: calc(48% - 20px);
+.small-box-container {
+    display: flex;
+    flex-direction: column; /* Alt alta hizala */
+    flex: 1 30%; /* Orta alan */
+    max-height: 100%;
 }
 
-#menu_ekle {
-    flex: 1 1 50%; 
-    max-width: 50%;
+#menu_ekle{
+    flex: 1 30%; 
+    overflow-y: auto;
+    max-height: 95%;
 }
-
-.scrollable {
-    max-height: 500px;
+#yemekhane_bilgileri{
+    flex:1 30%;
+    overflow-y: auto;
+    max-height: 95%;
+}
+#yemekhane_olustur{
+    flex:1;
+}
+#ogrenciler{
+    flex:1 50%;
+    max-height: 50%;
     overflow-y: auto;
 }
-
-
+#istekler{
+    flex:1 50%;
+    max-height: 50%;
+    overflow-y: auto;
+}
 ul {
     list-style: none;
     padding: 0;

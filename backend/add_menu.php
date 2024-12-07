@@ -43,8 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($menu_tarihi) || empty($kategori) || $menu_fiyati <= 0 || empty($yemekhane_id)) {
         die("Lütfen tüm alanları eksiksiz doldurun.");
     }
-    $existing_menu_sql = "SELECT id FROM menu WHERE menu_tarihi = ? AND yemekhane_id = ?";
-    $existing_menu_params = [$menu_tarihi, $yemekhane_id];
+    $existing_menu_sql = "SELECT id FROM menu WHERE menu_tarihi = ? and kategori = ? AND yemekhane_id = ?";
+    $existing_menu_params = [$menu_tarihi,$kategori, $yemekhane_id];
     $existing_menu_stmt = sqlsrv_query($conn, $existing_menu_sql, $existing_menu_params);
     if ($existing_menu_stmt === false) {
         die("Mevcut menü kontrol edilirken bir hata oluştu: " . print_r(sqlsrv_errors(), true));

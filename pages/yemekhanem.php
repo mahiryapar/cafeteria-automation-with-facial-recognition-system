@@ -47,7 +47,8 @@ include '../backend/yemekhanem_backend.php';
             <?php elseif(isset($_GET['message']) && $_GET['message']=="menueklendi"): ?>
                 <?php echo alertver("success","Başarılı","Menü Eklendi.");?>
         <?php endif;?>
-        <div id="icerik" class="container">
+        <div id="icerik">
+            <div id="anakart" class="containerr">
             <?php if ($_SESSION['yemekhane_id'] == 1&&$_SESSION['role'] =="ogrenci"): ?>    
                 <div id="yemekhane_yok" class="box">
                 <h3>Henüz bir yemekhaneye bağlı değilsiniz.</h3>
@@ -158,6 +159,7 @@ include '../backend/yemekhanem_backend.php';
                     </form>
                 </div>
             <?php else: ?>
+            <div class="small-box-container">
             <div id="ogrenciler" class="box">
                 <h4>Bağlı Öğrenciler:</h4>
                 <ul>
@@ -183,7 +185,8 @@ include '../backend/yemekhanem_backend.php';
                     <?php endwhile; ?>
                 </ul>
             </div>
-            <div id="menu_ekle" class="box scrollable">
+            </div>
+            <div id="menu_ekle" class="box">
                 <h4>Yeni Menü Ekle:</h4>
                 <form action="../backend/add_menu.php" method="POST">
                     <?php
@@ -220,6 +223,7 @@ include '../backend/yemekhanem_backend.php';
             </div>
             <?php endif; ?>
             <?php endif; ?>
+            </div>
         </div>
     </div>
     <script src="../js/yemekhanem.js"></script>
