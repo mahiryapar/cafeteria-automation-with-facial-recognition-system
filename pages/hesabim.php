@@ -51,31 +51,33 @@ else{
             <div id='anakart'>
             <div id="hesap_bilgileri" class="box">
                 <h3>Hesap Bilgilerim</h3>
-                <span id="nickname">Kullanıcı Adı: <?php echo $nickname?></span><br>
-                <span id="isim">İsim: <?php echo $isim?></span><br>
-                <span id="soyisim">Soyisim: <?php echo $soyisim?></span><br>
-                <span id="bakiye">Bakiye: <?php echo $bakiye?></span><br>
-                <span id="tel">Telefon Numarası: <?php echo $tel?></span><br>
-                <span id="mail">E-Posta: <?php echo $mail?></span><br>
-                <span id="yemekhane">Yemekhane: <?php echo $yemekhane?></span><br>
-                <span id="rol">Rol: <?php echo $role?></span><br>
-                <span></span><br>
-                <span></span><br>
-            </div>
-        
-        
-            <div id="pp_ayar" class="box">
-            <form action="../backend/upload.php" method="POST" enctype="multipart/form-data">
-                <div class="input-group">
-                    <input type="file" class="form-control" name="profile_photo" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-                     <button class="btn btn-outline-secondary" type="submit" id="inputGroupFileAddon04">Yükle</button>
+                <div id='hesap_bilgileri_icdiv'>
+                    <span id="nickname">Kullanıcı Adı: <?php echo $nickname?></span><br><hr>
+                    <span id="isim">İsim: <?php echo $isim?></span><br><hr>
+                    <span id="soyisim">Soyisim: <?php echo $soyisim?></span><br><hr>
+                    <span id="bakiye">Bakiye: <?php echo $bakiye?></span><br><hr>
+                    <span id="tel">Telefon Numarası: <?php echo $tel?></span><br><hr>
+                    <span id="mail">E-Posta: <?php echo $mail?></span><br><hr>
+                    <span id="yemekhane">Yemekhane: <?php echo $yemekhane?></span><br><hr>
+                    <span id="rol">Rol: <?php echo $role?></span><br>
                 </div>
-            </form>
-            <form action="../backend/remove_pp.php" method="POST" enctype="multipart/form-data">
-                <button type="submit">Profil Fotoğrafını Kaldır</button>
-            </form>
+                <div id="pp_ayar" class="box">
+                <form action="../backend/upload.php" method="POST" enctype="multipart/form-data">
+                    <div class="input-group">
+                        <input type="file" class="form-control" name="profile_photo" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                        <button class="btn btn-outline-secondary" type="submit" id="inputGroupFileAddon04">Yükle</button>
+                    </div>
+                </form>
+                <form action="../backend/remove_pp.php" method="POST" enctype="multipart/form-data">
+                    <button type="submit" id='foto_kaldir_button'>Profil Fotoğrafını Kaldır</button>
+                </form>
+                </div>
             </div>
             </div>
+            
+        
+        
+            
         </div>
     </div>
     <script>

@@ -58,15 +58,16 @@ if(isset($_SESSION['flash_message'])){
         </nav>
         
         <div id="icerik">
-            <div id="cikis" class="alert alert-success">
-                <strong>Logout!</strong> Başarıyla Çıkış Yapıldı.
-            </div>
-            <div id="hosgeldiniz" class="box">
-            <h3>Hoş Geldiniz <?php echo $_SESSION['isim']." ".$_SESSION['soyisim']; ?>!</h3>
+        <div id="cikis" class="alert alert-success">
+            <strong>Logout!</strong> Başarıyla Çıkış Yapıldı.
+        </div>
+        <div class='icine-alan-div'>
+        <div id="hosgeldiniz" class="box">
+        <h3>Hoş Geldiniz <?php echo $_SESSION['isim']." ".$_SESSION['soyisim']; ?>!</h3>
         </div>
         <?php if($role != 'guest'):?>
         <div id="gunun-menusu" class="box">
-            <h3>Bugünün Menü İçeriği:</h3>
+            <h3>Bugünün Menü İçeriği</h3><hr>
             <?php
             foreach ($_SESSION['ogunler'] as $ogun) {
                 if($ogun['ogun'] == "Kahvaltı"){
@@ -92,7 +93,7 @@ if(isset($_SESSION['flash_message'])){
                         if ($now < $ogunsaati->format('H:i:s') && (!$sonrakiOgunBaslangic || $ogunsaati->format('H:i:s') < $sonrakiOgunBaslangic)) {
                             $sonrakiOgunBaslangic = $ogunsaati;
                         }
-                        echo "<p><strong>Servis Saatleri:</strong> " . $ogunsaati->format('H:i') . " - " . $ogunbitissaati->format('H:i') . "</p>";
+                        echo "<p><strong>Servis Saatleri:</strong> " . $ogunsaati->format('H:i') . " - " . $ogunbitissaati->format('H:i') . "</p><hr>";
                     } else {
                         echo "<p><strong>Servis Saatleri:</strong> Geçersiz zaman formatı</p>";
                         echo "<p>Ham Zaman: " . htmlspecialchars($ogunsaatiRaw) . " - " . htmlspecialchars($ogunbitissaatiRaw) . "</p>";
@@ -115,7 +116,7 @@ if(isset($_SESSION['flash_message'])){
             <p>Bugün için başka öğün yok.</p>
             <?php endif; ?>
         </div>
-
+        </div>
         <div id="overlay">
             <div id="overlay-content">
                 <h3>Kamera Açılıyor...</h3>
@@ -125,6 +126,7 @@ if(isset($_SESSION['flash_message'])){
                 <button id="kapatButonu" class="btn btn-danger">Kapat</button>
             </div>
         </div>
+        
         <?php endif; ?>
     </div>
         </div>

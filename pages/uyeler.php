@@ -30,7 +30,7 @@ include '../backend/uyeler_init_backend.php';
             <div id="sonuc"></div>
         <div id=iletisim_sayfa>
             <div id="mesaj_yaz_div" class="box">
-                <span>Öğrencilerinize Mesaj Yazın</span>
+                <span><strong>Öğrencilerinize Mesaj Yazın</strong></span>
                 <hr><br><br>
                 <form action="../backend/iletisim_backend.php" method="post" id="mesaj_gonder">
                 <label for="kategori">Öğrenci Seçin:</label>
