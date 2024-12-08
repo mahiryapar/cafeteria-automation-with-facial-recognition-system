@@ -33,7 +33,9 @@ function php_degeral(value){
         document.getElementById("giris").style.display = "block";
         document.getElementById("myFormlogin").addEventListener("submit", function(event) {
         event.preventDefault(); 
-        
+        if(!giris_kontrol()){
+            return;
+        }
         const formData = new FormData(this);
         fetch("../backend/giris_bcknd.php?giris=1", {
             method: "POST",
@@ -92,6 +94,18 @@ function kayit_kontrol()
         return false;
     }
 
+
+    return true
+}
+function giris_kontrol()
+{
+    const username = document.getElementById("login_ncknm").value.trim();
+    const password = document.getElementById("login_psw").value.trim();
+
+    if (!username || !password) {
+        showAlert("Gerekli alanları doldurunuz.", "danger");
+        return false;
+    }
 
     return true
 }

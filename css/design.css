@@ -11,11 +11,6 @@ span,p,h3,input,button,textarea,h1,h2,h4,h5,h6,li,a,div,select,option{
     height: 100%;
     width: 100%;
     overflow: hidden;
-    background-image: url('../arka_plan_resimler/3.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-color: #b8b3b3;
     position: relative;
     z-index: 1;
     margin: 0px;
@@ -170,3 +165,5 @@ span,p,h3,input,button,textarea,h1,h2,h4,h5,h6,li,a,div,select,option{
     max-height: 500px;
     overflow-y: auto;
 }
+
+
