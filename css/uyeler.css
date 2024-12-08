@@ -54,17 +54,15 @@
   }
 
 
-  #mesajlar_hakkinda_gozukuyor{
+  #mesajlar_hakkinda_gozukuyor, #mesaj_gozukuyor, #ogrenci_gozukuyor{
     display:none;
+    margin-top: 5%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   }
 
-  #ogrenci_gozukuyor{
-    display: none;
-  }
-
-  #mesaj_gozukuyor{
-    display:none;
-  }
 
   #uyeler_listesi{
     display:block;
