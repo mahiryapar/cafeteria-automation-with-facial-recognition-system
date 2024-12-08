@@ -1,0 +1,52 @@
+#icerik{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-image: url('../arka_plan_resimler/sade_background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #b8b3b3;
+    position: relative;
+    z-index: 1;
+    margin: 0px;
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin: 20px;
+    padding-left: 20px;
+    font-weight:600;
+}
+
+
+.calendar-day {
+    padding: 10px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    margin:5px;
+}
+.calendar-day:hover {
+    transform: scale(1.10,1.10);
+    background-color: #e9ecef;
+}
+.today{
+    border: 2px solid #b39e25;
+}
+.today:hover{
+    background-color: #00ec08;
+    font-weight: bold;
+}
+
+.container{
+    margin-top: 100px;
+    display: none;
+}
+
+#warn{
+    display: none;
+}

@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         document.getElementById('warn').style.display = 'block';
     }
     else{
-        document.querySelector('.container').style.display = 'block';
+        document.querySelector('.containerr').style.display = 'block';
     }
     var ogunSecenekleri = document.querySelectorAll('.meal-option');
     var alinanMenuler = alinan_menuler;
@@ -56,7 +56,7 @@ document.getElementById("ogun_al").addEventListener("submit", function(event) {
 
 for (let i = 1; i < (firstDayOfWeek === 0 ? 7 : firstDayOfWeek); i++) {
     const emptyDiv = document.createElement('div');
-    emptyDiv.className = 'calendar-day empty';
+    emptyDiv.className = 'calendar-day empty box';
     calendar.appendChild(emptyDiv);
 }
 
