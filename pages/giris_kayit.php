@@ -34,7 +34,7 @@ if(isset($_GET['giris'])){
                 <li class="liler" id="signin"><a class="linkler" href="giris_kayit.php?giris=0">Kaydol</a></li>
         </nav>
         <div id="icerik">
-        <div id="sonuc"></div> 
+        <div id="sonuc" class="ab"></div> 
         <div id= "giris">
         
         <form id="myFormlogin" action="../backend/giris_bcknd.php" method="post">

@@ -1,14 +1,14 @@
 <?php
 function alertver($type,$about_mesaj,$mesaj){
-    return "<div id='alertdiv' class='alert alert-$type'>
+    return "<div id='sonuc'><div id='cikis' class='alert alert-$type'>
                 <strong>$about_mesaj!</strong> $mesaj
                 <script>
                     setTimeout(() => {
-                        document.getElementById('alertdiv').style.display = 'none';
+                        document.getElementById('sonuc').style.display = 'none';
                         window.location.href = 'yemekhanem.php';
                     }, 2000);    
                 </script>
-            </div>";
+            </div></div>";
 }
         
         $connection_alert;

@@ -252,3 +252,25 @@ span,p,h3,input,button,textarea,h1,h2,h4,h5,h6,li,a,div,select,option{
 }
 
 
+#sonuc{
+    justify-content: center;
+    position: fixed;
+    display: grid;  
+    place-items: center;
+    transition: all 0.5s ease; 
+}
+
+#cikis {
+    margin-top: 10vh;
+    position: fixed; 
+    top: 20px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    z-index: 100;
+    width: 90%; 
+    max-width: 400px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
+    transition: all 0.5s ease; 
+}
+
+

@@ -101,7 +101,6 @@ function giris_kontrol()
 {
     const username = document.getElementById("login_ncknm").value.trim();
     const password = document.getElementById("login_psw").value.trim();
-
     if (!username || !password) {
         showAlert("Gerekli alanları doldurunuz.", "danger");
         return false;
@@ -111,10 +110,11 @@ function giris_kontrol()
 }
 function showAlert(message, type = "success") {
     const alertDiv = document.getElementById("sonuc");
-    alertDiv.className = `alert alert-${type}`;
-    alertDiv.innerHTML = `<strong>${type === "success" ? "Başarılı" : "Hata!"}</strong> ${message}`;
+    alertDiv.innerHTML = `<div id='cikis' class='alert alert-${type}'><strong>${type === "success" ? "Başarılı" : "Hata!"}</strong> ${message}</div>`;
     alertDiv.style.display = "block";
     setTimeout(() => {
+        alertDiv.className = "";
+        alertDiv.innerHTML = "";
         alertDiv.style.display = "none";
     }, 5000);
 }
