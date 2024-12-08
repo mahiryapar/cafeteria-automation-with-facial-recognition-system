@@ -213,13 +213,13 @@
     background-color: rgba(255, 255, 255, 0.8);
     transition: 0.1s ease-in-out;
 }
-/* Submit butonları */
  #loginbutton {
     height: 4vh;
     width: 10vw;
     min-width: 80px;
     min-height: 35px;
     padding: 9px;
+    padding-top: 6px;
     margin: 11px auto;
     justify-content: center;
     display: flex;
