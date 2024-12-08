@@ -50,15 +50,17 @@ include '../backend/uyeler_init_backend.php';
             </div>
             <div id='mesaj_detay' class="box scrollable">
                 <div id="ogrenci_gozukuyor">
+                <h3>Kullanıcı Bilgileri</h2><hr>
                 <?php
-                        echo "<span id='oh_isim'>İsim: ".$row_2['name']."<br>Soyisim: ".$row_2['surname']."</span><br>
-                        <span id='oh_nickname'>Kullanıcı Adı: ".$row_2['nickname']."</span><br>
-                        <span id='oh_mail'>E-Posta: ".$row_2['mail']."</span><br>
-                        <span id='oh_tel'>Telefon Numarası: ".$row_2['phonenum']."</span><br>
+                        echo "<span id='oh_isim'>İsim: ".$row_2['name']."<br><hr>Soyisim: ".$row_2['surname']."</span><br><hr>
+                        <span id='oh_nickname'>Kullanıcı Adı: ".$row_2['nickname']."</span><br><hr>
+                        <span id='oh_mail'>E-Posta: ".$row_2['mail']."</span><br><hr>
+                        <span id='oh_tel'>Telefon Numarası: ".$row_2['phonenum']."</span><br><hr>
                         <span id='oh_bakiye'>Bakiye: ".$row_2['moneyy']."</span><br>";    
                     ?>
                 </div>
                 <div id="mesaj_gozukuyor">
+                <h3>Mail Bilgileri</h3><hr>
                     <?php 
                     if($_SESSION['gelgit']==0){
                         $prefix = 'Yazan';
@@ -66,10 +68,9 @@ include '../backend/uyeler_init_backend.php';
                     else{
                         $prefix = 'Alıcı';
                     }
-                    echo "<span id='mh_kimden'>".$prefix.": ".$row_2['name']." ".$row_2['surname']."</span><br>
-                                  <span id='mh_konu'>Konu: ".$row_2['konu']."</span><br>
-                                  <span id='mh_mesaj'>Mesaj: ".$row_2['mesaj']."</span><br>";
-
+                    echo "<span id='mh_kimden'>".$prefix.": ".$row_2['name']." ".$row_2['surname']."</span><br><hr>
+                                  <span id='mh_konu'>Konu: ".$row_2['konu']."</span><br><hr>
+                                  <span id='mh_mesaj'>Mesaj: ".$row_2['mesaj']."</span><br><hr>";
                     ?>
                     <?php
                     if (isset($row_2['mesaj_saati']) && $row_2['mesaj_saati'] instanceof DateTime) {

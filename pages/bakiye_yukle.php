@@ -8,6 +8,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bakiye Yükle</title>
     <link rel="stylesheet" href="../css/design.css">
+    <link rel="stylesheet" href="../css/bakiye_yukle.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
@@ -26,16 +27,17 @@ session_start();
 
         </nav>
         <div id="icerik">
-            <div id="sonuc"></div> 
+            <div id="sonuc"></div>
+            <div id='bakiye_yuklediv' class='box'>
             <span id="mevcut_bakiye">Şu anki bakiyeniz: <?php include '../backend/bakiye_bilgisi_cek.php'?></span>
             <form id="para_yukle_form" action="../backend/bakiye_yukle_backend.php" method="post"><br>
-                <input type="number" id="kart_no" name="kart_no" placeholder="kart numarası"><br>
-                <input type="text"   id="skt" name="skt" placeholder="son kullanma tarihi"><br>
-                <input type="number" id="cvv" name="cvv" placeholder="cvv kodu"><br>
-                <input type="number" id="bakiye" name="bakiye"placeholder="yüklemek istediğin bakiye"><br>
+                <input type="number" id="kart_no" name="kart_no" placeholder="Kart Numarası"><br>
+                <input type="month"   id="skt" name="skt" placeholder="Son Kullanma Tarihi" min="2024-12" max="2035-12" ><br>
+                <input type="number" id="cvv" name="cvv" placeholder="CVV Numarası"><br>
+                <input type="number" id="bakiye" name="bakiye"placeholder="Yüklemek İstediğin Bakiye"><br>
                 <button type="submit">Para Yükle</button><br>
             </form>
-
+            </div> 
         </div>
     </div>
     <script src="../js/bakiye_yukle.js"></script>

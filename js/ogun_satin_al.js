@@ -65,7 +65,7 @@ for (let i = 0; i < 30; i++) {
     day.setDate(today.getDate() + i);
 
     const dayElement = document.createElement('div');
-    dayElement.className = 'calendar-day';
+    dayElement.className = 'calendar-day box';
     if (i === 0) dayElement.classList.add('today');
     dayElement.textContent = `${day.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long' })}\n${day.toLocaleDateString('tr-TR', {weekday: 'long'})}`;
 
