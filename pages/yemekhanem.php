@@ -68,7 +68,7 @@ include '../backend/yemekhanem_backend.php';
                                 <?php endforeach; ?>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary mt-3">Katıl</button>
+                        <button type="submit" id="menuekle_button" class="btn btn-primary mt-3">Katıl</button>
                     </form>
                 <?php endif; ?>
             </div>
@@ -95,7 +95,7 @@ include '../backend/yemekhanem_backend.php';
                                     <strong>Öğün:</strong> <?php echo htmlspecialchars($ogun['ogun']); ?><br>
                                     <strong>Başlangıç Saati:</strong> <?php echo $ogunsaati->format('H:i'); ?><br>
                                     <strong>Bitiş Saati:</strong> <?php echo $ogunbitissaati->format('H:i'); ?><br>
-                                </li>
+                                </li><hr>
                             <?php endforeach; ?>
                         </ul>
                     <?php else: ?>
@@ -155,19 +155,19 @@ include '../backend/yemekhanem_backend.php';
                                 <input type="time" id="aksam_bitis" name="ogunler[Akşam Yemeği][bitis]">
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary mt-4">Yemekhane Oluştur</button>
+                        <button type="submit" id="menuekle_button" class="btn btn-primary mt-4">Yemekhane Oluştur</button>
                     </form>
                 </div>
             <?php else: ?>
             <div class="small-box-container">
             <div id="ogrenciler" class="box">
                 <h4>Bağlı Öğrenciler:</h4>
-                <ul>
+                <ul id="ogrenciler_ul">
                     <?php
                     while ($ogrenci = sqlsrv_fetch_array($stmt_ogrenci, SQLSRV_FETCH_ASSOC)): ?>
                         <li>
-                            <?php echo $ogrenci['name']; ?> - <?php echo $ogrenci['surname']; ?> 
-                            - - <button
+                            <?php echo $ogrenci['name']; ?>  <?php echo $ogrenci['surname']; ?> 
+                             <button
                                 class="remove-button" 
                                 onclick="return confirm('Bu öğrenciyi yemekhaneden kaldırmak istediğinize emin misiniz?') ? window.location.href='../backend/remove_student.php?user_id=<?php echo $ogrenci['id']; ?>' : false;">
                                 Kaldır
@@ -178,13 +178,23 @@ include '../backend/yemekhanem_backend.php';
             </div>
             <div id="istekler" class="box">
                 <h4>Katılma İstekleri:</h4>
-                <ul>
+                <ul id="istekler_ul">
                     <?php
                     while ($istek = sqlsrv_fetch_array($stmt_istek, SQLSRV_FETCH_ASSOC)): ?>
-                        <li>
+                        <li id="istek-li">
                             <?php echo $istek['name']." ".$istek['surname'] ?> 
-                            - <a href="../backend/approve_request.php?id=<?php echo $istek['id']; ?>">Onayla</a>
-                            - <a href="../backend/reject_request.php?id=<?php echo $istek['id']; ?>">Reddet</a>
+                            <div id="istek_butonlar">
+                            <button
+                                class="approve-button" 
+                                onclick="window.location.href='../backend/approve_request.php?id=<?php echo $istek['id']; ?>';">
+                                Kabul Et
+                                </button>
+                             <button
+                                class="remove-button" 
+                                onclick="window.location.href='../backend/reject_request.php?id=<?php echo $istek['id']; ?>';">
+                                Reddet
+                                </button>
+                            </div>
                         </li>
                     <?php endwhile; ?>
                 </ul>

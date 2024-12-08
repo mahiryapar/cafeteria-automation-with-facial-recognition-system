@@ -53,30 +53,50 @@
     max-height: 50%;
     overflow-y: auto;
 }
-ul {
+#ogrenciler_ul {
     list-style: none;
     padding: 0;
 }
 
-ul li:not(.liler,.prfl) {
+#istekler_ul {
+    list-style: none;
+    padding: 0;
+}
+
+#ogrenciler_ul li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 5px 0;
     border-bottom: 1px solid #ddd;
 }
 
-
-button {
-    display: inline-block;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 15px;
-    cursor: pointer;
+#istek_butonlar {
+    display: flex; /* Flex düzeni */
+    justify-content: flex-start; /* Butonları sola hizalar */
+    gap: 0.80vw; /* Butonlar arasında boşluk */
+    margin-top: 5px; /* Üstten hafif boşluk */
+    align-items: center; /* Yatayda hizalar */
 }
 
-button:hover {
-    background-color: #0056b3;
+#istek_butonlar button{
+    padding: 0;
+    margin:0;
 }
+
+select{
+    transition: all 0.3s ease;  
+}
+
+
+#istekler_ul li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid #ddd;
+}
+
 
 #menuekle_button{
     width: 10vw;
@@ -85,16 +105,19 @@ button:hover {
     display: block;
     margin: 10px auto;
     padding: 10px 20px;
-    background-color: #195787;
+    background-color: #195787c4;
     color: #fff;
-    border: 2px solid #282929d5;
-    border-radius: 20px;
+    border: 1px solid #282929d5;
+    border-radius: 10px;
     font-size: 1vw;
     cursor: pointer;
+    box-shadow: 0px 2px 2px 0px #282929d5;
     transition: all 0.3s ease;
     text-align: center;
 }
 #menuekle_button:hover{
     color: white;
-    transform: scale(1.1);
+    border-radius: 20px;
+    transform: scale(0.96);
+    background-color: #195787;
 }

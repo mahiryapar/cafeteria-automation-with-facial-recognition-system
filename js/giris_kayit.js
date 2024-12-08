@@ -69,9 +69,9 @@ function kayit_kontrol()
         showAlert("Gerekli alanları doldurunuz.", "danger");
         return false;
     }
-    const nameRegex = /^[a-zA-ZığüşöçİĞÜŞÖÇ]+$/;
+    const nameRegex = /^[a-zA-ZığüşöçİĞÜŞÖÇ\s]+$/;
     if (!nameRegex.test(name) || !nameRegex.test(surname)) {
-        showAlert("İsim ve soyisim sadece harf içermelidir.", "danger");
+        showAlert("İsim ve soyisim sadece harf ve boşluk içermelidir.", "danger");
         return false;
     }
     const usernameRegex = /^(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9_]+$/;
