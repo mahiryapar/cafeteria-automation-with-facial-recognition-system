@@ -44,8 +44,8 @@ include '../backend/uyeler_init_backend.php';
                     ?>
                 </select><br><br>
                 <input type="text" id="konu" name="konu" placeholder="Konu"><br><br>
-                <textarea id="mesaj" name="mesaj" placeholder="Mesajınızı buraya yazın" rows="5" cols="50"></textarea>
-                <button type="submit">Gönder</button>
+                <textarea id="mesaj" name="mesaj" placeholder="Mesajınızı buraya yazın" rows="5" cols="40"></textarea>
+                <button id='gonder_button' type="submit">Gönder</button>
                 </form>
             </div>
             <div id='mesaj_detay' class="box scrollable">

@@ -1,3 +1,17 @@
+#icerik{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-image: url('../arka_plan_resimler/sade_background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #b8b3b3;
+    position: relative;
+    z-index: 1;
+    margin: 0px;
+}
+
 .calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);

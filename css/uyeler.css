@@ -1,6 +1,44 @@
+#icerik{
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background-image: url('../arka_plan_resimler/sade_background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #b8b3b3;
+  position: relative;
+  z-index: 1;
+  margin: 0px;
+}
+
 #mesaj{
     width: 20vw;
     height: 20vh;
+    justify-content: center;
+    resize: nonex;
+}
+
+#gonder_button {
+  width: 8vw;
+  height: 5vh;
+  min-height: 40px;
+  min-width: 80px;
+  display: block;
+  margin: 10px auto;
+  padding: 10px 20px;
+  background-color: #195787;
+  color: #fff;
+  border: 2px solid #282929d5;
+  border-radius: 20px;
+  font-size: 1vw;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#gonder_button:hover {
+  color: white;
+  transform: scale(1.1);
 }
 
 #iletisim_sayfa{

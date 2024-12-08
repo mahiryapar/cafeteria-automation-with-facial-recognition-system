@@ -167,7 +167,11 @@ include '../backend/yemekhanem_backend.php';
                     while ($ogrenci = sqlsrv_fetch_array($stmt_ogrenci, SQLSRV_FETCH_ASSOC)): ?>
                         <li>
                             <?php echo $ogrenci['name']; ?> - <?php echo $ogrenci['surname']; ?> 
-                            - <a href="../backend/remove_student.php?user_id=<?php echo $ogrenci['id']; ?>" onclick="return confirm('Bu öğrenciyi yemekhaneden kaldırmak istediğinize emin misiniz?');">Kaldır</a>
+                            - - <button
+                                class="remove-button" 
+                                onclick="return confirm('Bu öğrenciyi yemekhaneden kaldırmak istediğinize emin misiniz?') ? window.location.href='../backend/remove_student.php?user_id=<?php echo $ogrenci['id']; ?>' : false;">
+                                Kaldır
+                                </button>
                         </li>
                     <?php endwhile; ?>
                 </ul>
@@ -218,7 +222,7 @@ include '../backend/yemekhanem_backend.php';
                     </div>
                     <div id="yemek_secenekleri">
                     </div>
-                    <button type="submit" class="btn btn-primary mt-3">Menüyü Ekle</button>
+                    <button type="submit" id='menuekle_button' class="btn btn-primary mt-3">Menüyü Ekle</button>
                 </form>
             </div>
             <?php endif; ?>

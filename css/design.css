@@ -153,10 +153,10 @@ span,p,h3,input,button,textarea,h1,h2,h4,h5,h6,li,a,div,select,option{
     padding: 20px;
     position: relative;
     z-index: 2;
-    border: 2px solid #41494e; /* Eski renk :2b2c2a*/
+    border: 2px solid #41494e;
     border-radius: 20px 20px 20px 20px;
     box-shadow: 0px 10px 10px 0px;
-    backdrop-filter: blur(3px); /* Bulanıklaştırma efekti */
+    backdrop-filter: blur(3px);
     background: rgba(79, 113, 133, 0.3);
 }
 
@@ -164,6 +164,25 @@ span,p,h3,input,button,textarea,h1,h2,h4,h5,h6,li,a,div,select,option{
 .scrollable {
     max-height: 500px;
     overflow-y: auto;
+}
+.remove-button {
+    display: inline-block;
+    background-color: #b81414;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: 1px solid #282929d5;    
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+
+.remove-button:hover {
+    transform: scale(1.2);
+    background-color: #7a2a2a;
+    border-radius: 20px;
 }
 
 
