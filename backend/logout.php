@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(isset($_SESSION['nickname'])){
-    $_SESSION['nickname'] = "default_pp";
+    unset($_SESSION['nickname']);
     $_SESSION['role'] = "guest";
     $_SESSION['flash_message'] = "Başarıyla çıkış yaptınız!";
     unset($_SESSION['suanki_mesaj']);
