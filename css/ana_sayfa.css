@@ -44,6 +44,74 @@ video {
     z-index: 3;
 }
 
+.icine-alan-div{
+    position: absolute;
+    justify-content: center;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    width: 40vw;
+    height: 85vh; 
+    left: 30%;
+    border: 2px solid #11435e;
+    border-radius: 15px;
+    margin-top: 8vh;
+    min-width: 600px;
+    min-height: 350px;
+}
 
 
+#hosgeldiniz{
+    position: relative;
+    justify-content: center;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    width: 20vw;
+    height: 8vh;  
+    left: 22%;
+    min-width: 200px;
+    min-height: 70px;
+}
 
+#gunun-menusu{
+    position: relative;
+    justify-content: center;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    width: 30vw;
+    height: 69vh;
+    left: 10%;
+    min-width: 350px;
+    min-height: 400px;
+    overflow-y: scroll;  
+}
+
+#yemek-baslat{
+    position: relative;
+    justify-content: center;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    width: 13vw;
+    height: 19.5vh;
+    left: 28%;
+    min-width: 230px;
+    min-height: 150px;  
+}
+
+#yemekBaslatButonu{
+    width: 7vw;
+    height: 2vh;
+    min-width: 120px;
+    min-height: 50px;
+    margin-left: 3vh;
+    margin-bottom: 1.1vh;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+#yemekBaslatButonu:hover{
+    border-radius: 25px;
+    transform: scale(1.15);
+}

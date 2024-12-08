@@ -12,11 +12,43 @@
   margin: 0px;
 }
 
+#konu{
+  width: 20vw;
+  height: 5vh;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transition: 0.2s ease-in-out;
+  outline: none;
+}
+
+#konu:hover{
+  border-radius: 14px;
+  transform: scale(1.05);
+}
+#konu:focus{
+  border: 3px solid rgba(25, 94, 134, 0.5);
+  border-color: #195787;
+}
+
 #mesaj{
     width: 20vw;
     height: 20vh;
+    border-radius: 5px;
     justify-content: center;
-    resize: nonex;
+    border: 2px;
+    resize: none;
+    transition: 0.2s ease-in-out;
+    outline: none;
+}
+
+#mesaj:hover{
+  border-radius: 14px;
+  border-color: #195787;
+  border: 3px solid rgba(25, 94, 134, 0.5);
+  transform: scale(1.05);
+}
+#mesaj:focus{
+  border: 3px solid rgba(25, 94, 134, 0.5);
 }
 
 #gonder_button {
