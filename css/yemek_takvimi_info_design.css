@@ -1,34 +1,123 @@
 #yemekler {
-    margin-top:3vh;
+    margin-top:6vh;
     display: flex; 
     justify-content: space-between; 
     gap: 10px; 
+    height: 90%;
   }
   
+
+.yemek_div{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 95%;
+}
+
+
+
+#tarih{
+  margin-top: 2vh;
+  margin-left: 2vw;
+  position: absolute;
+  font-size: 1.5vw;
+  font-weight: bold;
+  text-align: right;
+}
+
+
+.yemek_yazi{
+  margin-top:5vh;
+  margin-bottom:5vh;
+  width: 20vw;
+  max-width: 45%;
+}
+
+.yorumlar_li {
+  display: flex;
+  flex-direction: column; 
+  justify-content: left;
+  align-items: flex-start; 
+  padding: 10px;
+  border: 2px solid #4f7185;
+  border-radius: 15px;
+  background: rgba(79, 113, 133, 0.3);
+  margin: 10px;
+  word-wrap: break-word;
+  word-break: break-all; 
+  width: 100%; 
+  max-width: 100%; 
+}
+
+#yorum_gonder {
+  width: 11vw;
+  height: 4vh;
+  display: block;
+  margin: 10px auto;
+  margin-left: 0.8vw;
+  margin-top: -4vh;
+  background-color: #195787c4;
+  color: #fff;
+  border: 1px solid #282929d5;
+  border-radius: 10px;
+  font-size: 0.8vw;
+  cursor: pointer;
+  box-shadow: 0px 2px 2px 0px #282929d5;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+#yorum_gonder:hover{
+  color: white;
+  border-radius: 20px;
+  transform: scale(0.96);
+  background-color: #195787;
+}
+
+#yorum_input{
+  width: 20vw;
+  height: 15vh;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  border: 2px solid #4f7185;
+  border-radius: 30px;
+  padding: 10px;
+  font-size: 0.8vw;
+  resize: none;
+}
+
   #yemekler #kahvalti,#ogle,#aksam {
     display: none;
-    flex: 1; 
     text-align: center; 
-    padding: 10px;
-    border: 1px solid #ccc; 
-    background-color: #f9f9f9; 
     margin-bottom: 10vh;
+    overflow-y: scroll;
+    text-align: left;
+    width: 50vw;
   }
   .yemekimgdiv{
-    height: 12vh;
-    width: 12vw;
+    height: 16vh;
+    width: 30%;
     overflow: hidden;
-    display: flex;
+    display:block;
+    position: absolute;
     justify-content: center;
     align-items: center;
+    margin-left: 60%;
+    border: 2px solid #4f7185;
+    border-radius: 30px;
+    box-shadow: 0px 2px 2px 0px;
+    transition: 0.3s ease-in-out;
   }
 
-  .yemekimg{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
+.yemekimgdiv:hover {
+  transform: scale(1.3);
+  transform-origin: right center;
+}
+
+.yemekimg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
   img:not([src]){
     visibility: hidden;
   }

@@ -36,40 +36,41 @@ include '../backend/yemek_takvimi_info_init_backend.php';
         <div id="icerik">
             <div id="sonuc"></div>
             <span id="warn">Şu anda bir yemekhaneye kayıtlı değilsiniz.</span>
-            <span>Tarih: <?php echo $date?></span>
+            <div id="tarih"><span>Tarih: <?php echo $date?></span></div>
             <div id="yemekler">
-            <div id="kahvalti">
-                <span>Kahvaltı:<br> </span>
-                <span>
+            <div id="kahvalti" class="box">
+                <h5><strong>Kahvaltı</strong><br><hr> </h5>
+                <div class="yemek_div">
+                <span class="yemek_yazi">
                     Ana yemek: <?php echo !empty($kahvalti_ana_yemek) ? $kahvalti_ana_yemek : "Yok"; ?><br> 
                     Açıklama: <?php echo !empty($kahvalti_ana_yemek_aciklama) ? $kahvalti_ana_yemek_aciklama : "Yok"; ?><br>
                 </span>
                 <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$kahvalti_ana_yemek] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
-                <span>
+                </div><hr><div class="yemek_div"><span class="yemek_yazi">
                     Kahvaltılık 1: <?php echo !empty($kahvalti_ara_sicak) ? $kahvalti_ara_sicak : "Yok"; ?><br>
                     Açıklama: <?php echo !empty($kahvalti_ara_sicak_aciklama) ? $kahvalti_ara_sicak_aciklama : "Yok"; ?><br>
                 </span>
                 <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$kahvalti_ara_sicak] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
-                <span>
+                </div><hr><div class="yemek_div"><span class="yemek_yazi">
                     Kahvaltılık 2: <?php echo !empty($kahvalti_corba) ? $kahvalti_corba : "Yok"; ?><br>
                     Açıklama: <?php echo !empty($kahvalti_corba_aciklama) ? $kahvalti_corba_aciklama : "Yok"; ?><br>
                 </span>
                 <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$kahvalti_corba] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
-                <span>
+                </div><hr><div class="yemek_div"><span class="yemek_yazi">
                     Kahvaltılık 3: <?php echo !empty($kahvalti_tatli) ? $kahvalti_tatli : "Yok"; ?><br>
                     Açıklama: <?php echo !empty($kahvalti_tatli_aciklama) ? $kahvalti_tatli_aciklama : "Yok"; ?><br>
                 </span>
                 <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$kahvalti_tatli] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
-                <span>
+                </div><hr><div class="yemek_div"><span class="yemek_yazi">
                     İçecek: <?php echo !empty($kahvalti_icecek) ? $kahvalti_icecek : "Yok"; ?><br>
                     Açıklama: <?php echo !empty($kahvalti_icecek_aciklama) ? $kahvalti_icecek_aciklama : "Yok"; ?><br>
                 </span>
                 <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$kahvalti_icecek] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
-                <div class="yorum_yaz">
+                </div><hr><div class="yorum_yaz">
                     <form id="kahvalti_yorum_yaz" action="../backend/yorum_ekle.php" method="post">
                     <input type="hidden" name="form_id" value="kahvalti_yorum_yaz">
                     <textarea id="yorum_input" name="yazilan_yorum" placeholder="Yorumunuzu yazın.." rows="5" cols="50"></textarea>
-                        <button type="submit">Yorumu gönder</button>
+                        <button type="submit" id="yorum_gonder">Yorumu gönder</button>
                     </form>
                 </div>
                 <div class="yorumlar">
@@ -79,7 +80,7 @@ include '../backend/yemek_takvimi_info_init_backend.php';
                     $kahvalti_yorumlar = yorumlariGetir($_SESSION['kahvalti_menu_id'], $conn); 
                     if (!empty($kahvalti_yorumlar)) {
                         foreach ($kahvalti_yorumlar as $yorum) {
-                            echo "<li class='yorumlar_li'><b>{$yorum['sahibi_nickname']}:</b> {$yorum['yorum']}</p>";
+                            echo "<li class='yorumlar_li'><b>@{$yorum['sahibi_nickname']}</b>{$yorum['yorum']}</p>";
                         }
                     } else {
                         echo "<p>Henüz yorum yok.</p>";
@@ -87,38 +88,38 @@ include '../backend/yemek_takvimi_info_init_backend.php';
                     ?>
                 </div>
             </div>
-            <div id="ogle">
-                <span>Öğle Yemeği: <br> </span>
-                <span>
+            <div id="ogle" class="box">
+                <h5><strong>Öğle Yemeği</strong><br><hr> </h5>
+                <div class="yemek_div"><span class="yemek_yazi">
                     Ana yemek: <?php echo !empty($ogle_yemegi_ana_yemek) ? $ogle_yemegi_ana_yemek : "Yok"; ?><br>
                     Açıklama: <?php echo !empty($ogle_yemegi_ana_yemek_aciklama) ? $ogle_yemegi_ana_yemek_aciklama : "Yok"; ?><br>
                 </span>
                 <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$ogle_yemegi_ana_yemek] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
-                <span>
+                </div><hr><div class="yemek_div"><span class="yemek_yazi">
                     Ara sıcak: <?php echo !empty($ogle_yemegi_ara_sicak) ? $ogle_yemegi_ara_sicak : "Yok"; ?><br>
                     Açıklama: <?php echo !empty($ogle_yemegi_ara_sicak_aciklama) ? $ogle_yemegi_ara_sicak_aciklama : "Yok"; ?><br>
                 </span>
                 <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$ogle_yemegi_ara_sicak] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
-                <span>
+                </div><hr><div class="yemek_div"> <span class="yemek_yazi">
                     Çorba: <?php echo !empty($ogle_yemegi_corba) ? $ogle_yemegi_corba : "Yok"; ?><br>
                     Açıklama: <?php echo !empty($ogle_yemegi_corba_aciklama) ? $ogle_yemegi_corba_aciklama : "Yok"; ?><br>
                 </span>
                 <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$ogle_yemegi_corba] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
-                <span>
+                </div><hr><div class="yemek_div"><span class="yemek_yazi">
                     Tatlı: <?php echo !empty($ogle_yemegi_tatli) ? $ogle_yemegi_tatli : "Yok"; ?><br>
                     Açıklama: <?php echo !empty($ogle_yemegi_tatli_aciklama) ? $ogle_yemegi_tatli_aciklama : "Yok"; ?><br>
                 </span>
                 <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$ogle_yemegi_tatli] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
-                <span>
+                </div><hr><div class="yemek_div"><span class="yemek_yazi">
                     İçecek: <?php echo !empty($ogle_yemegi_icecek) ? $ogle_yemegi_icecek : "Yok"; ?><br>
                     Açıklama: <?php echo !empty($ogle_yemegi_icecek_aciklama) ? $ogle_yemegi_icecek_aciklama : "Yok"; ?><br>
                 </span>
                 <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$ogle_yemegi_icecek] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
-                <div class="yorum_yaz">
+                </div><hr><div class="yorum_yaz">
                     <form id="ogle_yorum_yaz" action="../backend/yorum_ekle.php" method="post">
                     <input type="hidden" name="form_id" value="ogle_yorum_yaz">
                     <textarea id="yorum_input" name="yazilan_yorum" placeholder="Yorumunuzu yazın.." rows="5" cols="50"></textarea>
-                        <button type="submit">Yorumu gönder</button>
+                        <button type="submit" id="yorum_gonder">Yorumu gönder</button>
                     </form>
                 </div>
                 <div class="yorumlar">
@@ -128,7 +129,7 @@ include '../backend/yemek_takvimi_info_init_backend.php';
                     $ogle_yorumlar = yorumlariGetir($_SESSION['ogle_yemegi_menu_id'], $conn); 
                     if (!empty($ogle_yorumlar)) {
                         foreach ($ogle_yorumlar as $yorum) {
-                            echo "<li class='yorumlar_li'><b>{$yorum['sahibi_nickname']}:</b> {$yorum['yorum']}</li>";
+                            echo "<li class='yorumlar_li'><b>@{$yorum['sahibi_nickname']} </b>{$yorum['yorum']}</li>";
                         }
                     } else {
                         echo "<p>Henüz yorum yok.</p>";
@@ -136,38 +137,38 @@ include '../backend/yemek_takvimi_info_init_backend.php';
                     ?>
                 </div>
             </div>
-            <div id="aksam">
-                <span>Akşam Yemeği: <br> </span>
-                <span>
+            <div id="aksam" class="box">
+                <h5><strong>Akşam Yemeği</strong><br><hr> </h5>
+                <div class="yemek_div"><span class="yemek_yazi">
                     Ana yemek: <?php echo !empty($aksam_yemegi_ana_yemek) ? $aksam_yemegi_ana_yemek : "Yok"; ?><br>
                     Açıklama: <?php echo !empty($aksam_yemegi_ana_yemek_aciklama) ? $aksam_yemegi_ana_yemek_aciklama : "Yok"; ?><br>
                 </span>
                 <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$aksam_yemegi_ana_yemek]?>" alt="" onerror="this.style.visibility='hidden';"></div>
-                <span>
+                </div><hr><div class="yemek_div"><span class="yemek_yazi">
                     Ara sıcak: <?php echo !empty($aksam_yemegi_ara_sicak) ? $aksam_yemegi_ara_sicak : "Yok"; ?><br>
                     Açıklama: <?php echo !empty($aksam_yemegi_ara_sicak_aciklama) ? $aksam_yemegi_ara_sicak_aciklama : "Yok"; ?><br>
                 </span>
                 <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$aksam_yemegi_ara_sicak] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
-                <span>
+                </div><hr><div class="yemek_div"><span class="yemek_yazi">
                     Çorba: <?php echo !empty($aksam_yemegi_corba) ? $aksam_yemegi_corba : "Yok"; ?><br>
                     Açıklama: <?php echo !empty($aksam_yemegi_corba_aciklama) ? $aksam_yemegi_corba_aciklama : "Yok"; ?><br>
                 </span>
                 <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$aksam_yemegi_corba] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
-                <span>
+                </div><hr><div class="yemek_div"><span class="yemek_yazi">
                     Tatlı: <?php echo !empty($aksam_yemegi_tatli) ? $aksam_yemegi_tatli : "Yok"; ?><br>
                     Açıklama: <?php echo !empty($aksam_yemegi_tatli_aciklama) ? $aksam_yemegi_tatli_aciklama : "Yok"; ?><br>
                 </span>
                 <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$aksam_yemegi_tatli] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
-                <span>
+                </div><hr><div class="yemek_div"><span class="yemek_yazi">
                     İçecek: <?php echo !empty($aksam_yemegi_icecek) ? $aksam_yemegi_icecek : "Yok"; ?><br>
                     Açıklama: <?php echo !empty($aksam_yemegi_icecek_aciklama) ? $aksam_yemegi_icecek_aciklama : "Yok"; ?><br>
                 </span>
                 <div class="yemekimgdiv" ><img class="yemekimg" src="<?php echo $resimler[$aksam_yemegi_icecek] ?>" alt="" onerror="this.style.visibility='hidden';"></div>
-                <div class="yorum_yaz">
+                </div><hr><div class="yorum_yaz">
                     <form id="aksam_yorum_yaz" action="../backend/yorum_ekle.php" method="post">
                     <input type="hidden" name="form_id" value="aksam_yorum_yaz">    
                     <textarea id="yorum_input" name="yazilan_yorum" placeholder="Yorumunuzu yazın.." rows="5" cols="50"></textarea>
-                        <button type="submit">Yorumu gönder</button>
+                        <button type="submit" id="yorum_gonder">Yorumu gönder</button>
                     </form>
                 </div>
                 <div class="yorumlar">
@@ -177,7 +178,7 @@ include '../backend/yemek_takvimi_info_init_backend.php';
                     $aksam_yorumlar = yorumlariGetir($_SESSION['aksam_yemegi_menu_id'], $conn); 
                     if (!empty($aksam_yorumlar)) {
                         foreach ($aksam_yorumlar as $yorum) {
-                            echo "<li class='yorumlar_li'><b>{$yorum['sahibi_nickname']}:</b> {$yorum['yorum']}</li>";
+                            echo "<li class='yorumlar_li'><b>@{$yorum['sahibi_nickname']} </b>{$yorum['yorum']}</li>";
                         }
                     } else {
                         echo "<p>Henüz yorum yok.</p>";

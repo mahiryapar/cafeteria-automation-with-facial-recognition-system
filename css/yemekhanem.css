@@ -29,6 +29,14 @@
     flex: 1 30%; /* Orta alan */
     max-height: 100%;
 }
+#adres{
+    resize: none;
+}
+
+#yemekhane_olustur{
+    overflow-y: scroll;
+    max-height: 95%;
+}
 
 #menu_ekle{
     flex: 1 30%; 
@@ -39,9 +47,6 @@
     flex:1 30%;
     overflow-y: auto;
     max-height: 95%;
-}
-#yemekhane_olustur{
-    flex:1;
 }
 #ogrenciler{
     flex:1 50%;
@@ -104,7 +109,6 @@ select{
     margin-top: 5px;
     display: block;
     margin: 10px auto;
-    padding: 10px 20px;
     background-color: #195787c4;
     color: #fff;
     border: 1px solid #282929d5;
