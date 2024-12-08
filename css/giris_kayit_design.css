@@ -28,6 +28,7 @@
     backdrop-filter: blur(1px);
     background: rgba(79, 113, 133, 0.3);
     overflow: hidden;
+    justify-content: center;
 }
 
 #kayit{
@@ -45,6 +46,7 @@
     backdrop-filter: blur(1px);
     background: rgba(79, 113, 133, 0.3);
     overflow: hidden;
+    justify-content: center;
 }
 
 #myFormsignup{
@@ -54,41 +56,37 @@
     display: flex;
     flex-direction: column; 
     align-items: center;    
-    justify-content: center;
-
-    
+    justify-content: center;   
 }
+
+#myFormlogin{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column; 
+    gap: 3px;
+    align-items: center;
+    padding: 10px;
+    padding-top: 20vh;
+}
+
 
 #myFormsignup div {
     display: flex;
     align-items: center;
     margin-bottom: 5px;
-    margin-right: 120px;
     justify-content: space-between;
 }
 
-#myFormsignup span {
-    display: inline-block;
-    flex: 1;
-    height: 4vh;
-    width: 12vw;
-    min-width: 70px;
-    min-height: 20px;
-    text-align: right;
-    margin-right: 15px;
-    margin-top: 15px;
-    word-wrap: break-word;
-}
 
-
-#isim, #soyisim, #ncknm, #mail, #number, #psw{
+#isim, #soyisim, #ncknm, #mail, #number, #psw,#login_ncknm,#login_psw{
     display: flex;
     flex: 1;
     height: 4vh;
     width: 12vw;
     min-width: 100px;
     min-height: 30px;
-    margin: 8px auto;
+    margin: 4px;
     margin-bottom: 5px;
     padding: 6px;
     font-size: 16px;
@@ -99,67 +97,24 @@
     outline: none;
     box-sizing: border-box;
     color: #333;
+    transition: 0.1s ease-in-out;
 }
-#isim:hover, #soyisim:hover, #ncknm:hover, #mail:hover, #number:hover, #psw:hover{
+
+#isim:hover, #soyisim:hover, #ncknm:hover, #mail:hover, #number:hover, #psw:hover,#login_ncknm:hover,#login_psw:hover{
+    transform: scale(1.06);
     border-color: white;
     background: rgba(255, 255, 255, 0.2);
 }
-#isim:focus, #soyisim:focus, #ncknm:focus, #mail:focus, #number:focus, #psw:focus{
+#isim:focus, #soyisim:focus, #ncknm:focus, #mail:focus, #number:focus, #psw:focus,#login_ncknm:focus,#login_psw:focus{
     border: 2px solid #3c88a1;
     box-shadow: 0 0 5px rgba(107, 140, 255, 0.5);
+    transform: scale(1.06);
 }
 
-#myFormlogin{
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column; 
-    gap: 3px;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-}
-
-#login_ncknm{
-    display: flex;
-    flex: 1;
-    position: relative;
-    height: 4vh;
-    width: 11vw;
-    min-width: 100px;
-    min-height: 30px;
-    margin: 5px auto;
-    padding: 12px;
-    font-size: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 19px;
-    background: rgba(255, 255, 255, 0.1);
-    color: rgb(97, 97, 112);
-    outline: none;
-    box-sizing: border-box;
-}
-
-#login_psw {
-    display: flex;
-    flex: 1;
-    position: relative;
-    height: 4vh;
-    width: 11vw;
-    min-width: 100px;
-    min-height: 30px;
-    margin: 5px auto;
-    padding: 13px;
-    font-size: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 19px;
-    background: rgba(255, 255, 255, 0.1);
-    color: rgb(97, 97, 112);
-    outline: none;
-    box-sizing: border-box;
-}
 #login_ncknm{
     margin-top: 30%;
     color: #333;
+    transition: 0.1s ease-in-out;
 }
 #login_ncknm::placeholder{
     font-weight: lighter;
@@ -175,26 +130,40 @@
 }
 
 
-/* Simgeler */
+
+
+
 .icon_user {
     position: absolute;
-    right: 135px;
-    top: 41%;
-    right: 30%;
+    margin-top: -2rem;
+    margin-left: clamp(80px, 9.5vw, 300px);
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.8);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.icon_password {
+    position: absolute;
+    margin-top:-1.2rem;
+    margin-left: clamp(80px, 9.5vw, 300px);
     transform: translateY(-50%);
     font-size: 18px;
     color: rgba(255, 255, 255, 0.8);
     pointer-events: none;
 }
-.icon_password {
+
+
+#iconab{
     position: absolute;
-    right: 135px;
-    top: 51%;
-    right: 30%;
-    transform: translateY(-50%);
-    font-size: 18px;
-    color: rgba(255, 255, 255, 0.8);
     pointer-events: none;
+    font-size: clamp(90px, 9vw, 9vw);
+    display: flex;
+    align-items: center; /* Ortala */
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
 }
 
 .icon_container {
@@ -205,12 +174,10 @@
     top: 10%;
     left: 50%;
     transform: translate(-50%, -10%);
-    z-index: 10;
 }
 #icon_giris{
     position: relative;
     pointer-events: none;
-    font-size: 9vw;
     display: flex;
     align-items: center; /* Ortala */
     justify-content: center;
@@ -218,13 +185,12 @@
     border: 3px solid rgba(255, 255, 255, 0.8);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     color: rgba(50, 50, 50, 0.8);
-    margin-bottom: 25px;
+    margin-bottom: 2vh;
     width: 8vw;
-    height: 16vh;
-    min-width: 100px;
+    height: 8vw;
+    min-width: 80px;
     min-height: 80px;
     object-fit: cover; 
-    top:auto;
     
     
     
@@ -238,7 +204,6 @@
     padding: 9px;
     right: 10%;
     margin: 11px auto;
-    margin-right: 120px;
     justify-content: center;
     display: flex;
     font-size: 16px;
@@ -246,6 +211,7 @@
     border-radius: 19px;
     cursor: pointer;
     background-color: rgba(255, 255, 255, 0.8);
+    transition: 0.1s ease-in-out;
 }
 /* Submit butonları */
  #loginbutton {
@@ -254,9 +220,7 @@
     min-width: 80px;
     min-height: 35px;
     padding: 9px;
-    right: 10%;
     margin: 11px auto;
-    margin-right: 120px;
     justify-content: center;
     display: flex;
     font-size: 16px;
@@ -264,6 +228,7 @@
     border-radius: 19px;
     cursor: pointer;
     background-color: rgba(255, 255, 255, 0.8); /* Şeffaf beyaz arka plan */
+    transition: 0.1s ease-in-out;
 
 }
 #signupbutton:hover, #loginbutton:hover{

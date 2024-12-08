@@ -40,7 +40,7 @@ if(isset($_GET['giris'])){
         
         <form id="myFormlogin" action="../backend/giris_bcknd.php" method="post">
         <div class='icon_container'>
-            <span id='icon_giris'><i class="fas fa-user-circle big-icon"></i></span> 
+            <span id='icon_giris'><i id="iconab" class="fas fa-user-circle big-icon"></i></span> 
         </div>
             <div >
                 <input type="text" class="form-control" id= "login_ncknm" name="login_kullanici_adi" maxlength="19" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
@@ -58,18 +58,19 @@ if(isset($_GET['giris'])){
         </div>
         <div id= "kayit">
         <form id="myFormsignup" action="../backend/giris_bcknd.php" method="post"> 
-            <div><span style="color:black">İsim: </span>
-            <input type="text" id= "isim" name="isim" maxlength="26"></div>
-            <div><span style="color:black">Soyisim: </span>
-            <input type="text" id= "soyisim" name="soyisim" maxlength="26"></div>
-            <div><span style="color:black">Kullanıcı Adı: </span>
-            <input type="text" id= "ncknm" name="kullanici_adi" maxlength="19"></div>
-            <div><span style="color:black">Mail: </span>
-            <input type="email" id= "mail" name="mail" placeholder="example@gmail.com" maxlength="28"></div>
-            <div><span style="color:black">Telefon Numarası: </span>
-            <input type="text" id="number" name="number" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '');"></div>
-            <div><span style="color:black">Şifre:</span>
-            <input type="password" id= "psw" name="sifre" maxlength="19"></div>
+            <h3>Kayıt Ol</h3>
+            <div>
+            <input type="text" id= "isim" name="isim" maxlength="26" placeholder="İsim"></div>
+            <div>
+            <input type="text" id= "soyisim" name="soyisim" maxlength="26" placeholder="Soyisim"></div>
+            <div>
+            <input type="text" id= "ncknm" name="kullanici_adi" maxlength="19" placeholder="Kullanıcı Adı"></div>
+            <div>
+            <input type="email" id= "mail" name="mail" placeholder="E-Posta" maxlength="28"></div>
+            <div>
+            <input type="text" id="number" name="number" maxlength="11" placeholder="Telefon Numarası" oninput="this.value = this.value.replace(/[^0-9]/g, '');"></div>
+            <div>
+            <input type="password" id= "psw" name="sifre" maxlength="19" placeholder="Şifre"></div>
             <button type="submit" id="signupbutton">Kayıt Ol</button>
         </form>   
         </div>
