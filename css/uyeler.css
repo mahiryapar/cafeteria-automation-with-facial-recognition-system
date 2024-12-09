@@ -43,12 +43,12 @@
 
 #mesaj:hover{
   border-radius: 14px;
-  border-color: #195787;
-  border: 3px solid rgba(25, 94, 134, 0.5);
   transform: scale(1.05);
 }
 #mesaj:focus{
   border: 3px solid rgba(25, 94, 134, 0.5);
+  border-color: #195787;
+  border-radius: 14px;
 }
 
 #gonder_button {
@@ -73,6 +73,26 @@
   transform: scale(1.1);
 }
 
+
+#tum_radio_butonlar{
+  font-size: 18px;
+  margin: 15px;
+  border: 2px solid #ddd;
+}
+
+/* #tum_radio_butonlar:hover{
+  border: 3px solid #383942;
+  border-color: #4CAF50;
+} */
+
+#uyeler_listesi , #gelen_mesajlar, #giden_mesajlar{
+  /* border: 1px solid #166e59; */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+
 #iletisim_sayfa{
     margin-top:11vh;
     display: flex; 
@@ -83,28 +103,68 @@
 #iletisim_sayfa #mesaj_yaz_div,#mesaj_ve_ogrenciler,#mesaj_detay {
     flex: 1; 
     text-align: center; 
-  }
+}
+
+.okunacak_mesajlar{
+
+  border-radius: 5px;
+  padding: 10px;
+  margin: 5px ;
+  transition: all 0.3s ease;
+}
+
+#okunmus_mesaj{
+  font-weight: bold;
+  
+}
+#okunmus_mesaj:hover{
+  transform: scale(1.1);
+}
+
+#okunmamıs_mesaj{
+  font-weight: lighter;
+  opacity: 0.6;
+  transform: scale(1.1);
+}
+#okunmamıs_mesaj:hover{
+  transform: scale(1.1);
+}
+
+#gelen_mesajlar a {
+  text-decoration: none;
+  color: inherit;
+  color: #1f677d;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+#gelen_mesajlar a:hover {
+  color: #45a049;
+  text-decoration: underline;
+
+}
 
 
-  #mesajlar_hakkinda_gozukuyor, #mesaj_gozukuyor, #ogrenci_gozukuyor{
+
+#mesajlar_hakkinda_gozukuyor, #mesaj_gozukuyor, #ogrenci_gozukuyor{
     display:none;
     margin-top: 5%;
     padding: 15px;
     border: 1px solid #ccc;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  }
+}
 
 
-  #uyeler_listesi{
+#uyeler_listesi{
     display:block;
-  }
+ }
 
 
-  #gelen_mesajlar{
+#gelen_mesajlar{
     display:none;
-  }
+}
 
-  #giden_mesajlar{
+#giden_mesajlar{
     display:none;
-  }
+}

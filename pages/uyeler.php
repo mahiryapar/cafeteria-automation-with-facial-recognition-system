@@ -93,48 +93,42 @@ include '../backend/uyeler_init_backend.php';
             </div> 
             <div id='mesaj_ve_ogrenciler' class="box scrollable">
                 <label>
-                     <input type="radio" name="mesaj_tipi" value="uyeler" checked> Üyeler
+                     <input type="radio" id='tum_radio_butonlar' name="mesaj_tipi" value="uyeler" checked> Üyeler
                 </label>
                 <label>
-                     <input type="radio" name="mesaj_tipi" value="gelen"> Gelen Mesajlar
+                     <input type="radio" id='tum_radio_butonlar' name="mesaj_tipi" value="gelen"> Gelen Mesajlar
                 </label>
                 <label>
-                    <input type="radio" name="mesaj_tipi" value="giden"> Giden Mesajlar
+                    <input type="radio" id='tum_radio_butonlar' name="mesaj_tipi" value="giden"> Giden Mesajlar
                 </label>
                 <div id="uyeler_listesi">
-                    <ul id="uyeler_ul">
                     <?php
                             while ($row_4 = sqlsrv_fetch_array($stmt_4, SQLSRV_FETCH_ASSOC)) {
-                                echo "<li id='uyeler_li'><a href='../backend/ogrenci_goster.php?ogrenci_id=".$row_4['id']."&sayfa=uyeler'><span>ID: ". $row_4['id'] ." - ". $row_4['name']." " .$row_4['surname']."</span></a></li><br><hr>";
+                                echo "<a href='../backend/ogrenci_goster.php?ogrenci_id=".$row_4['id']."&sayfa=uyeler'><span>ID: ". $row_4['id'] ." - ". $row_4['name']." " .$row_4['surname']."</span></a><br><hr>";
                             }
                         ?>
-                    </ul>
                 </div>
                 <div id="gelen_mesajlar">
-                    <ul id="mesajlar_ul">
                         <?php
                             while ($row_1 = sqlsrv_fetch_array($stmt_1, SQLSRV_FETCH_ASSOC)) {
                                 if($row_1['okundu'] == 'Hayır'){
-                                    echo "<li id='gelen_mesaj_li'><a href='../backend/mesaj_goster.php?mesaj_id=".$row_1['id']."&gelgit=0&sayfa=uyeler'><span>". $row_1['name'] ." ". $row_1['surname']."--" .$row_1['konu']."-- Mesaj Okunmadı</span></a></li><br><hr>";
+                                    echo "<a id='okunmus_mesaj' class='okunacak_mesajlar' href='../backend/mesaj_goster.php?mesaj_id=".$row_1['id']."&gelgit=0&sayfa=uyeler'><span>". $row_1['name'] ." ". $row_1['surname']."--" .$row_1['konu']."</span></a><br><hr>";
                                 }
                                 else{
-                                    echo "<li id='gelen_mesaj_li'><a href='../backend/mesaj_goster.php?mesaj_id=".$row_1['id']."&gelgit=0&sayfa=uyeler'><span>". $row_1['name'] ." ". $row_1['surname']."--" .$row_1['konu']."-- Mesaj Okundu</span></a></li><br><hr>";
+                                    echo "<a id='okunmamıs_mesaj' class='okunacak_mesajlar' href='../backend/mesaj_goster.php?mesaj_id=".$row_1['id']."&gelgit=0&sayfa=uyeler'><span>". $row_1['name'] ." ". $row_1['surname']."--" .$row_1['konu']."</span></a><br><hr>";
                                 }
 
                             }
                         ?>
-                    </ul>
                 </div>
                 <div id="giden_mesajlar">
-                    <ul id="mesajlar_ul">
                         <?php
                             while ($row_3 = sqlsrv_fetch_array($stmt_3, SQLSRV_FETCH_ASSOC)) {
-                                echo "<li id='giden_mesaj_li'><a href='../backend/mesaj_goster.php?mesaj_id=".$row_3['id']."&gelgit=1&sayfa=uyeler'><span>
-                                ". $row_3['name'] ." ". $row_3['surname']."--" .$row_3['konu']."</span></a></li><br><hr>";
+                                echo "<a href='../backend/mesaj_goster.php?mesaj_id=".$row_3['id']."&gelgit=1&sayfa=uyeler'><span>
+                                ". $row_3['name'] ." ". $row_3['surname']."--" .$row_3['konu']."</span></a><br><hr>";
 
                             }
                         ?>
-                    </ul>
                 </div>
             </div>
         </div>
