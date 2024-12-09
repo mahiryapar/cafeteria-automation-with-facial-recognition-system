@@ -107,21 +107,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             else{
                 $hashed_password = password_hash($sifre, PASSWORD_DEFAULT);
-                $sql = "INSERT INTO users (name, surname,mail,phonenum,moneyy,nickname,password_hash,rol,yemekhane_id ) 
-                VALUES (?,?,?,?,0,?,?,'ogrenci',1)";
-                $params = [$isim,$soyisim,$mail,$number,$kullaniciAdi,$hashed_password];
-                $stmt = sqlsrv_query($conn, $sql,$params);
+
+                // SQL sorgusu
+                $sql = "INSERT INTO users (name, surname, mail, phonenum, moneyy, nickname, password_hash, rol, yemekhane_id) 
+                        VALUES (?, ?, ?, ?, 0, ?, ?, 'ogrenci', 1); 
+                        SELECT SCOPE_IDENTITY() AS last_id;";
+                
+                $params = [$isim, $soyisim, $mail, $number, $kullaniciAdi, $hashed_password];
+                $stmt = sqlsrv_query($conn, $sql, $params);
                 if ($stmt === false) {
                     die(print_r(sqlsrv_errors(), true));
                 }
+                if (sqlsrv_next_result($stmt) && sqlsrv_fetch($stmt)) {
+                    $lastId = sqlsrv_get_field($stmt, 0);
+                    session_start();
+                    $_SESSION['user_id'] = $lastId; // Oturum değişkenine kaydet
+                } else {
+                    echo "Son ID alınamadı.";
+                }
                 echo "
                 <div id='cikis' class='alert alert-success'>
-                    <strong>Başarılı!</strong> Kayıt olundu. Giriş sayfasına yönlendiriliyorsunuz..
+                    <strong>Başarılı!</strong> Kayıt olundu. ".$_SESSION['user_id']."Yüz ekleme sayfasına yönlendiriliyorsunuz..
                 </div>
                 <script>
                     document.getElementById('sonuc').style.display = 'block';
                     setTimeout(function() {
-                        window.location.href = 'giris_kayit.php?giris=1';
+                        window.location.href = 'yuz_ekle.php';
                     }, 2000);
                 </script>";
             }

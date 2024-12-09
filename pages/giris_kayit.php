@@ -81,5 +81,5 @@ if(isset($_GET['giris'])){
         
     </script>
     <script src="../js/app.js"></script>
-   
+    </body>
 </html>
