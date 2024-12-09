@@ -38,6 +38,8 @@ if(isset($_SESSION['flash_message'])){
 <body>
     <div id="sayfa">
         <nav id="nav">
+        <div id="prfl-foto-mobil"><img src="<?php echo $_SESSION['pp']; ?>"alt="Profil Fotoğrafı" id="prfl-foto-img"></div>
+        <div id="menu-toggle">&#9776;</div>
             <ul id="liste">
                 <li class="liler" id = "ortak-li"><a class="linkler" href="#">Ana Sayfa</a></li>
                 <li class="liler" id = "admin-li"><a class="linkler" href="hesabim.php">Hesabım</a></li>
@@ -142,10 +144,10 @@ if(isset($_SESSION['flash_message'])){
             }
         };
 
-        if(<?php echo $aktifOgun["ogun"];?> == "Kahvaltı"){
+        if("<?php echo $aktifOgun["ogun"];?>" == "Kahvaltı"){
             deger_al(<?php echo $_SESSION['kahvalti_menu_id'];?>);
         }
-        else if(<?php echo $aktifOgun["ogun"];?> == "Öğle"){
+        else if("<?php echo $aktifOgun["ogun"];?>" == "Öğle"){
             deger_al(<?php echo $_SESSION['ogle_yemegi_menu_id'];?>);
         }
         else{
@@ -154,20 +156,20 @@ if(isset($_SESSION['flash_message'])){
 
         
         
-        startBtn.addEventListener('DOMContentLoaded',  () => {
+        document.addEventListener('DOMContentLoaded',  () => {
             console.log("Butondan önceki satır.");
             const startBtn = document.getElementById('yemekBaslatButonu');
             startBtn.addEventListener('click', async () => {
             console.log("Buraya giriyor mu ?");
-            loadModels();
-            startVideo();
+            await loadModels();
+            await startVideo();
             const yuzDurumu = document.getElementById("yuzAlgilamaDurumu");
             const interval = setInterval(async () => {
-                const faceDescriptor =  detectFace();
+                const faceDescriptor = await detectFace();
                 if (faceDescriptor) {
                     clearInterval(interval);
                     yuzDurumu.innerText = "Embedding oluşturuluyor...";
-                    const matchedUser =  compareEmbeddings(faceDescriptor);
+                    const matchedUser = await compareEmbeddings(faceDescriptor);
 
                     if (matchedUser) {
                         yuzDurumu.innerText = "Kullanıcı bulundu: " + matchedUser;
