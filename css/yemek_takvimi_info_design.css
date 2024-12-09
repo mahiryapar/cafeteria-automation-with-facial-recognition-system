@@ -121,3 +121,35 @@
   img:not([src]){
     visibility: hidden;
   }
+
+
+
+@media (max-width:768px){
+  #icerik{
+    overflow: scroll;
+  }
+  #yemekler {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    height: initial;
+    margin-left: 9vw;
+  }
+  #yemekler #kahvalti,#ogle,#aksam {
+    width: 90vw;
+    margin-bottom: 2vh;
+  }
+  #yorum_input{
+    width: 79vw;
+    font-size:4vw;
+  }
+  #yorum_gonder{
+    font-size: 3vw;
+    width: 30vw;
+  }
+  .yemek_yazi{
+    width: 35vw;
+
+  }
+
+}

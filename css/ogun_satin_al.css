@@ -97,3 +97,28 @@
     transform: scale(0.96);
     background-color: #195787;
 }
+
+
+@media (max-width:768px){
+    .containerr{
+        height: initial;
+        width: initial;
+        margin-bottom:0;
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 20vh;
+    }
+    #menuekle_button{
+        width: 40vw;
+        font-size: 4vw;
+    }
+    #bakiye{
+        margin-top: 14vh;
+        margin-left: 5vw;
+    }
+
+    #ucretler{
+        margin-top: 11vh;
+    }
+
+}

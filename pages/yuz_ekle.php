@@ -31,6 +31,8 @@
 <body>
 <div id="sayfa">
         <nav id="nav">
+        <div id="prfl-foto-mobil"><img src="<?php echo $_SESSION['pp']; ?>"alt="Profil Fotoğrafı" id="prfl-foto-img"></div>
+        <div id="menu-toggle">&#9776;</div>
             <ul id="liste">
                 <li class="liler" id="signin"><a class="linkler" href="giris_kayit.php?giris=1">Giriş Yap</a></li>
                 <li class="liler" id="signin"><a class="linkler" href="giris_kayit.php?giris=0">Kaydol</a></li>

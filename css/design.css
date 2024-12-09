@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Signika:wght@300..700&display=swap');
+
+
+
 span,p,h3,input,button,textarea,h1,h2,h4,h5,h6,li,a,div,select,option{
     font-family: 'Signika', sans-serif;
     font-optical-sizing: auto;
@@ -6,6 +9,9 @@ span,p,h3,input,button,textarea,h1,h2,h4,h5,h6,li,a,div,select,option{
     font-style: normal;
 }
 
+#menu-toggle {
+    display: none;
+}
 
 #icerik{
     height: 100%;
@@ -14,6 +20,10 @@ span,p,h3,input,button,textarea,h1,h2,h4,h5,h6,li,a,div,select,option{
     position: relative;
     z-index: 1;
     margin: 0px;
+}
+
+#prfl-foto-mobil{
+    display: none;
 }
 
 
@@ -275,3 +285,98 @@ span,p,h3,input,button,textarea,h1,h2,h4,h5,h6,li,a,div,select,option{
 }
 
 
+@media (max-width: 768px) {
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    html {
+        scrollbar-width: none;
+    }
+    #icerik{
+        height: 100%;
+        width: 100%;
+        overflow: auto;
+        position: relative;
+        z-index: 1;
+        margin: 0px;
+    }
+    #nav {
+        flex-direction: column;
+        background: rgba(79, 113, 133, 0.859);
+        align-items: flex-start;
+        transition: all 0.4s ease;
+        z-index: 2;
+        position: fixed;
+        top: 0;
+        width: 100%;
+    }
+
+    #liste {
+        display: none;
+        flex-direction: column;
+        margin-left: 4vw;
+        width: 90vw;
+        transition: max-height 0.2s ease, opacity 0.2s ease;
+    }
+
+    .liler {
+        text-align: left;
+        padding: 10px;
+        width: 90vw;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .liler a {
+        display: block;
+        width: 100%;
+    }
+
+    .prfl {
+        order: 1;
+        margin: 10px 0;
+    }
+
+    #prfl-foto{
+        display: none;
+    }
+
+    #prfl-foto-mobil{
+        opacity: 1;
+        position:absolute;
+        background: rgba(79, 113, 133, 0.636);   
+        height: 5vw;
+        width: 5vw;   
+        min-width: 80px;
+        min-height: 80px; 
+        margin-top: 10px; 
+        margin-bottom: 5px;
+        margin-left: 15px;
+        margin-right: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border:solid 2px  rgb(79, 113, 133);
+        border-top: 0px;
+        border-left: 0px;
+        border-right:0px;
+        border-radius: 50%;
+        box-shadow: 0px 5px 5px 0px;
+    }
+
+    #prfl-foto-mobil.hidden{
+        opacity: 0;
+    }
+
+    #menu-toggle {
+        user-select: none;
+        display: block;
+        cursor: pointer;
+        font-size: 24px;
+        margin-left: 90vw;
+    }
+
+    #liste.show {
+        display: flex;
+    }
+}

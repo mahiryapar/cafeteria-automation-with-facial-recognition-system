@@ -5,6 +5,13 @@ var signlar = document.querySelectorAll("#signin");
 var adminliler = document.querySelectorAll("#admin-li");
 var ogrencililer = document.querySelectorAll("#ogrenci-li");
 
+
+document.getElementById('menu-toggle').addEventListener('click', function() {
+    document.getElementById('liste').classList.toggle('show');
+    document.getElementById('prfl-foto-mobil').classList.toggle('hidden');
+});
+
+
 document.addEventListener("DOMContentLoaded", INIT);
 
 
