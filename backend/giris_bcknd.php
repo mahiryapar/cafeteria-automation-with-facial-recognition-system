@@ -28,31 +28,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if($_GET['giris'] == 1){
             $kullaniciAdi = $_POST['login_kullanici_adi'] ?? '';
             $sifre = $_POST['login_sifre'] ?? '';
-            $sql = "SELECT id,rol,yemekhane_id,name,surname FROM Users where nickname = ? and password_hash = ?";      
-            $params = [$kullaniciAdi, $sifre];
-            $stmt = sqlsrv_query($conn, $sql,$params);
+            $sql = "SELECT id, rol, yemekhane_id, name, surname, password_hash FROM Users WHERE nickname = ?";
+            $params = [$kullaniciAdi];
+            $stmt = sqlsrv_query($conn, $sql, $params);
             if ($stmt === false) {
                 die(print_r(sqlsrv_errors(), true));
             }
             if(sqlsrv_has_rows($stmt)){
                 session_start();
                 $row = sqlsrv_fetch_array($stmt,SQLSRV_FETCH_ASSOC);
-                $_SESSION['nickname'] = $kullaniciAdi; 
-                $_SESSION['isim'] = $row['name'];
-                $_SESSION['soyisim'] = $row['surname'];
-                $_SESSION['role'] = $row['rol'];
-                $_SESSION['yemekhane_id'] = $row['yemekhane_id'];
-                $_SESSION['user_id'] = $row['id'];
-                echo "
-                <div id='cikis' class='alert alert-success'>
-                    <strong>Başarılı!</strong> Giriş yapıldı. Ana sayfaya yönlendiriliyorsunuz.
-                </div>
-                <script>
-                    document.getElementById('sonuc').style.display = 'block';
-                    setTimeout(function() {
-                        window.location.href = 'index.php';
-                    }, 2000);
-                </script>";
+                if (password_verify($sifre, $row['password_hash'])){   
+                    $_SESSION['nickname'] = $kullaniciAdi; 
+                    $_SESSION['isim'] = $row['name'];
+                    $_SESSION['soyisim'] = $row['surname'];
+                    $_SESSION['role'] = $row['rol'];
+                    $_SESSION['yemekhane_id'] = $row['yemekhane_id'];
+                    $_SESSION['user_id'] = $row['id'];
+                    echo "
+                    <div id='cikis' class='alert alert-success'>
+                        <strong>Başarılı!</strong> Giriş yapıldı. Ana sayfaya yönlendiriliyorsunuz.
+                    </div>
+                    <script>
+                        document.getElementById('sonuc').style.display = 'block';
+                        setTimeout(function() {
+                            window.location.href = 'index.php';
+                        }, 2000);
+                    </script>";
+                }
+                else {
+                    echo "<div id='cikis' class='alert alert-danger'>
+                        <strong>Hata!</strong> Kullanıcı adı veya şifre hatalı.
+                    </div>
+                    <script>
+                        document.getElementById('sonuc').style.display = 'block';
+                        setTimeout(function() {
+                            document.getElementById('sonuc').style.display = 'none';
+                        }, 2000);
+                    </script>";
+                }
             }
             else{
                 echo "<div id='cikis' class='alert alert-danger'>
@@ -93,9 +106,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </script>";
             }
             else{
+                $hashed_password = password_hash($sifre, PASSWORD_DEFAULT);
                 $sql = "INSERT INTO users (name, surname,mail,phonenum,moneyy,nickname,password_hash,rol,yemekhane_id ) 
                 VALUES (?,?,?,?,0,?,?,'ogrenci',1)";
-                $params = [$isim,$soyisim,$mail,$number,$kullaniciAdi,$sifre];
+                $params = [$isim,$soyisim,$mail,$number,$kullaniciAdi,$hashed_password];
                 $stmt = sqlsrv_query($conn, $sql,$params);
                 if ($stmt === false) {
                     die(print_r(sqlsrv_errors(), true));

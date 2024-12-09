@@ -62,6 +62,8 @@ else{
                     <span id="rol">Rol: <?php echo $role?></span><br>
                 </div>
                 <div id="pp_ayar" class="box">
+                    <h4>Profil Fotoğrafınızı Ayarlayın</h4>
+                    <hr>
                 <form action="../backend/upload.php" method="POST" enctype="multipart/form-data">
                     <div class="input-group">
                         <input type="file" class="form-control" name="profile_photo" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
