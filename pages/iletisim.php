@@ -32,7 +32,7 @@ include '../backend/iletisim_init_backend.php';
         <div id="icerik">
             <div id="sonuc"></div>
         <div id=iletisim_sayfa>
-            <div id="mesaj_yaz_div">
+            <div id="mesaj_yaz_div" class="box">
                 <span>Adminlerinize Mesaj Yazın</span>
                 <hr><br><br>
                 <form action="../backend/iletisim_backend.php" method="post" id="mesaj_gonder">
@@ -48,11 +48,12 @@ include '../backend/iletisim_init_backend.php';
                 </select><br><br>
                 <input type="text" id="konu" name="konu" placeholder="Konu"><br><br>
                 <textarea id="mesaj" name="mesaj" placeholder="Mesajınızı buraya yazın" rows="5" cols="50"></textarea>
-                <button type="submit">Gönder</button>
+                <button id='gonder_button' type="submit">Gönder</button>
                 </form>
             </div>
-            <div id='mesaj_detay'>
+            <div id='mesaj_detay' class="box scrollable">
                 <div id="mesaj_gozukuyor">
+                <h3>Mail Bilgileri</h3><hr>
                     <?php 
                     if($_SESSION['gelgit']==0){
                         $prefix = 'Yazan';
@@ -60,14 +61,14 @@ include '../backend/iletisim_init_backend.php';
                     else{
                         $prefix = 'Alıcı';
                     }
-                    echo "<span id='mh_kimden'>".$prefix.": ".$row_2['name']." ".$row_2['surname']."</span><br>
-                                  <span id='mh_konu'>Konu: ".$row_2['konu']."</span><br>
-                                  <span id='mh_mesaj'>Mesaj: ".$row_2['mesaj']."</span><br>";
+                    echo "<span id='mh_kimden'>".$prefix.": ".$row_2['name']." ".$row_2['surname']."</span><br><hr>
+                                  <span id='mh_konu'>Konu: ".$row_2['konu']."</span><br><hr>
+                                  <span id='mh_mesaj'>Mesaj: ".$row_2['mesaj']."</span><br><hr>";
 
                     ?>
                     <?php
                     if (isset($row_2['mesaj_saati']) && $row_2['mesaj_saati'] instanceof DateTime) {
-                        $mesajSaati = $row_2['mesaj_saati']->format('Y-m-d H:i:s'); // İstediğiniz format
+                        $mesajSaati = $row_2['mesaj_saati']->format('Y-m-d H:i:s');
                         echo "<span id='mh_saati'>Mesaj Zamanı: " . htmlspecialchars($mesajSaati) . "</span><br>";
                     }
                     ?>
@@ -84,38 +85,33 @@ include '../backend/iletisim_init_backend.php';
                     ?>
                 </div>
             </div> 
-            <div id='mesaj_ve_ogrenciler'>
+            <div id='mesaj_ve_ogrenciler' class="box scrollable">
                 <label>
-                     <input type="radio" name="mesaj_tipi" value="gelen" checked> Gelen Mesajlar
+                     <input type="radio" id='tum_radio_butonlar' name="mesaj_tipi" value="gelen" checked> Gelen Mesajlar
                 </label>
                 <label>
-                    <input type="radio" name="mesaj_tipi" value="giden"> Giden Mesajlar
+                    <input type="radio" id='tum_radio_butonlar' name="mesaj_tipi" value="giden"> Giden Mesajlar
                 </label>
                 <div id="gelen_mesajlar">
-                    <ul id="mesajlar_ul">
                         <?php
                             while ($row_1 = sqlsrv_fetch_array($stmt_1, SQLSRV_FETCH_ASSOC)) {
                                 if($row_1['okundu'] == 'Hayır'){
-                                    echo "<li id='gelen_mesaj_li'><a href='../backend/mesaj_goster.php?mesaj_id=".$row_1['id']."&gelgit=0&sayfa=iletisim'><span>". $row_1['name'] ." ". $row_1['surname']."--" .$row_1['konu']."-- Mesaj Okunmadı</span></a></li><br><hr>";
+                                    echo "<div id='okunmus_mesaj' class='okunacak_mesajlar'><a style='text-decoration: none' href='../backend/mesaj_goster.php?mesaj_id=".$row_1['id']."&gelgit=0&sayfa=iletisim'><span>". $row_1['name'] ." ". $row_1['surname']."--" .$row_1['konu']."</span></a></div><hr>";
                                 }
                                 else{
-                                    echo "<li id='gelen_mesaj_li'><a href='../backend/mesaj_goster.php?mesaj_id=".$row_1['id']."&gelgit=0&sayfa=iletisim'><span>". $row_1['name'] ." ". $row_1['surname']."--" .$row_1['konu']."-- Mesaj Okundu</span></a></li><br><hr>";
+                                    echo "<div id='okunmamıs_mesaj' class='okunacak_mesajlar'><a style='text-decoration: none' href='../backend/mesaj_goster.php?mesaj_id=".$row_1['id']."&gelgit=0&sayfa=iletisim'><span>". $row_1['name'] ." ". $row_1['surname']."--" .$row_1['konu']."</span></a></div><hr>";
                                 }
-
                             }
                         ?>
-                    </ul>
                 </div>
                 <div id="giden_mesajlar">
-                    <ul id="mesajlar_ul">
                         <?php
                             while ($row_3 = sqlsrv_fetch_array($stmt_3, SQLSRV_FETCH_ASSOC)) {
-                                echo "<li id='giden_mesaj_li'><a href='../backend/mesaj_goster.php?mesaj_id=".$row_3['id']."&gelgit=1&sayfa=iletisim'><span>
-                                ". $row_3['name'] ." ". $row_3['surname']."--" .$row_3['konu']."</span></a></li><br><hr>";
+                                echo "<div id='okunmus_mesaj' class='okunacak_mesajlar'><a style='text-decoration: none' href='../backend/mesaj_goster.php?mesaj_id=".$row_3['id']."&gelgit=1&sayfa=iletisim'><span>
+                                ". $row_3['name'] ." ". $row_3['surname']."--" .$row_3['konu']."</span></a></div><hr>";
 
                             }
                         ?>
-                    </ul>
                 </div>
             </div>
         </div>

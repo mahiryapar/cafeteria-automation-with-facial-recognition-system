@@ -74,7 +74,7 @@ include '../backend/uyeler_init_backend.php';
                     ?>
                     <?php
                     if (isset($row_2['mesaj_saati']) && $row_2['mesaj_saati'] instanceof DateTime) {
-                        $mesajSaati = $row_2['mesaj_saati']->format('Y-m-d H:i:s'); // İstediğiniz format
+                        $mesajSaati = $row_2['mesaj_saati']->format('Y-m-d H:i:s');
                         echo "<span id='mh_saati'>Mesaj Zamanı: " . htmlspecialchars($mesajSaati) . "</span><br>";
                     }
                     ?>
@@ -104,7 +104,7 @@ include '../backend/uyeler_init_backend.php';
                 <div id="uyeler_listesi">
                     <?php
                             while ($row_4 = sqlsrv_fetch_array($stmt_4, SQLSRV_FETCH_ASSOC)) {
-                                echo "<a href='../backend/ogrenci_goster.php?ogrenci_id=".$row_4['id']."&sayfa=uyeler'><span>ID: ". $row_4['id'] ." - ". $row_4['name']." " .$row_4['surname']."</span></a><br><hr>";
+                                echo "<div id='okunmus_mesaj' class='okunacak_mesajlar'><a style='text-decoration: none' href='../backend/ogrenci_goster.php?ogrenci_id=".$row_4['id']."&sayfa=uyeler'><span>ID: ". $row_4['id'] ." - ". $row_4['name']." " .$row_4['surname']."</span></a></div><hr>";
                             }
                         ?>
                 </div>
@@ -112,10 +112,10 @@ include '../backend/uyeler_init_backend.php';
                         <?php
                             while ($row_1 = sqlsrv_fetch_array($stmt_1, SQLSRV_FETCH_ASSOC)) {
                                 if($row_1['okundu'] == 'Hayır'){
-                                    echo "<a id='okunmus_mesaj' class='okunacak_mesajlar' href='../backend/mesaj_goster.php?mesaj_id=".$row_1['id']."&gelgit=0&sayfa=uyeler'><span>". $row_1['name'] ." ". $row_1['surname']."--" .$row_1['konu']."</span></a><br><hr>";
+                                    echo "<div id='okunmus_mesaj' class='okunacak_mesajlar'><a style='text-decoration: none' href='../backend/mesaj_goster.php?mesaj_id=".$row_1['id']."&gelgit=0&sayfa=uyeler'><span>". $row_1['name'] ." ". $row_1['surname']."--" .$row_1['konu']."</span></a></div><hr>";
                                 }
                                 else{
-                                    echo "<a id='okunmamıs_mesaj' class='okunacak_mesajlar' href='../backend/mesaj_goster.php?mesaj_id=".$row_1['id']."&gelgit=0&sayfa=uyeler'><span>". $row_1['name'] ." ". $row_1['surname']."--" .$row_1['konu']."</span></a><br><hr>";
+                                    echo "<div id='okunmamıs_mesaj' class='okunacak_mesajlar'><a style='text-decoration: none' href='../backend/mesaj_goster.php?mesaj_id=".$row_1['id']."&gelgit=0&sayfa=uyeler'><span>". $row_1['name'] ." ". $row_1['surname']."--" .$row_1['konu']."</span></a></div><hr>";
                                 }
 
                             }
@@ -124,8 +124,8 @@ include '../backend/uyeler_init_backend.php';
                 <div id="giden_mesajlar">
                         <?php
                             while ($row_3 = sqlsrv_fetch_array($stmt_3, SQLSRV_FETCH_ASSOC)) {
-                                echo "<a href='../backend/mesaj_goster.php?mesaj_id=".$row_3['id']."&gelgit=1&sayfa=uyeler'><span>
-                                ". $row_3['name'] ." ". $row_3['surname']."--" .$row_3['konu']."</span></a><br><hr>";
+                                echo "<div id='okunmus_mesaj' class='okunacak_mesajlar'><a style='text-decoration: none' href='../backend/mesaj_goster.php?mesaj_id=".$row_3['id']."&gelgit=1&sayfa=uyeler'><span>
+                                ". $row_3['name'] ." ". $row_3['surname']."--" .$row_3['konu']."</span></a></div><hr>";
 
                             }
                         ?>

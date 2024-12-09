@@ -1,7 +1,17 @@
-#mesaj{
-    width: 20vw;
-    height: 20vh;
+#icerik{
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background-image: url('../arka_plan_resimler/sade_background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #b8b3b3;
+  position: relative;
+  z-index: 1;
+  margin: 0px;
 }
+
 
 #iletisim_sayfa{
     margin-top:11vh;
@@ -10,20 +20,22 @@
     gap: 10px; 
 }
 
-#iletisim_sayfa #mesaj_yaz_div,#mesaj_ve_ogrenciler,#mesaj_detay {
+/* #iletisim_sayfa #mesaj_yaz_div,#mesaj_ve_ogrenciler,#mesaj_detay {
     flex: 1; 
     text-align: center; 
     padding: 10px;
     border: 1px solid #ccc; 
     background-color: #f9f9f9; 
-  }
+  } */
+  #iletisim_sayfa #mesaj_yaz_div,#mesaj_ve_ogrenciler,#mesaj_detay {
+    flex: 1; 
+    text-align: center; 
+}
 
 
   #mesajlar_hakkinda_gozukuyor{
     display:none;
   }
-
-
   #mesaj_gozukuyor{
     display:none;
   }
@@ -35,3 +47,113 @@
   #giden_mesajlar{
     display:none;
   }
+
+  #tum_radio_butonlar{
+    font-size: 18px;
+    margin: 15px;
+    border: 2px solid #ddd;
+  }
+
+  #konu{
+    width: 20vw;
+    height: 5vh;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: 0.2s ease-in-out;
+    outline: none;
+  }
+  
+  #konu:hover{
+    border-radius: 14px;
+    transform: scale(1.05);
+  }
+  #konu:focus{
+    border: 3px solid rgba(25, 94, 134, 0.5);
+    border-color: #195787;
+  }
+  
+  #mesaj{
+      width: 20vw;
+      height: 20vh;
+      border-radius: 5px;
+      justify-content: center;
+      border: 2px;
+      resize: none;
+      transition: 0.2s ease-in-out;
+      outline: none;
+  }
+  
+  #mesaj:hover{
+    border-radius: 14px;
+    transform: scale(1.05);
+  }
+  #mesaj:focus{
+    border: 3px solid rgba(25, 94, 134, 0.5);
+    border-color: #195787;
+    border-radius: 14px;
+  }
+
+  #gonder_button {
+    width: 8vw;
+    height: 5vh;
+    min-height: 40px;
+    min-width: 80px;
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background-color: #195787;
+    color: #fff;
+    border: 2px solid #282929d5;
+    border-radius: 20px;
+    font-size: 1vw;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  #gonder_button:hover {
+    color: white;
+    transform: scale(1.1);
+  }
+
+  
+.okunacak_mesajlar{
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  background: #dde9e7;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+#okunmus_mesaj{
+  font-weight: bold;
+  
+}
+#okunmus_mesaj:hover{
+  transform: scale(1.1);
+}
+
+#okunmamıs_mesaj{
+  opacity: 0.6;
+  
+}
+#okunmamıs_mesaj:hover{
+  transform: scale(1.1);
+}
+
+
+#gelen_mesajlar a:hover, #giden_mesajlar a:hover{
+  color: #45a049;
+}
+
+#mesajlar_hakkinda_gozukuyor, #mesaj_gozukuyor{
+  display:none;
+  margin-top: 5%;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
