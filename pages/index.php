@@ -144,6 +144,16 @@ if(isset($_SESSION['flash_message'])){
             }
         };
 
+        if(<?php echo $aktifOgun["ogun"];?> == "Kahvaltı"){
+            deger_al(<?php echo $_SESSION['kahvalti_menu_id'];?>);
+        }
+        else if(<?php echo $aktifOgun["ogun"];?> == "Öğle"){
+            deger_al(<?php echo $_SESSION['ogle_yemegi_menu_id'];?>);
+        }
+        else{
+            deger_al(<?php echo $_SESSION['aksam_yemegi_menu_id'];?>);
+        }
+
         console.log("Butondan önceki satır.");
         document.getElementById('startBtn').addEventListener('click',  () => {
             console.log("Buraya giriyor mu ?");
@@ -166,10 +176,7 @@ if(isset($_SESSION['flash_message'])){
             }, 2000);
     });
     </script> 
-    <?php if($_SESSION['role']=="admin"):?>
-    <!-- <script src="../js/embedding_karsilastirma.js"></script>  -->
-    
-    <?php endif;?> 
+
     <script src="../js/app.js"></script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

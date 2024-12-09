@@ -1,9 +1,11 @@
 // const video = document.getElementById('videoElement');
 // const kapatButonu = document.getElementById('kapatButonu');
 const startBtn = document.getElementById('startBtn');
-
+var menu_id;
 // let faceDetected = false;
-
+function deger_al(value){
+    menu_id=value;
+}
 
 async function loadModels() {
     await faceapi.nets.ssdMobilenetv1.loadFromUri('../models');
@@ -34,7 +36,7 @@ function euclideanDistance(vector1, vector2) {
 
 async function compareEmbeddings(newEmbedding) {
     // Veritabanındaki embedding'leri çek
-    const response = await fetch('../backend/get_embeddings.php');
+    const response = await fetch('../backend/get_embeddings.php?menu_id=${menu_id}');
     const databaseEmbeddings = await response.json();
 
     for (let dbEmbedding of databaseEmbeddings) {
