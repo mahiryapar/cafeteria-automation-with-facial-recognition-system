@@ -26,7 +26,7 @@ if(isset($_SESSION['flash_message'])){
 <html lang="en">
 <head>
     <script src="https://cdn.jsdelivr.net/npm/face-api.js"></script>
-    
+    <script src="../js/face-api.js"></script> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yemekhane</title>
@@ -154,18 +154,22 @@ if(isset($_SESSION['flash_message'])){
             deger_al(<?php echo $_SESSION['aksam_yemegi_menu_id'];?>);
         }
 
-        console.log("Butondan önceki satır.");
-        document.getElementById('startBtn').addEventListener('click',  () => {
+        
+        
+        document.addEventListener('DOMContentLoaded',  () => {
+            console.log("Butondan önceki satır.");
+            const startBtn = document.getElementById('yemekBaslatButonu');
+            startBtn.addEventListener('click', async () => {
             console.log("Buraya giriyor mu ?");
-             loadModels();
-             startVideo();
+            await loadModels();
+            await startVideo();
             const yuzDurumu = document.getElementById("yuzAlgilamaDurumu");
             const interval = setInterval(async () => {
-                const faceDescriptor =  detectFace();
+                const faceDescriptor = await detectFace();
                 if (faceDescriptor) {
                     clearInterval(interval);
                     yuzDurumu.innerText = "Embedding oluşturuluyor...";
-                    const matchedUser =  compareEmbeddings(faceDescriptor);
+                    const matchedUser = await compareEmbeddings(faceDescriptor);
 
                     if (matchedUser) {
                         yuzDurumu.innerText = "Kullanıcı bulundu: " + matchedUser;
@@ -174,12 +178,13 @@ if(isset($_SESSION['flash_message'])){
                     }
                 }
             }, 2000);
+        });
     });
     </script> 
 
     <script src="../js/app.js"></script>
-    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
 </body>
 </html>
 
