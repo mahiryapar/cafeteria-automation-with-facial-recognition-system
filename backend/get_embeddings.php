@@ -37,7 +37,6 @@ if (!$menu_id) {
     echo json_encode(['error' => 'Menu ID eksik.']);
     exit;
 }
-
 $sql = "SELECT embedding FROM users INNER JOIN alinan_menuler ON users.id = alinan_menuler.user__id WHERE alinan_menuler.menu_id = ?";
 $params = [$menu_id];
 
@@ -51,7 +50,7 @@ if ($stmt === false) {
 $embeddings = [];
 while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
     if ($row['embedding'] != "Yüz Verisi Yok") {
-        $embeddings[] = ['embedding' => json_decode($row['embedding'])]; // JSON'ı çöz
+        $embeddings[] = ['embedding' => json_decode($row['embedding'], true)]; // JSON'ı çöz
     }
 }
 
