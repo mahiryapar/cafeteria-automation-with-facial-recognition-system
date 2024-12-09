@@ -1,7 +1,7 @@
 const video = document.getElementById('videoElement');
 // const kapatButonu = document.getElementById('kapatButonu');
 // const startBtn = document.getElementById('startBtn');
-
+var menu_id;
 // let faceDetected = false;
 function deger_al(value){
     menu_id=value;
@@ -41,8 +41,9 @@ function euclideanDistance(vector1, vector2) {
 
 async function compareEmbeddings(newEmbedding) {
     // Veritabanındaki embedding'leri çek
-    const response = await fetch('../backend/get_embeddings.php?menu_id=${menu_id}');
+    const response = await fetch("../backend/get_embeddings.php?menu_id="+menu_id);
     const databaseEmbeddings = await response.json();
+    console.log(databaseEmbeddings);
     if (!Array.isArray(databaseEmbeddings) || databaseEmbeddings.length === 0) {
         console.log("Veritabanında hiçbir embedding bulunamadı.");
         return null;
