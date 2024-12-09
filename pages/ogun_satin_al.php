@@ -8,22 +8,9 @@ include '../backend/ogun_satin_al_init_backend.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Öğün Satın Al</title>
-    <style>
-        .containerr{
-            margin-bottom:40vh;
-            margin-left: 10vw;
-            margin-right: 10vw;
-            margin-top: 10px;
-            overflow-y:scroll;
-            max-height: 70%;
-        }
-        .calendar{
-            height:90%;
-            max-height: 90%;
-        }
-    </style>
     <link rel="stylesheet" href="../css/design.css">
     <link href ="../css/yemek_takvimi_design.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/ogun_satin_al.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
@@ -71,7 +58,7 @@ include '../backend/ogun_satin_al_init_backend.php';
                 </div>
                 <form id = "ogun_al"action="../backend/ogunleri_al.php" method="POST">
                     <div id="calendar" class="calendar"></div>
-                    <button type="submit">Seçimleri Gönder</button>
+                    <button id="menuekle_button" type="submit">Seçimleri Gönder</button>
                 </form>
             </div>
         </div>

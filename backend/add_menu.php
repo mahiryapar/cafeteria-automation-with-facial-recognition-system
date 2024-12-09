@@ -51,6 +51,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     if ($existing_menu = sqlsrv_fetch_array($existing_menu_stmt, SQLSRV_FETCH_ASSOC)) {
         $existing_menu_id = $existing_menu['id'];
+        $get_users_sql = "SELECT user__id FROM alinan_menuler WHERE menu_id = ?";
+        $get_users_stmt = sqlsrv_query($conn, $get_users_sql, [$existing_menu_id]);
+
+        if ($get_users_stmt === false) {
+            die("Kullanıcı listesi alınırken bir hata oluştu: " . print_r(sqlsrv_errors(), true));
+        }
+
+        $user_ids = [];
+        while ($row = sqlsrv_fetch_array($get_users_stmt, SQLSRV_FETCH_ASSOC)) {
+            $user_ids[] = $row['user__id'];
+        }
+
+        // 2. İlgili `alinan_menuler` kayıtlarını sil
+        $delete_alinan_menu_sql = "DELETE FROM alinan_menuler WHERE menu_id = ?";
+        $delete_alinan_menu_stmt = sqlsrv_query($conn, $delete_alinan_menu_sql, [$existing_menu_id]);
+        if ($delete_alinan_menu_stmt === false) {
+            die("Alınan menüler silinirken bir hata oluştu: " . print_r(sqlsrv_errors(), true));
+        }
         $delete_menu_items_sql = "DELETE FROM menudeki_yemekler WHERE menu_id = ?";
         $delete_menu_items_stmt = sqlsrv_query($conn, $delete_menu_items_sql, [$existing_menu_id]);
         if ($delete_menu_items_stmt === false) {
@@ -78,6 +96,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!$menu_id) {
         die("Menü ID alınamadı. Menü oluşturulamadı.");
     }
+
+    foreach ($user_ids as $user_id) {
+        $add_user_menu_sql = "INSERT INTO alinan_menuler (user__id, menu_id) VALUES (?, ?)";
+        $add_user_menu_stmt = sqlsrv_query($conn, $add_user_menu_sql, [$user_id, $menu_id]);
+    
+        if ($add_user_menu_stmt === false) {
+            die("Yeni menüye kullanıcı eklenirken bir hata oluştu: " . print_r(sqlsrv_errors(), true));
+        }
+    }
+    
     foreach ($yemekler as $kategori => $yemek_adi) {
         if ($yemek_adi) {
             $yemek_id_sorgu = "SELECT id FROM yemekler WHERE yemek_ismi = ?";
