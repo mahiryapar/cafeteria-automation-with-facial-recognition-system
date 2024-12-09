@@ -36,6 +36,7 @@
     display: block;
     margin: 2px 0;
     font-size: 16px;
+    font-weight:500
 }
 
 #hesap_bilgileri span strong {
@@ -76,6 +77,32 @@
     border-radius: 20px;
     transform: scale(1.09);
 }
+#yuz_tanıma_div{
+    text-align: center;
+    justify-content: center;
+    justify-items: center;
+    display: flex;
+    margin-bottom: 3vh;
+}
+
+#yuz_ekle_button{
+    padding: 8px 16px;
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    width: 8vw;
+    height: 4vh;
+}
+#yuz_ekle_button:hover{
+    background: #a71d2a;
+    border-radius: 20px;
+    transform: scale(1.09);
+}
+
 
 #anakart {
     display: flex; /* Flex düzenini etkinleştir */
