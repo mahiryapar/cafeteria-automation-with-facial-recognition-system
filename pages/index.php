@@ -144,10 +144,10 @@ if(isset($_SESSION['flash_message'])){
             }
         };
 
-        if(<?php echo $aktifOgun["ogun"];?> == "Kahvaltı"){
+        if("<?php echo $aktifOgun["ogun"];?>" == "Kahvaltı"){
             deger_al(<?php echo $_SESSION['kahvalti_menu_id'];?>);
         }
-        else if(<?php echo $aktifOgun["ogun"];?> == "Öğle"){
+        else if("<?php echo $aktifOgun["ogun"];?>" == "Öğle"){
             deger_al(<?php echo $_SESSION['ogle_yemegi_menu_id'];?>);
         }
         else{

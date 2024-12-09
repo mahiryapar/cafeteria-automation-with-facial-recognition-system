@@ -1,5 +1,6 @@
 <?php 
 session_start();
+date_default_timezone_set('Europe/Istanbul');
 include '../backend/ogun_satin_al_init_backend.php';
 ?>
 <!DOCTYPE html>

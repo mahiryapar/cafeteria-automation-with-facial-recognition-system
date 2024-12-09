@@ -1,5 +1,6 @@
 <?php 
 session_start();
+date_default_timezone_set('Europe/Istanbul');
 $yemekhane_id = $_SESSION['yemekhane_id'];
 $configPath ='../config/database_infos.json';
 if (!file_exists($configPath)) {

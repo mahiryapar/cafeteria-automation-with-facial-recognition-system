@@ -61,13 +61,17 @@ for (let i = 1; i < (firstDayOfWeek === 0 ? 7 : firstDayOfWeek); i++) {
 }
 
 for (let i = 0; i < 30; i++) {
+    const today = new Date();
     const day = new Date();
     day.setDate(today.getDate() + i);
+
+    const localDate = new Date(day.getTime() - day.getTimezoneOffset() * 60000);
+    const isoDate = localDate.toISOString().split('T')[0];
 
     const dayElement = document.createElement('div');
     dayElement.className = 'calendar-day box';
     if (i === 0) dayElement.classList.add('today');
-    dayElement.textContent = `${day.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long' })}\n${day.toLocaleDateString('tr-TR', {weekday: 'long'})}`;
+    dayElement.textContent = `${day.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long' })}\n${day.toLocaleDateString('tr-TR', { weekday: 'long' })}`;
 
     const optionsContainer = document.createElement('div');
     optionsContainer.className = 'meal-options';
@@ -77,7 +81,7 @@ for (let i = 0; i < 30; i++) {
     const breakfastCheckbox = document.createElement('input');
     breakfastCheckbox.type = 'checkbox';
     breakfastCheckbox.value = 'Kahvaltı';
-    breakfastCheckbox.name = `breakfast-${day.toISOString().split('T')[0]}`;
+    breakfastCheckbox.name = `breakfast-${isoDate}`;
     breakfastOption.appendChild(breakfastCheckbox);
     breakfastOption.appendChild(document.createTextNode(' Kahvaltı'));
     optionsContainer.appendChild(breakfastOption);
@@ -87,7 +91,7 @@ for (let i = 0; i < 30; i++) {
     const lunchCheckbox = document.createElement('input');
     lunchCheckbox.type = 'checkbox';
     lunchCheckbox.value = "Öğle Yemeği";
-    lunchCheckbox.name = `lunch-${day.toISOString().split('T')[0]}`;
+    lunchCheckbox.name = `lunch-${isoDate}`;
     lunchOption.appendChild(lunchCheckbox);
     lunchOption.appendChild(document.createTextNode(' Öğle Yemeği'));
     optionsContainer.appendChild(lunchOption);
@@ -97,7 +101,7 @@ for (let i = 0; i < 30; i++) {
     const dinnerCheckbox = document.createElement('input');
     dinnerCheckbox.type = 'checkbox';
     dinnerCheckbox.value = "Akşam Yemeği";
-    dinnerCheckbox.name = `dinner-${day.toISOString().split('T')[0]}`;
+    dinnerCheckbox.name = `dinner-${isoDate}`;
     dinnerOption.appendChild(dinnerCheckbox);
     dinnerOption.appendChild(document.createTextNode(' Akşam Yemeği'));
     optionsContainer.appendChild(dinnerOption);

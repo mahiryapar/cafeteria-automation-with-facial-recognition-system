@@ -1,5 +1,6 @@
 <?php
 include '../backend/fetch_yemek_foto.php';
+date_default_timezone_set('Europe/Istanbul');
 $yemekhane_id = $_SESSION['yemekhane_id'];
 if(isset($_GET['date'])){
     $date = $_GET['date'];
