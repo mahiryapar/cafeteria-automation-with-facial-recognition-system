@@ -1,6 +1,6 @@
-// const video = document.getElementById('videoElement');
+const video = document.getElementById('videoElement');
 // const kapatButonu = document.getElementById('kapatButonu');
-const startBtn = document.getElementById('startBtn');
+// const startBtn = document.getElementById('startBtn');
 
 // let faceDetected = false;
 

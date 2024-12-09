@@ -26,7 +26,7 @@ if(isset($_SESSION['flash_message'])){
 <html lang="en">
 <head>
     <script src="https://cdn.jsdelivr.net/npm/face-api.js"></script>
-    
+    <script src="../js/face-api.js"></script> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yemekhane</title>
@@ -38,8 +38,6 @@ if(isset($_SESSION['flash_message'])){
 <body>
     <div id="sayfa">
         <nav id="nav">
-        <div id="prfl-foto-mobil"><img src="<?php echo $_SESSION['pp']; ?>"alt="Profil Fotoğrafı" id="prfl-foto-img"></div>
-        <div id="menu-toggle">&#9776;</div>
             <ul id="liste">
                 <li class="liler" id = "ortak-li"><a class="linkler" href="#">Ana Sayfa</a></li>
                 <li class="liler" id = "admin-li"><a class="linkler" href="hesabim.php">Hesabım</a></li>
@@ -144,11 +142,15 @@ if(isset($_SESSION['flash_message'])){
             }
         };
 
-        console.log("Butondan önceki satır.");
-        document.getElementById('startBtn').addEventListener('click',  () => {
+        
+        
+        startBtn.addEventListener('DOMContentLoaded',  () => {
+            console.log("Butondan önceki satır.");
+            const startBtn = document.getElementById('yemekBaslatButonu');
+            startBtn.addEventListener('click', async () => {
             console.log("Buraya giriyor mu ?");
-             loadModels();
-             startVideo();
+            loadModels();
+            startVideo();
             const yuzDurumu = document.getElementById("yuzAlgilamaDurumu");
             const interval = setInterval(async () => {
                 const faceDescriptor =  detectFace();
@@ -164,15 +166,17 @@ if(isset($_SESSION['flash_message'])){
                     }
                 }
             }, 2000);
+        });
     });
     </script> 
     <?php if($_SESSION['role']=="admin"):?>
     <!-- <script src="../js/embedding_karsilastirma.js"></script>  -->
     
     <?php endif;?> 
-    <script src="../js/app.js"></script>
     
+    <script src="../js/app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
 </body>
 </html>
 
