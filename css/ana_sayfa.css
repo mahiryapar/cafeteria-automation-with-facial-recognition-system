@@ -58,6 +58,10 @@ video {
     margin-top: 8vh;
     min-width: 600px;
     min-height: 350px;
+    max-height: 1000px;
+    overflow-y: scroll;
+    box-sizing: border-box;
+    justify-content: start;
 }
 
 

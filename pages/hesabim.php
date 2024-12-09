@@ -61,6 +61,7 @@ else{
                     <span id="yemekhane">Yemekhane: <?php echo $yemekhane?></span><br><hr>
                     <span id="rol">Rol: <?php echo $role?></span><br>
                 </div>
+
                 <div id="pp_ayar" class="box">
                     <h4>Profil Fotoğrafınızı Ayarlayın</h4>
                     <hr>
@@ -73,6 +74,13 @@ else{
                 <form action="../backend/remove_pp.php" method="POST" enctype="multipart/form-data">
                     <button type="submit" id='foto_kaldir_button'>Profil Fotoğrafını Kaldır</button>
                 </form>
+                </div>
+                <div id='yuz_tanima_div' class='box'>
+                    <center>
+                    <h4>Yüz Tanıma İçin Yüz Resminizi Güncelleyin</h4>
+                    <button type="submit" id='yuz_ekle_button'>Yüz Ekle</button>
+                    </center>
+                    
                 </div>
             </div>
             </div>
