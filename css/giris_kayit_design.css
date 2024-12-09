@@ -219,9 +219,9 @@
     width: 10vw;
     min-width: 80px;
     min-height: 35px;
-    padding: 9px;
     margin: 11px auto;
     justify-content: center;
+    align-items: center;
     display: flex;
     font-size: 16px;
     border: none;
@@ -279,11 +279,11 @@
     }
     #login_ncknm{
         margin-top: 15%;
-        height: 8vh;
+        height: 6vh;
         width: 50vw;
     }
     #login_psw{
-        height: 8vh;
+        height: 6vh;
         width: 50vw;
     }
     .icon_user{

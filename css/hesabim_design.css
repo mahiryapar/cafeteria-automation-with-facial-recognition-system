@@ -109,3 +109,28 @@
     flex-direction: row; /* Yatay hizalama */
     gap: 20px; /* Divler arasına boşluk bırakır */
 }
+
+
+@media (max-width:768px){
+    #hesap_bilgileri {
+        flex: 1;
+        margin-top: 9vh;
+        height: initial;
+        width: 50vw;
+        left: 0;
+        overflow-y: scroll;
+        flex-direction: column; 
+    }
+    #yuz_ekle_button{
+        flex: 1;
+        width: 25vw;
+        justify-content: center;
+        align-items: center;
+        font-size: 3vw;
+        height: 4vh;
+        background: #a71d2a;
+        border-radius: 10px;
+        transform: scale(1.09);
+    }
+    
+}

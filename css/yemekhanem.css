@@ -125,3 +125,67 @@ select{
     transform: scale(0.96);
     background-color: #195787;
 }
+
+
+@media (max-width:768px){
+    #icerik{
+        overflow: scroll;
+    }
+    .containerr {
+        display: flex;
+        margin-top: 10%;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        row-gap: 0px;
+        column-gap: 0px;
+        justify-content: flex-start;
+        height: initial;
+        margin-bottom: 5%;
+        overflow: scroll;
+    }
+    
+    .small-box-container {
+        display: flex;
+        flex-direction: column; /* Alt alta hizala */
+        flex: 1 30%; /* Orta alan */
+        max-height: 100%;
+    }
+    #adres{
+        resize: none;
+    }
+    
+    #yemekhane_olustur{
+        overflow-y: scroll;
+        max-height: 95%;
+    }
+    
+    #menu_ekle{
+        flex: 1 30%; 
+        overflow-y: auto;
+        max-height: 95%;
+    }
+    #yemekhane_bilgileri{
+        flex:1 30%;
+        overflow-y: auto;
+        max-height: 95%;
+    }
+    #ogrenciler{
+        flex:1 50%;
+        max-height: 50%;
+        overflow-y: auto;
+    }
+    #istekler{
+        flex:1 50%;
+        max-height: 50%;
+        overflow-y: auto;
+    }
+    #menuekle_button{
+        width: 30vw;
+        height: 6vh;
+        font-size: 4vw;
+    }
+    .remove-button{
+        width: 10vw;
+        font-size: 3vw;
+    }
+}

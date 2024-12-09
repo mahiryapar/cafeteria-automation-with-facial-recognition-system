@@ -286,16 +286,24 @@ span,p,h3,input,button,textarea,h1,h2,h4,h5,h6,li,a,div,select,option{
 
 
 @media (max-width: 768px) {
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    html {
+        scrollbar-width: none;
+    }
     #icerik{
         height: 100%;
         width: 100%;
-        overflow: scroll;
+        overflow: auto;
         position: relative;
         z-index: 1;
         margin: 0px;
     }
     #nav {
         flex-direction: column;
+        background: rgba(79, 113, 133, 0.859);
         align-items: flex-start;
         transition: all 0.4s ease;
         z-index: 2;

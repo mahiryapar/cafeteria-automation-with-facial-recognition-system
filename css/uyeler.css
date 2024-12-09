@@ -155,3 +155,30 @@
 #giden_mesajlar{
     display:none;
 }
+
+
+
+@media(max-width:768px){
+  #icerik{
+    overflow: scroll;
+  }
+  #iletisim_sayfa{
+    overflow: scroll;
+    display: flex; 
+    justify-content: flex-start; 
+    flex-direction: column;
+    gap: 10px; 
+}
+#konu{
+  width: 40vw;
+  height: 5vh;
+}
+#gonder_button {
+  width: 40vw;
+  font-size: 3vw;
+}
+#mesaj{
+  width: 80vw;
+  height: 20vh;
+}
+}

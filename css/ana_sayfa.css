@@ -8,6 +8,8 @@
     background-position: center;
     background-color: #b8b3b3;
     position: relative;
+    display: flex;
+    justify-content: center;
     z-index: 1;
     margin: 0px;
 }
@@ -45,23 +47,22 @@ video {
 }
 
 .icine-alan-div{
-    position: absolute;
-    justify-content: center;
+    flex: 1;
+    max-width: 50%;
+    justify-content: flex-start;
+    align-items: center;
     display: flex;
     text-align: center;
     flex-direction: column;
     width: 40vw;
-    height: 85vh; 
-    left: 30%;
+    height: 75%; 
     border: 2px solid #11435e;
     border-radius: 15px;
-    margin-top: 8vh;
+    margin-top: 10vh;
     min-width: 600px;
     min-height: 350px;
     max-height: 1000px;
     overflow-y: scroll;
-    box-sizing: border-box;
-    justify-content: start;
 }
 
 
@@ -70,10 +71,9 @@ video {
     justify-content: center;
     display: flex;
     text-align: center;
-    flex-direction: column;
-    width: 20vw;
+    flex: 1;
+    width: 90%;
     height: 8vh;  
-    left: 22%;
     min-width: 200px;
     min-height: 70px;
 }
@@ -84,38 +84,99 @@ video {
     display: flex;
     text-align: center;
     flex-direction: column;
-    width: 30vw;
+    width: 90%;
     height: 69vh;
-    left: 10%;
     min-width: 350px;
     min-height: 400px;
     overflow-y: scroll;  
 }
 
 #yemek-baslat{
+    display: flex;
     position: relative;
     justify-content: center;
     display: flex;
     text-align: center;
     flex-direction: column;
-    width: 13vw;
+    width: 90%;
     height: 19.5vh;
-    left: 28%;
     min-width: 230px;
     min-height: 150px;  
 }
 
 #yemekBaslatButonu{
-    width: 7vw;
-    height: 2vh;
-    min-width: 120px;
-    min-height: 50px;
-    margin-left: 3vh;
-    margin-bottom: 1.1vh;
     border-radius: 15px;
     transition: all 0.3s ease;
 }
 #yemekBaslatButonu:hover{
     border-radius: 25px;
-    transform: scale(1.15);
+    transform: scale(1.03);
+}
+
+
+@media (max-width:768px){
+    .icine-alan-div{
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        justify-content: left;
+        align-items: center;
+        margin-top:6vh;
+        left: 0%;
+        width: 100%;
+        height: initial;
+        gap: 3vh;
+        padding-left:2vw;
+        padding-right:2vw;
+        min-width: 300px;
+        min-height: 0px;
+        padding-top:5vh;
+        padding-bottom: 5vh;
+    }
+    #hosgeldiniz{    
+        flex: 1 5%;
+        margin: 0;
+        position: relative;
+        justify-content:left;
+        left:0%;
+        width: 100%;
+        height: 0;
+        min-width: 300px;
+        min-height: 0px;
+    }
+    #gunun-menusu{    
+        flex: 1 50%;
+        margin: 0;
+        position: relative;
+        justify-content: left;
+        left:0%;
+        width: 100%;
+        height: 0;
+        min-width: 300px;
+        min-height: 0px;
+    }
+    #yemek-baslat{    
+        flex: 1 10%;
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        position: relative;
+        justify-content: left;
+        left:0%;
+        height: 0;
+        width: 100%;
+        min-width: 300px;
+        min-height: 0px;
+    }
+    #yemekBaslatButonu{
+        flex: 1;
+        width: 97%;
+        height: 15vh;
+        min-width: 0;
+        min-height: 4vh;
+        margin-left: 0;
+        margin-bottom: 0;
+        border-radius: 15px;
+        transition: all 0.3s ease;
+    }
 }

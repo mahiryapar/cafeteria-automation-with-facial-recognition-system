@@ -17,6 +17,8 @@ include '../backend/uyeler_init_backend.php';
 <body>
     <div id="sayfa">
         <nav id="nav">
+        <div id="prfl-foto-mobil"><img src="<?php echo $_SESSION['pp']; ?>"alt="Profil Fotoğrafı" id="prfl-foto-img"></div>
+        <div id="menu-toggle">&#9776;</div>
             <ul id="liste">
                 <li class="liler" id = "ortak-li"><a class="linkler" href="index.php">Ana Sayfa</a></li>
                 <li class="liler" id = "admin-li"><a class="linkler" href="hesabim.php">Hesabım</a></li>

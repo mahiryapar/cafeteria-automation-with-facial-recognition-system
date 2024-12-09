@@ -50,3 +50,20 @@
 #warn{
     display: none;
 }
+
+
+
+@media(max-width: 768px){
+    #icerik{
+        overflow: scroll;
+        padding-right: 10vw;
+    }
+    .weekdays{
+        display: none;
+    }
+    .containerr{
+        margin-right: 5vw;
+        padding-right: 5vw;
+    }
+    
+}
