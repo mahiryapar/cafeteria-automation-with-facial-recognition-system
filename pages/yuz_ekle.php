@@ -6,11 +6,8 @@
     <title>Yüz Ekle</title>
     <link rel="stylesheet" href="../css/design.css">
     <link rel="stylesheet" href="../css/yuz_ekle.css">
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/facemesh"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter"></script>
+    <script src="https://cdn.jsdelivr.net/npm/face-api.js"></script>
+    <script src="../js/face-api.js"></script> 
     <style>
         #sonuc{
             display:none;
@@ -45,9 +42,8 @@
         <div id="overlay"></div>
         </div>
     </div>
+    
     <script src="../js/app.js"></script>
     <script src="../js/yuz_ekle.js"></script>
     </body> 
-    
-   
 </html>

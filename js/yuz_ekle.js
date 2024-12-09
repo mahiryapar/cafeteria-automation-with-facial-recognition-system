@@ -2,87 +2,65 @@ const video = document.getElementById('videoElement');
 const startBtn = document.getElementById('startBtn');
 var faceDetected = false;
 
-// BlazeFace Modelini Yükle
-async function loadBlazeFaceModel() {
-    const model = await blazeface.load();
-    console.log("BlazeFace Modeli Yüklendi.");
-    return model;
-}
 
-// FaceNet Modelini Yükle
-async function loadFaceNetModel() {
-    const model = await tf.loadGraphModel("https://tfhub.dev/google/tfjs-model/facenet/1/default/1");
-    console.log("FaceNet Modeli Yüklendi.");
-    return model;
+// Modelleri Yükleme
+async function loadModels() {
+    await faceapi.nets.ssdMobilenetv1.loadFromUri('../models');
+    await faceapi.nets.faceLandmark68Net.loadFromUri('../models');
+    await faceapi.nets.faceRecognitionNet.loadFromUri('../models');
+    console.log("Modeller Yüklendi.");
 }
 
 // Kamera Başlatma
 async function startVideo() {
     const stream = await navigator.mediaDevices.getUserMedia({ video: true });
     video.srcObject = stream;
+    console.log("Kamera Başlatıldı.");
 }
-
-// Yüz Algılama
-async function detectFace(model) {
-    const predictions = await model.estimateFaces(video, false);
-    if (predictions.length > 0) {
-        console.log("Yüz algılandı:", predictions);
-        return captureFace(predictions[0]); // Yüz kırpıldıktan sonra gönder
+// Yüz Algılama ve Kırpma
+async function detectFace() {
+    const detections = await faceapi.detectSingleFace(video).withFaceLandmarks().withFaceDescriptor();
+    if (detections) {
+        console.log("Yüz algılandı:", detections);
+        const faceDescriptor = detections.descriptor;
+        return faceDescriptor; // Embedding döndür
     }
     return null;
 }
 
-// Yüzü Kırp ve Gönder
-function captureFace(prediction) {
-    const canvas = document.createElement('canvas');
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
-    const ctx = canvas.getContext('2d');
-    const [startX, startY, endX, endY] = prediction.topLeft.concat(prediction.bottomRight);
-    const width = endX - startX;
-    const height = endY - startY;
-
-    ctx.drawImage(video, startX, startY, width, height, 0, 0, width, height);
-    return tf.browser.fromPixels(canvas); // Tensor olarak döndür
-}
-
 // Embedding Gönderimi
-async function sendEmbedding(faceTensor, faceNetModel) {
-    const embedding = faceNetModel.predict(faceTensor.expandDims(0)); // Embedding oluştur
-    const embeddingArray = await embedding.array(); // Float32Array'e çevir
-
-    console.log("Embedding:", embeddingArray);
+async function sendEmbedding(faceDescriptor) {
+    console.log("Embedding:", faceDescriptor);
 
     // Embedding verisini backend'e gönder
     const formData = new FormData();
-    formData.append("embedding", JSON.stringify(embeddingArray));
+    formData.append("embedding", JSON.stringify(faceDescriptor));
 
     fetch('../backend/yeni_embedding_ekle.php', {
         method: 'POST',
         body: formData
     })
-    .then(response => response.text())
-    .then(data => {
-        document.getElementById("sonuc").innerHTML = data;
-        console.log(data);
-    })
-    .catch(err => console.error("Hata:", err));
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("sonuc").innerHTML = data;
+            console.log(data);
+        })
+        .catch(err => console.error("Hata:", err));
 }
 
 // Başlatma
 startBtn.addEventListener('click', async () => {
-    const blazeFaceModel = await loadBlazeFaceModel();
-    const faceNetModel = await loadFaceNetModel();
+    await loadModels();
     await startVideo();
 
     const interval = setInterval(async () => {
         if (!faceDetected) {
-            const faceTensor = await detectFace(blazeFaceModel);
-            if (faceTensor) {
-                faceDetected = true; // Yüz algılandı
+            const faceDescriptor = await detectFace();
+            if (faceDescriptor) {
+                faceDetected = true;
                 clearInterval(interval); // Algılamayı durdur
                 console.log("Embedding oluşturuluyor...");
-                sendEmbedding(faceTensor, faceNetModel).then(() => {
+                await sendEmbedding(faceDescriptor).then(() => {
                     console.log("Embedding kaydedildi. Giriş yapabilirsiniz.");
                 });
             }

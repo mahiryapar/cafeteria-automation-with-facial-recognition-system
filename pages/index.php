@@ -25,15 +25,15 @@ if(isset($_SESSION['flash_message'])){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/face-api.js"></script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yemekhane</title>
     <link rel="stylesheet" href="../css/ana_sayfa.css">
     <link rel="stylesheet" href="../css/design.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
 </head>
 <body>
     <div id="sayfa">
@@ -131,23 +131,50 @@ if(isset($_SESSION['flash_message'])){
     </div>
         </div>
     </div>
+    <script src="../js/embedding_karsilastirma.js"></script>
     <script>
         window.onload = () => {
             if(<?php echo json_encode($message);?> != null){
                 document.getElementById('cikis').style.display = 'block';
                 setTimeout(() => {
                     document.getElementById('cikis').style.display = 'none';
-                }, 2000000);
-        }
+                }, 2000);
+            }
         };
+
+        console.log("Butondan önceki satır.");
+        document.getElementById('startBtn').addEventListener('click',  () => {
+            console.log("Buraya giriyor mu ?");
+             loadModels();
+             startVideo();
+            const yuzDurumu = document.getElementById("yuzAlgilamaDurumu");
+            const interval = setInterval(async () => {
+                const faceDescriptor =  detectFace();
+                if (faceDescriptor) {
+                    clearInterval(interval);
+                    yuzDurumu.innerText = "Embedding oluşturuluyor...";
+                    const matchedUser =  compareEmbeddings(faceDescriptor);
+
+                    if (matchedUser) {
+                        yuzDurumu.innerText = "Kullanıcı bulundu: " + matchedUser;
+                    } else {
+                        yuzDurumu.innerText = "Eşleşen kullanıcı bulunamadı.";
+                    }
+                }
+            }, 2000);
+    });
     </script> 
     <?php if($_SESSION['role']=="admin"):?>
-    <script src="../js/ana_sayfa.js"></script>
+    <!-- <script src="../js/embedding_karsilastirma.js"></script>  -->
+    
     <?php endif;?> 
     <script src="../js/app.js"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
+
+
 
 
 
