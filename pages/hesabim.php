@@ -82,12 +82,11 @@ else{
                     <h4>Yüz Tanıma İçin Yüz Resminizi Güncelleyin</h4>
                     <button type="submit" id='yuz_ekle_button'>Yüz Ekle</button>
                     </center>
-                    
                 </div>
             </div>
             </div>
             
-        
+            
         
             
         </div>

@@ -31,7 +31,36 @@
     text-align: center;
 }
 video {
-    width: 300px;
-    height: auto;
+    /* width: 300px; */
+    /* height: auto; */
     margin-bottom: 20px;
+    /* border: 2px solid black; */
+}
+
+#yuz_tanima_div{
+    flex-direction: column;
+    text-align: center;
+    display: flex;
+    margin-top: 10%;
+}
+
+
+
+#startBtn{
+    background: #57afac;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    width: 10vw;
+    height: 5vh;
+    min-width: 60px;
+    min-height: 25px;
+}
+#startBtn:hover{
+    background: #0fc0b7;
+    border-radius: 20px;
+    transform: scale(1.09);
 }

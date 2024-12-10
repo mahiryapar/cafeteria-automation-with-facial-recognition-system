@@ -18,6 +18,9 @@
         #videoElement {
             width: 100%;
             max-width: 500px;
+            min-width: 200px;
+            height: 100%;
+            min-height:200px;
             border: 2px solid #ccc;
             margin-top: 20px;
         }
@@ -38,9 +41,15 @@
                 <li class="liler" id="signin"><a class="linkler" href="giris_kayit.php?giris=0">Kaydol</a></li>
         </nav>
         <div id="icerik">
-        <div id="sonuc" class="ab"></div> 
-        <button id="startBtn">Yüz Tanımayı Başlat</button>
-        <video id="videoElement" autoplay></video>
+        <div id="sonuc" class="ab"></div>
+        <div id='yuz_tanima_div'>
+            <center>
+                <video id="videoElement" autoplay></video><br>
+                <button id="startBtn">Yüz Tanımayı Başlat</button>
+            </center>
+        </div> 
+        
+        
         <div id="overlay"></div>
         </div>
     </div>
