@@ -124,8 +124,6 @@ async function compareEmbeddings(newEmbedding) {
             continue; // Bu embedding'i atla
         }
         console.log("Diziye dönüştürülmüş format:", dbEmbeddingArray, "Uzunluk:", dbEmbeddingArray.length);
-        // console.log("Karşılaştırma yapılacak embedding'ler:", newEmbedding, dbEmbedding.embedding);
-        console.log(newEmbedding.length, dbEmbedding.embedding.length)
         const distance = euclideanDistance(newEmbedding, dbEmbeddingArray);
         if (distance < 0.5) { 
             console.log("Eşleşme bulundu: ", dbEmbedding.user);
