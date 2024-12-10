@@ -41,18 +41,28 @@ function euclideanDistance(vector1, vector2) {
 
 async function compareEmbeddings(newEmbedding) {
     // Veritabanındaki embedding'leri çek
-    const response = await fetch("../backend/get_embeddings.php?menu_id="+menu_id);
+    const response = await fetch('../backend/get_embeddings.php?menu_id='+menu_id);
     const databaseEmbeddings = await response.json();
-    console.log(databaseEmbeddings);
+    console.log(databaseEmbeddings)
     if (!Array.isArray(databaseEmbeddings) || databaseEmbeddings.length === 0) {
         console.log("Veritabanında hiçbir embedding bulunamadı.");
         return null;
     }
     console.log("Veritabanından alınan embedding'ler:", databaseEmbeddings);
     for (let dbEmbedding of databaseEmbeddings) {
-        console.log("Karşılaştırma yapılacak embedding'ler:", newEmbedding, dbEmbedding.embedding);
-        console.log(newEmbedding, dbEmbedding.embedding, newEmbedding.length, dbEmbedding.embedding.length)
-        const distance = euclideanDistance(newEmbedding, dbEmbedding.embedding);
+        console.log("Orijinal format:", dbEmbedding.embedding);
+        let dbEmbeddingArray;
+        try {
+            const parsedEmbedding = JSON.parse(dbEmbedding.embedding); // Parse the string
+            dbEmbeddingArray = Object.values(parsedEmbedding);
+        } catch (error) {
+            console.error("Embedding format hatası:", dbEmbedding.embedding, error);
+            continue; // Bu embedding'i atla
+        }
+        console.log("Diziye dönüştürülmüş format:", dbEmbeddingArray, "Uzunluk:", dbEmbeddingArray.length);
+        // console.log("Karşılaştırma yapılacak embedding'ler:", newEmbedding, dbEmbedding.embedding);
+        console.log(newEmbedding.length, dbEmbedding.embedding.length)
+        const distance = euclideanDistance(newEmbedding, dbEmbeddingArray);
         if (distance < 0.6) { 
             console.log("Eşleşme bulundu: ", dbEmbedding.user);
             return dbEmbedding.user;
