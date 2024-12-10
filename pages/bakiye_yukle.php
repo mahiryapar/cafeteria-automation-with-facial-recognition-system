@@ -33,10 +33,10 @@ session_start();
             <div id='bakiye_yuklediv' class='box'>
             <span id="mevcut_bakiye">Şu anki bakiyeniz: <?php include '../backend/bakiye_bilgisi_cek.php'?></span>
             <form id="para_yukle_form" action="../backend/bakiye_yukle_backend.php" method="post"><br>
-                <input type="number" id="kart_no" name="kart_no" placeholder="Kart Numarası"><br>
+                <input type="text" id="kart_no" name="kart_no" maxlength =16 placeholder="Kart Numarası"><br>
                 <input type="month"   id="skt" name="skt" placeholder="Son Kullanma Tarihi" min="2024-12" max="2035-12" ><br>
-                <input type="number" id="cvv" name="cvv" placeholder="CVV Numarası"><br>
-                <input type="number" id="bakiye" name="bakiye"placeholder="Yüklemek İstediğin Bakiye"><br>
+                <input type="text" id="cvv" name="cvv" maxlength =3 placeholder="CVV Numarası"><br>
+                <input type="text" id="bakiye" name="bakiye" maxlength =5 placeholder="Yüklemek İstediğin Bakiye"><br>
                 <button type="submit">Para Yükle</button><br>
             </form>
             </div> 
