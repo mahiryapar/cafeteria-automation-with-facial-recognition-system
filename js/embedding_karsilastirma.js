@@ -3,7 +3,9 @@ var overlay;
 var kapatButonu;
 var yuzAlgilamaDurumu;
 var startBtn;
-let faceDetected = false;
+let faceDetected = false; // Yüz algılandı mı kontrolü için
+const successSound = new Audio('../sounds/success.mp3');
+const errorSound = new Audio('../sounds/error.mp3');
 
 document.addEventListener('DOMContentLoaded', () => {
     overlay = document.getElementById('overlay');
@@ -127,13 +129,16 @@ async function compareEmbeddings(newEmbedding) {
     
                 const infoDiv = document.getElementById("info_div");
                 if (result.status === "yendi") {
-                    infoDiv.innerHTML = `<p>${result.message}</p>`;
+                    infoDiv.innerHTML = `<p id="yuzAlgilamaDurumu">${result.message}</p>`;
+                    errorSound.play();
                 } else if (result.status === "yeni_yendi") {
-                    infoDiv.innerHTML = `<p>${result.message}</p>`;
+                    infoDiv.innerHTML = `<p id="yuzAlgilamaDurumu">${result.message}</p>`;
+                    successSound.play();
                 } else if (result.status === "yok") {
-                    infoDiv.innerHTML = `<p>${result.message}</p>`;
+                    infoDiv.innerHTML = `<p id="yuzAlgilamaDurumu">${result.message}</p>`;
+                    errorSound.play();
                 } else {
-                    infoDiv.innerHTML = `<p>Bilinmeyen durum.</p>`;
+                    infoDiv.innerHTML = `<p id="yuzAlgilamaDurumu">Bilinmeyen durum.</p>`;
                 }
             } catch (error) {
                 console.error("Hata:", error);
