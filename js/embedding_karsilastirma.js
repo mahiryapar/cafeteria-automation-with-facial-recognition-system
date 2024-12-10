@@ -3,7 +3,7 @@ var overlay;
 var kapatButonu;
 var yuzAlgilamaDurumu;
 var startBtn;
-let faceDetected = false; // Yüz algılandı mı kontrolü için
+let faceDetected = false;
 
 document.addEventListener('DOMContentLoaded', () => {
     overlay = document.getElementById('overlay');
@@ -20,25 +20,22 @@ document.addEventListener('DOMContentLoaded', () => {
     
         const interval = setInterval(async () => {
             if (!faceDetected) {
-                faceDetected=true;
                 const faceDescriptor = await detectFace();
                 if (faceDescriptor) {
                     faceDetected = true;
-                    clearInterval(interval); // Algılamayı durdur
                     console.log("Embedding oluşturuluyor...");
                     await compareEmbeddings(faceDescriptor);
                     faceDetected = false;
                 }
             }
-        }, 2000);
+        }, 3000);
     });
 
-    // Kapat butonuna tıklama olayı
+    
     kapatButonu.addEventListener('click', () => {
-        hideOverlay(); // Overlay'i gizle
-        stopVideo(); // Videoyu durdur
+        hideOverlay();
+        stopVideo();
     });
-    // Video akışını durdur
     
 });
 
@@ -46,19 +43,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 var menu_id;
-// let faceDetected = false;
+
 function deger_al(value){
     menu_id=value;
 }
 
-  // Overlay'i açan işlev
+
   const showOverlay = () => {
-    overlay.style.display = 'block'; // Overlay'i göster
+    overlay.style.display = 'block';
 };
 
-// Overlay'i kapatan işlev
+
 const hideOverlay = () => {
-    overlay.style.display = 'none'; // Overlay'i gizle
+    overlay.style.display = 'none';
 };
 
 
@@ -98,7 +95,7 @@ async function detectFace() {
 function euclideanDistance(vector1, vector2) {
     if (!vector1 || !vector2 || vector1.length !== vector2.length) {
         console.error("Invalid vectors for Euclidean distance calculation:", vector1, vector2);
-        return Infinity; // Or another appropriate default value, like -1 or throw an error.
+        return Infinity; 
     }
     return Math.sqrt(vector1.reduce((sum, val, i) => sum + Math.pow(val - vector2[i], 2), 0));
 }
@@ -107,23 +104,20 @@ async function compareEmbeddings(newEmbedding) {
     // Veritabanındaki embedding'leri çek
     const response = await fetch('../backend/get_embeddings.php?menu_id='+menu_id);
     const databaseEmbeddings = await response.json();
-    console.log(databaseEmbeddings)
+    // console.log(databaseEmbeddings)
     if (!Array.isArray(databaseEmbeddings) || databaseEmbeddings.length === 0) {
         console.log("Veritabanında hiçbir embedding bulunamadı.");
         return null;
     }
-    console.log("Veritabanından alınan embedding'ler:", databaseEmbeddings);
     for (let dbEmbedding of databaseEmbeddings) {
-        console.log("Orijinal format:", dbEmbedding.embedding);
         let dbEmbeddingArray;
         try {
-            const parsedEmbedding = JSON.parse(dbEmbedding.embedding); // Parse the string
+            const parsedEmbedding = JSON.parse(dbEmbedding.embedding);
             dbEmbeddingArray = Object.values(parsedEmbedding);
         } catch (error) {
             console.error("Embedding format hatası:", dbEmbedding.embedding, error);
-            continue; // Bu embedding'i atla
+            continue; 
         }
-        console.log("Diziye dönüştürülmüş format:", dbEmbeddingArray, "Uzunluk:", dbEmbeddingArray.length);
         const distance = euclideanDistance(newEmbedding, dbEmbeddingArray);
         if (distance < 0.5) { 
             console.log("Eşleşme bulundu: ", dbEmbedding.user);

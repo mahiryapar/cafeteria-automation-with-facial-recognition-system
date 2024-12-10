@@ -13,6 +13,8 @@ async function loadModels() {
 
 // Kamera Başlatma
 async function startVideo() {
+    const video = document.getElementById('videoElement');
+    video.style.display = "block";
     const stream = await navigator.mediaDevices.getUserMedia({ video: true });
     video.srcObject = stream;
     console.log("Kamera Başlatıldı.");
@@ -61,12 +63,12 @@ startBtn.addEventListener('click', async () => {
             const faceDescriptor = await detectFace();
             if (faceDescriptor) {
                 faceDetected = true;
-                clearInterval(interval); // Algılamayı durdur
+                clearInterval(interval); 
                 console.log("Embedding oluşturuluyor...");
                 await sendEmbedding(faceDescriptor).then(() => {
                     console.log("Embedding kaydedildi. Giriş yapabilirsiniz.");
                 });
             }
         }
-    }, 2000);
+    }, 5000);
 });

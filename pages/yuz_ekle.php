@@ -44,6 +44,7 @@
         <div id="sonuc" class="ab"></div>
         <div id='yuz_tanima_div'>
             <center>
+                <p id="message">Lütfen Yüz Tanımanın Düzgün Çalışması İçin Kameraya Bakınız</p>
                 <video id="videoElement" autoplay></video><br>
                 <button id="startBtn">Yüz Tanımayı Başlat</button>
             </center>

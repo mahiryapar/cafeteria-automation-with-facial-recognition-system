@@ -33,6 +33,7 @@
 video {
     /* width: 300px; */
     /* height: auto; */
+    display: none;
     margin-bottom: 20px;
     /* border: 2px solid black; */
 }
