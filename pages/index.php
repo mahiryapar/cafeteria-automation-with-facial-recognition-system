@@ -12,7 +12,7 @@ if(isset($_SESSION['nickname'])){
     include '../backend/ana_sayfa_backend.php';
 } else {
     $_SESSION['role'] = "guest";
-    header("Location: giris_kayit.php");
+    header("Location: giris_kayit.php?giris=1");
 }
 
 $message = null;

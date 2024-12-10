@@ -35,13 +35,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
     echo "
                 <div id='cikis' class='alert alert-success'>
-                    <strong>Başarılı!</strong> Kayıt olundu. Giriş yapabilirsiniz.
+                    <strong>Başarılı!</strong> Yüz ekleme işlemi başarılı.
                 </div>
                 <script>
                     document.getElementById('sonuc').style.display = 'block';
                     setTimeout(function() {
-                        window.location.href = 'giris_kayit.php?giris=1';
-                    }, 200000);
+                        window.location.href = 'index.php';
+                    }, 2000);
                 </script>";
     sqlsrv_close($conn);
 }
