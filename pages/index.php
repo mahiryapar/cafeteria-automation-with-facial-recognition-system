@@ -111,7 +111,7 @@ if(isset($_SESSION['flash_message'])){
             <h3>Yemek Başlat</h3>
             <?php if ($aktifOgun): ?>
             <p>Şu anki öğün: <strong><?php echo htmlspecialchars($aktifOgun['ogun']); ?></strong></p>
-            <button id="yemekBaslatButonu" class="btn btn-primary">Yemeği Başlat</button>
+            <button id="startBtn" class="btn btn-primary">Yemeği Başlat</button>
              <?php elseif ($sonrakiOgunBaslangic): ?>
             <p>Bir sonraki öğün, <?php echo $sonrakiOgunBaslangic->format('H:i'); ?>'de başlayacak.</p>
             <?php else: ?>
@@ -123,8 +123,7 @@ if(isset($_SESSION['flash_message'])){
             <div id="overlay-content">
                 <h3>Kamera Açılıyor...</h3>
                 <video id="videoElement" width="640" height="480" autoplay></video>
-                <button id="startBtn">Yüz Tanımayı Başlat</button>
-                <p id="yuzAlgilamaDurumu">Yüz algılanırsa, bilgiler burada gösterilecektir.</p>
+                <div id="info_div"><p id="yuzAlgilamaDurumu">Yüz algılanırsa, bilgiler burada gösterilecektir.</p></div>
                 <button id="kapatButonu" class="btn btn-danger">Kapat</button>
             </div>
         </div>
@@ -153,33 +152,6 @@ if(isset($_SESSION['flash_message'])){
         else{
             deger_al(<?php echo $_SESSION['aksam_yemegi_menu_id'];?>);
         }
-
-        
-        
-        document.addEventListener('DOMContentLoaded',  () => {
-            console.log("Butondan önceki satır.");
-            const startBtn = document.getElementById('yemekBaslatButonu');
-            startBtn.addEventListener('click', async () => {
-            console.log("Buraya giriyor mu ?");
-            await loadModels();
-            await startVideo();
-            const yuzDurumu = document.getElementById("yuzAlgilamaDurumu");
-            const interval = setInterval(async () => {
-                const faceDescriptor = await detectFace();
-                if (faceDescriptor) {
-                    clearInterval(interval);
-                    yuzDurumu.innerText = "Embedding oluşturuluyor...";
-                    const matchedUser = await compareEmbeddings(faceDescriptor);
-
-                    if (matchedUser) {
-                        yuzDurumu.innerText = "Kullanıcı bulundu: " + matchedUser;
-                    } else {
-                        yuzDurumu.innerText = "Eşleşen kullanıcı bulunamadı.";
-                    }
-                }
-            }, 2000);
-        });
-    });
     </script> 
 
     <script src="../js/app.js"></script>

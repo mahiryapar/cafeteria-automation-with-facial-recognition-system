@@ -1,11 +1,66 @@
-const video = document.getElementById('videoElement');
-// const kapatButonu = document.getElementById('kapatButonu');
-// const startBtn = document.getElementById('startBtn');
+var video;
+var overlay;
+var kapatButonu;
+var yuzAlgilamaDurumu;
+var startBtn;
+let faceDetected = false; // Yüz algılandı mı kontrolü için
+
+document.addEventListener('DOMContentLoaded', () => {
+    overlay = document.getElementById('overlay');
+    kapatButonu = document.getElementById('kapatButonu');
+    yuzAlgilamaDurumu = document.getElementById('yuzAlgilamaDurumu');
+    video = document.getElementById('videoElement');
+    startBtn = document.getElementById('startBtn');
+
+    
+    startBtn.addEventListener('click', async () => {
+        showOverlay();
+        await loadModels();
+        await startVideo();
+    
+        const interval = setInterval(async () => {
+            if (!faceDetected) {
+                faceDetected=true;
+                const faceDescriptor = await detectFace();
+                if (faceDescriptor) {
+                    faceDetected = true;
+                    clearInterval(interval); // Algılamayı durdur
+                    console.log("Embedding oluşturuluyor...");
+                    await compareEmbeddings(faceDescriptor);
+                    faceDetected = false;
+                }
+            }
+        }, 2000);
+    });
+
+    // Kapat butonuna tıklama olayı
+    kapatButonu.addEventListener('click', () => {
+        hideOverlay(); // Overlay'i gizle
+        stopVideo(); // Videoyu durdur
+    });
+    // Video akışını durdur
+    
+});
+
+
+
+
 var menu_id;
 // let faceDetected = false;
 function deger_al(value){
     menu_id=value;
 }
+
+  // Overlay'i açan işlev
+  const showOverlay = () => {
+    overlay.style.display = 'block'; // Overlay'i göster
+};
+
+// Overlay'i kapatan işlev
+const hideOverlay = () => {
+    overlay.style.display = 'none'; // Overlay'i gizle
+};
+
 
 async function loadModels() {
     await faceapi.nets.ssdMobilenetv1.loadFromUri('../models');
@@ -19,6 +74,15 @@ async function startVideo() {
     video.srcObject = stream;
     console.log("Kamera Başlatıldı.");
 }
+
+const stopVideo = () => {
+    const stream = video.srcObject;
+    if (stream) {
+        const tracks = stream.getTracks();
+        tracks.forEach(track => track.stop());
+        video.srcObject = null;
+    }
+};
 
 async function detectFace() {
     const detections = await faceapi.detectSingleFace(video).withFaceLandmarks().withFaceDescriptor();
@@ -63,32 +127,31 @@ async function compareEmbeddings(newEmbedding) {
         // console.log("Karşılaştırma yapılacak embedding'ler:", newEmbedding, dbEmbedding.embedding);
         console.log(newEmbedding.length, dbEmbedding.embedding.length)
         const distance = euclideanDistance(newEmbedding, dbEmbeddingArray);
-        if (distance < 0.6) { 
+        if (distance < 0.5) { 
             console.log("Eşleşme bulundu: ", dbEmbedding.user);
-            return dbEmbedding.user;
+            try {
+                const response = await fetch(`../backend/embedding_menu_kontrol.php?menu_id=${menu_id}&user_id=${dbEmbedding.user_id}`);
+                const result = await response.json();
+    
+                const infoDiv = document.getElementById("info_div");
+                if (result.status === "yendi") {
+                    infoDiv.innerHTML = `<p>${result.message}</p>`;
+                } else if (result.status === "yeni_yendi") {
+                    infoDiv.innerHTML = `<p>${result.message}</p>`;
+                } else if (result.status === "yok") {
+                    infoDiv.innerHTML = `<p>${result.message}</p>`;
+                } else {
+                    infoDiv.innerHTML = `<p>Bilinmeyen durum.</p>`;
+                }
+            } catch (error) {
+                console.error("Hata:", error);
+            }
+            return;
         }
     }
     return null;
 }
 
-startBtn.addEventListener('click', async () => {
-    await loadModels();
-    await startVideo();
 
-    const interval = setInterval(async () => {
-        if (!faceDetected) {
-            const faceDescriptor = await detectFace();
-            if (faceDescriptor) {
-                faceDetected = true;
-                clearInterval(interval); // Algılamayı durdur
-                console.log("Embedding oluşturuluyor...");
-                const matchedUser = await compareEmbeddings(faceDescriptor);
-                if (matchedUser) {
-                    console.log("Kullanıcı bulundu:", matchedUser);
-                } else {
-                    console.log("Eşleşen kullanıcı bulunamadı.");
-                }
-            }
-        }
-    }, 2000);
-});
+
+
