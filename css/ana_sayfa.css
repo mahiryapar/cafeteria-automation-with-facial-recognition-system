@@ -37,6 +37,10 @@ video {
     margin-bottom: 20px;
 }
 
+#yuzAlgilamaDurumu{
+    font-size:20px;
+}
+
 #cikis{
     display:none;
     margin-left:20vw;

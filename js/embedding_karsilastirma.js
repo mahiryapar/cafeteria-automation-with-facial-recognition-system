@@ -133,13 +133,13 @@ async function compareEmbeddings(newEmbedding) {
     
                 const infoDiv = document.getElementById("info_div");
                 if (result.status === "yendi") {
-                    infoDiv.innerHTML = `<p>${result.message}</p>`;
+                    infoDiv.innerHTML = `<p id="yuzAlgilamaDurumu">${result.message}</p>`;
                 } else if (result.status === "yeni_yendi") {
-                    infoDiv.innerHTML = `<p>${result.message}</p>`;
+                    infoDiv.innerHTML = `<p id="yuzAlgilamaDurumu">${result.message}</p>`;
                 } else if (result.status === "yok") {
-                    infoDiv.innerHTML = `<p>${result.message}</p>`;
+                    infoDiv.innerHTML = `<p id="yuzAlgilamaDurumu">${result.message}</p>`;
                 } else {
-                    infoDiv.innerHTML = `<p>Bilinmeyen durum.</p>`;
+                    infoDiv.innerHTML = `<p id="yuzAlgilamaDurumu">Bilinmeyen durum.</p>`;
                 }
             } catch (error) {
                 console.error("Hata:", error);
