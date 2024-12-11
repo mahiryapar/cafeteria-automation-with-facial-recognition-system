@@ -1,1 +1,0 @@
-You must do changes in config dir.
