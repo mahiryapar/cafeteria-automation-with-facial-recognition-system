@@ -64,13 +64,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($ogun_veri['secilen']) && $ogun_veri['secilen'] === '1') {
             $baslangic_saati = $ogun_veri['baslangic'];
             $bitis_saati = $ogun_veri['bitis'];
+            $ogun_fiyati = $ogun_veri['fiyat'];
 
             if (empty($baslangic_saati) || empty($bitis_saati)) {
                 die("$ogun_adi için saatler eksik girildi.");
             }
 
-            $ogun_sql = "INSERT INTO yemekhane_ogunleri (yemekhane_id, ogun, ogun_saati, ogun_bitis_saati) VALUES (?, ?, ?, ?)";
-            $ogun_params = [$yemekhane_id, $ogun_adi, $baslangic_saati, $bitis_saati];
+            $ogun_sql = "INSERT INTO yemekhane_ogunleri (yemekhane_id, ogun, ogun_saati, ogun_bitis_saati,ogun_fiyati) VALUES (?, ?, ?, ?,?)";
+            $ogun_params = [$yemekhane_id, $ogun_adi, $baslangic_saati, $bitis_saati,$ogun_fiyati];
             $ogun_stmt = sqlsrv_query($conn, $ogun_sql, $ogun_params);
 
             if ($ogun_stmt === false) {

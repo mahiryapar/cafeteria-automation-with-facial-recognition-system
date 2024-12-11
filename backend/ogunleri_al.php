@@ -41,7 +41,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $mealName = $meal['meal'];
         $mealDate = $meal['date'];
         
-        $sql = "SELECT id,menu_fiyati FROM menu WHERE kategori = ? AND menu_tarihi = ?";
+        $sql = "SELECT menu.id,ogun_fiyati FROM menu
+        inner join yemekhaneler
+        on menu.yemekhane_id = yemekhaneler.id
+        inner join yemekhane_ogunleri
+        on yemekhaneler.id = yemekhane_ogunleri.yemekhane_id
+         WHERE yemekhane_ogunleri.ogun = ? AND menu_tarihi = ?";
         $params = [$mealName, $mealDate];
         $stmt = sqlsrv_prepare($conn, $sql, $params);
 
@@ -51,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             if ($result) {
                 $menu_id = $result['id'];
                 $bakiye = $_SESSION['bakiye'];
-                if($result['menu_fiyati']>$bakiye){
+                if($result['ogun_fiyati']>$bakiye){
                     echo "
                         <div id='cikis' class='alert alert-danger'>
                             <strong>Hata!</strong> Seçtiğiniz tüm menüler alınamadı. Bakiyeniz yetersiz!
@@ -65,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         die();
                 }
                 else{
-                    $bakiye = $bakiye - $result['menu_fiyati'];
+                    $bakiye = $bakiye - $result['ogun_fiyati'];
                     $_SESSION['bakiye'] = $bakiye;
                     $update_sql = "update users set moneyy = ? where users.id = ?";
                     $params_update = [$bakiye,$_SESSION['user_id']];
