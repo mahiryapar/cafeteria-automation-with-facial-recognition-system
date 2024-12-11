@@ -46,7 +46,7 @@ if(isset($_GET['giris'])){
                 <span class="icon_user"><i class="fa fa-user"></i></span>
             </div>
             <div>
-            <input type="password" id= "login_psw" name="login_sifre" placeholder="Password" maxlength="19">
+            <input type="password" id= "login_psw" name="login_sifre" placeholder="Password">
             <span class="icon_password"><i class="fa fa-lock"></i></span>
             </div>
             <button type="submit" id="loginbutton">Giriş Yap</button>
@@ -69,7 +69,7 @@ if(isset($_GET['giris'])){
             <div>
             <input type="text" id="number" name="number" maxlength="11" placeholder="Telefon Numarası" oninput="this.value = this.value.replace(/[^0-9]/g, '');"></div>
             <div>
-            <input type="password" id= "psw" name="sifre" maxlength="19" placeholder="Şifre"></div>
+            <input type="password" id= "psw" name="sifre" placeholder="Şifre"></div>
             <button type="submit" id="signupbutton">Kayıt Ol</button>
         </form>   
         </div>
