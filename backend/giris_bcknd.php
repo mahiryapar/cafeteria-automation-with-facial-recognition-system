@@ -127,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
                 echo "
                 <div id='cikis' class='alert alert-success'>
-                    <strong>Başarılı!</strong> Kayıt olundu. ".$_SESSION['user_id']."Yüz ekleme sayfasına yönlendiriliyorsunuz..
+                    <strong>Başarılı!</strong> Kayıt olundu. Yüz ekleme sayfasına yönlendiriliyorsunuz..
                 </div>
                 <script>
                     document.getElementById('sonuc').style.display = 'block';
