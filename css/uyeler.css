@@ -12,6 +12,10 @@
   margin: 0px;
 }
 
+#kategori{
+  width: 60%;
+}
+
 #konu{
   width: 20vw;
   height: 5vh;
