@@ -28,7 +28,6 @@ if ($_SESSION['role'] !== 'admin') {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $menu_tarihi = trim($_POST['tarih']);
     $kategori = trim($_POST['ogun']);
-    $menu_fiyati = floatval(trim($_POST['fiyat']));
     $yemekhane_id = $_SESSION['yemekhane_id']; 
     $yemekler = [
         'ana_yemek' => $_POST['ana_yemek'],
@@ -40,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'tatli' => $_POST['tatli'] ?? null,
         'icecek' => $_POST['icecek']
     ];
-    if (empty($menu_tarihi) || empty($kategori) || $menu_fiyati <= 0 || empty($yemekhane_id)) {
+    if (empty($menu_tarihi) || empty($kategori) || empty($yemekhane_id)) {
         die("Lütfen tüm alanları eksiksiz doldurun.");
     }
     $existing_menu_sql = "SELECT id FROM menu WHERE menu_tarihi = ? and kategori = ? AND yemekhane_id = ?";
@@ -80,8 +79,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             die("Mevcut menü silinirken bir hata oluştu: " . print_r(sqlsrv_errors(), true));
         }
     }
-    $menu_sql = "INSERT INTO menu (menu_tarihi, kategori, yemekhane_id, menu_fiyati) OUTPUT INSERTED.id VALUES (?, ?, ?, ?)";
-    $menu_params = [$menu_tarihi, $kategori, $yemekhane_id, $menu_fiyati];
+    $menu_sql = "INSERT INTO menu (menu_tarihi, kategori, yemekhane_id) OUTPUT INSERTED.id VALUES (?, ?, ?)";
+    $menu_params = [$menu_tarihi, $kategori, $yemekhane_id];
     $menu_stmt = sqlsrv_query($conn, $menu_sql, $menu_params);
 
     if ($menu_stmt === false) {

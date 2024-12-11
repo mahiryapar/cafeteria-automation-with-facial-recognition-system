@@ -137,6 +137,8 @@ include '../backend/yemekhanem_backend.php';
                                 <input type="time" id="kahvalti_baslangic" name="ogunler[Kahvaltı][baslangic]">
                                 <label for="kahvalti_bitis">Bitiş Saati:</label>
                                 <input type="time" id="kahvalti_bitis" name="ogunler[Kahvaltı][bitis]">
+                                <label for="kahvalti_fiyat">Fiyat:</label>
+                                <input type="number" id="kahvalti_fiyat" name="ogunler[Kahvaltı][fiyat]">
                             </div>
                             <div class="mt-2">
                                 <input type="checkbox" id="ogle" name="ogunler[Öğle Yemeği][secilen]" value="1">
@@ -146,6 +148,8 @@ include '../backend/yemekhanem_backend.php';
                                 <input type="time" id="ogle_baslangic" name="ogunler[Öğle Yemeği][baslangic]">
                                 <label for="ogle_bitis">Bitiş Saati:</label>
                                 <input type="time" id="ogle_bitis" name="ogunler[Öğle Yemeği][bitis]">
+                                <label for="ogle_fiyat">Fiyat:</label>
+                                <input type="number" id="ogle_fiyat" name="ogunler[Öğle Yemeği][fiyat]">
                             </div>
                             <div class="mt-2">
                                 <input type="checkbox" id="aksam" name="ogunler[Akşam Yemeği][secilen]" value="1">
@@ -155,6 +159,8 @@ include '../backend/yemekhanem_backend.php';
                                 <input type="time" id="aksam_baslangic" name="ogunler[Akşam Yemeği][baslangic]">
                                 <label for="aksam_bitis">Bitiş Saati:</label>
                                 <input type="time" id="aksam_bitis" name="ogunler[Akşam Yemeği][bitis]">
+                                <label for="aksam_fiyat">Fiyat:</label>
+                                <input type="number" id="aksam_fiyat" name="ogunler[Akşam Yemeği][fiyat]">
                             </div>
                         </div>
                         <button type="submit" id="menuekle_button" class="btn btn-primary mt-4">Yemekhane Oluştur</button>
@@ -227,10 +233,6 @@ include '../backend/yemekhanem_backend.php';
                                 </option>
                             <?php endwhile; ?>
                         </select>
-                    </div>
-                    <div class="form-group mt-3">
-                        <label for="fiyat">Menü Fiyatı (₺):</label>
-                        <input type="number" name="fiyat" id="fiyat" class="form-control" required>
                     </div>
                     <div id="yemek_secenekleri">
                     </div>

@@ -21,12 +21,12 @@ $conn = sqlsrv_connect($serverName, $connectionOptions);
 if ($conn === false) {
     die(print_r(sqlsrv_errors(), true));
 }
-$sql_ucret="select menu.kategori,menu.menu_fiyati
-            from menu
+$sql_ucret="select yemekhane_ogunleri.ogun,yemekhane_ogunleri.ogun_fiyati
+            from yemekhane_ogunleri
             inner join yemekhaneler
-            on menu.yemekhane_id = yemekhaneler.id
+            on yemekhane_ogunleri.yemekhane_id = yemekhaneler.id
             where yemekhane_id = ?
-            group by menu.kategori,menu_fiyati";
+            group by yemekhane_ogunleri.ogun,yemekhane_ogunleri.ogun_fiyati";
 $params_ucret = [$_SESSION['yemekhane_id']];
 $stmt_ucret = sqlsrv_query($conn, $sql_ucret, $params_ucret);
 $sql_bakiye="select moneyy from users where id = ?";

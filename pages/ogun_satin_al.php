@@ -39,8 +39,8 @@ include '../backend/ogun_satin_al_init_backend.php';
             <span id="ucretler">  <?php
                                     $ucretler = [];
                                     while ($row_ucret = sqlsrv_fetch_array($stmt_ucret, SQLSRV_FETCH_ASSOC)) {
-                                        $kategori = $row_ucret['kategori'];
-                                        $fiyat = $row_ucret['menu_fiyati'];
+                                        $kategori = $row_ucret['ogun'];
+                                        $fiyat = $row_ucret['ogun_fiyati'];
                                         $ucretler[] = "$kategori: $fiyat TL";
                                     }
                                     if (!empty($ucretler)) {
