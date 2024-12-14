@@ -46,8 +46,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         on menu.yemekhane_id = yemekhaneler.id
         inner join yemekhane_ogunleri
         on yemekhaneler.id = yemekhane_ogunleri.yemekhane_id
-         WHERE yemekhane_ogunleri.ogun = ? AND menu_tarihi = ?";
-        $params = [$mealName, $mealDate];
+         WHERE yemekhane_ogunleri.ogun = ? AND menu.kategori = ? and menu_tarihi = ? and yemekhaneler.id = ?";
+        $params = [$mealName,$mealName, $mealDate,$_SESSION['yemekhane_id']];
         $stmt = sqlsrv_prepare($conn, $sql, $params);
 
         if (sqlsrv_execute($stmt)) {
